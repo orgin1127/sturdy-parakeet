@@ -25,7 +25,7 @@ public class IOTest6 {
 				break;
 			}
 			sb.append(str);
-			sb.append("\r"+"\n");
+			sb.append(str = System.getProperty("line.separator"));
 			count++;
 		}
 		
