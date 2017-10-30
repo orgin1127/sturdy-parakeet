@@ -20,8 +20,7 @@ public class CageArea extends VO {
 	
 	@Override //from VO Classes' toString() method
 	public String toString() {
-		super.toString();
-		return ", 芭林备开: "+cageArea;
+		return super.toString() + ", 芭林备开: "+cageArea;
 	}
 	
 	@Override //from VO Classes' equals() method

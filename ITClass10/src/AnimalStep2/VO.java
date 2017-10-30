@@ -1,6 +1,8 @@
 package AnimalStep2;
 
-public class VO {
+import java.io.Serializable;
+
+public class VO implements Serializable {
 	
 	//field
 	private String name;

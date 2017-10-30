@@ -20,8 +20,8 @@ public class Zookeeper extends VO {
 	
 	@Override //from VO Classes' toString() method
 	public String toString() {
-		super.toString();
-		return ", ªÁ¿∞ªÁ∏Ì: " + zookeeper;
+		return super.toString() +", ªÁ¿∞ªÁ∏Ì: " + zookeeper;
+		
 	}
 
 	@Override //from VO Classes' equals() method

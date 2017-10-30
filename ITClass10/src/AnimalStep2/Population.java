@@ -20,8 +20,7 @@ public class Population extends VO{
 	
 	@Override //from VO Classes' toString() method
 	public String toString() {
-		super.toString();
-		return ", 개체수: "+population+"마리";
+		return super.toString()+", 개체수: "+population+"마리";
 	}
 
 	@Override //from VO Classes' equals() method
