@@ -267,12 +267,12 @@ public class UI {
 				//System.out.print(message);
 				option = Integer.parseInt(message);
 				if (option == 0) {
-					throw new Exception();
+					zeroException();
 				}
 			} catch (Exception e) {
 				System.out.println("[에러] 잘못 입력하였습니다. 다시 입력하여 주세요.");
-				sc.nextLine();
-				continue;
+				System.out.print("재입력>> ");
+				message = sc.nextLine();
 			}
 		} while(option == 0);
 		return option;
