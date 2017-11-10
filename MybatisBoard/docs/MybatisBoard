@@ -1,0 +1,23 @@
+[ MybatisBoard 예제]
+
+* 폴더 구조
+src - 프로그램 소스, Mybatis관련 설정파일
+lit - JDBC드라이버, Mybatis 라이브러리 파일
+
+* 패키지
+board.vo - 게시판 관련 VO 클래스
+board.ui - 사용자 화면
+board.dao - DB관련 처리 클래스
+
+* Mybatis 관련 파일
+db.properties - DB 관련 정보
+mybatis-config - Mybatis 설정파일
+board.xml - 게시판 관련 SQL문 정의
+
+*각 패키지 별 클래스
+board.vo.Board - 게시판 글 정보 저장 VO
+board.ui.BoardMain - main() 메서드 포함, 실행의 시작
+board.ui.BoardUI - 사용자 메뉴 및 입출력
+board.dao.MybatisConfig - 마이바티스 객체 생성
+board.dao.BoardDAO - DB관련 처리
+board.dao.BoardMapper - XML 파일과 매핑되는 인터페이스
