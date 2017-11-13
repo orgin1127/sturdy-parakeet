@@ -57,7 +57,8 @@ public class Board {
 		System.out.println("작성일: "+this.indate);
 		System.out.println("조회수: "+this.hits);
 		System.out.println("제목: "+this.title);
-		System.out.println("내용 : "+this.content );
+		System.out.println("내용 : ");
+		System.out.println(content);
 	}
 	
 	@Override

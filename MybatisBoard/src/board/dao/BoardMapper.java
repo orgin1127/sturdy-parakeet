@@ -1,6 +1,7 @@
 package board.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import board.vo.Board;
 
@@ -15,8 +16,16 @@ public interface BoardMapper {
 	public int updateHit(int i);
 	//글 삭제
 	public int deleteBoard(int i);
-	//글 검색 (글번호)
-	public ArrayList<Board> findBoardNum();
-	//글 검색 (제목)
-	public ArrayList<Board> findBoardTitle(String title);
+	//검색(동적SQL 사용)
+	public ArrayList<Board> search(HashMap<String, Object> map);
+	
+	//동적 sql 사용 전
+//	//글 검색 (글번호)
+//	public ArrayList<Board> findBoardNum(int number);
+//	//글 검색 (제목)
+//	public ArrayList<Board> findBoardTitle(String title);
+//	//글 검색 (글 내용)
+//	public ArrayList<Board> findBoardContent(String content);
+//	//글 검색 (글 작성자)
+//	public ArrayList<Board> findBoardWriter(String writer);
 }

@@ -59,7 +59,7 @@ public class BoardUI {
 			}
 			else {
 				System.out.println("숫자를 잘못 입력 하셨습니다.");
-				sc.nextLine();
+				System.out.println("");
 				continue;
 			}
 		}
@@ -157,69 +157,129 @@ public class BoardUI {
 	}
 	
 	public void findBoard() {
-		String str = "";
-		int number = 0;
 		String selectFindMenu = "";
 		int intselectFindMenu = 0;
+		String findWord = "";
 		
 		System.out.println("[글 목록 검색]");
 		System.out.println("1. 제목으로 검색");
 		System.out.println("2. 글 내용으로 검색");
-		System.out.println("3. 글 번호로 검색");
+		System.out.println("3. 작성자로 검색");
 		System.out.println("4. 상위메뉴로");
 		System.out.print("검색 방법을 선택하여 주세요: ");
-		
 		selectFindMenu = sc.nextLine();
 		
 		if (Pattern.matches("^[0-9]*$", selectFindMenu)) {
 			intselectFindMenu = Integer.parseInt(selectFindMenu);
-			switch (intselectFindMenu) {
+			switch(intselectFindMenu) {
 			case 1:
 				System.out.print("찾을 글의 제목을 입력하여 주세요: ");
-				String stringFindTitle = sc.nextLine();
-				ArrayList<Board> listForFindTitle = dao.findBoardTitle(stringFindTitle);
-				if (listForFindTitle.isEmpty()) {
-					System.out.println("검색 결과가 없습니다.");
-				}
-				else {
-					System.out.println(listForFindTitle);
+				findWord = sc.nextLine();
+				ArrayList<Board> listForFindTitle = dao.findBoard(intselectFindMenu, findWord);
+				for (Board boardForShow : listForFindTitle) {
+					boardForShow.showBoard();
 				}
 				break;
 			case 2:
 				System.out.print("찾을 글의 내용을 입력하여 주세요: ");
-				String stringFindContent = sc.nextLine();
+				findWord = sc.nextLine();
+				ArrayList<Board> listForFindContent = dao.findBoard(intselectFindMenu, findWord);
+				for (Board boardForShow : listForFindContent) {
+					boardForShow.showBoard();
+				}
 				break;
 			case 3:
-				System.out.print("검색할 글의 번호를 입력하여 주세요 : ");
-				str = sc.nextLine();
-				if (Pattern.matches("^[0-9]*$", str)) {
-					number = Integer.parseInt(str);
-				}
-				else {
-					System.out.println("잘못된 번호 입력");
-					sc.nextLine();
-					return;
-				}
-				ArrayList<Board> list = dao.findBoardNum(number);
-				if (list.isEmpty()) {
-					System.out.println("검색 결과가 없습니다.");
-				}
-				else {
-					System.out.println(list);
+				System.out.print("찾을 글의 작성자를 입력하여 주세요: ");
+				findWord = sc.nextLine();
+				ArrayList<Board> listForFindWriter = dao.findBoard(intselectFindMenu, findWord);
+				for (Board boardForShow : listForFindWriter) {
+					boardForShow.showBoard();
 				}
 				break;
-			case 4:
-				return;
 
 			default:
 				break;
 			}
 		}
 		else {
-			System.out.println("잘못된 번호 입력");
-			sc.nextLine();
+			System.out.println("잘못된 번호를 선택하셨습니다.");
 			return;
 		}
+		
+		
+		//동적sql 쓰기 전 아까워라 내 코드
+//		if (Pattern.matches("^[0-9]*$", selectFindMenu)) {
+//			intselectFindMenu = Integer.parseInt(selectFindMenu);
+//			switch (intselectFindMenu) {
+//			case 1:
+//				System.out.print("찾을 글의 제목을 입력하여 주세요: ");
+//				String stringFindTitle = sc.nextLine();
+//				ArrayList<Board> listForFindTitle = dao.findBoardTitle(stringFindTitle);
+//				if (listForFindTitle.isEmpty()) {
+//					System.err.println("[오류] 검색 결과가 없습니다.");
+//				}
+//				else {
+//					for (Board boardForShowSearchResult : listForFindTitle) {
+//						boardForShowSearchResult.showBoard();
+//					}
+//					
+//				}
+//				System.out.println("");
+//				break;
+//			case 2:
+//				System.out.print("찾을 글의 내용을 입력하여 주세요: ");
+//				String stringFindContent = sc.nextLine();
+//				ArrayList<Board> listForFindContent = dao.findBoardContent(stringFindContent);
+//				if (listForFindContent.isEmpty()) {
+//					System.err.println("[오류] 검색 결과가 없습니다.");
+//				}
+//				else {
+//					for (Board boardForShowSearchResult : listForFindContent) {
+//						boardForShowSearchResult.showBoard();
+//					}
+//				}
+//				System.out.println("");
+//				break;
+//			case 3:
+//				System.out.print("검색할 글의 번호를 입력하여 주세요 : ");
+//				str = sc.nextLine();
+//				if (Pattern.matches("^[0-9]*$", str)) {
+//					number = Integer.parseInt(str);
+//				}
+//				else {
+//					System.out.println("잘못된 번호 입력");
+//					sc.nextLine();
+//					System.out.println("");
+//					return;
+//				}
+//				ArrayList<Board> listForFindNum = dao.findBoardNum(number);
+//				if (listForFindNum.isEmpty()) {
+//					System.err.println("[오류] 검색 결과가 없습니다.");
+//				}
+//				else {
+//					for (Board boardForShowSearchResult : listForFindNum) {
+//						boardForShowSearchResult.showBoard();
+//					}
+//				}
+//				System.out.println("");
+//				break;
+//			case 4:
+//				System.out.println("검색할 작성자를 입력하여 주세요 : ");
+//				String stringFindWriter = sc.nextLine();
+//				ArrayList<Board> findForShowSearchResult = dao.findBoardWriter(stringFindWriter);
+//				break;
+//			case 5:
+//				return;
+//
+//			default:
+//				break;
+//			}
+//		}
+//		else {
+//			System.out.println("잘못된 번호 입력");
+//			System.out.println("");
+//			return;
+//		}
 	}
 
 }

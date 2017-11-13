@@ -22,14 +22,14 @@ values (
 	, #{content}
 )
 </insert>
-<!-- 글 목록, 작성자, 글쓴 날 출력 -->
+<!-- 전체 글 목록 -->
 <select id="showBoard" resultType="Board">
 select 
 		boardnum
 		, name
 		, title
 		, hits
-		, indate
+		, to_char(indate, 'yy/mm/dd') indate
 from board
 order by boardnum
 </select>
@@ -40,7 +40,7 @@ select
 		, title
 		, name
 		, hits
-		, indate
+		, to_char(indate, 'yy/mm/dd') indate
 		, content
 from board
 where boardnum = #{boardnum}
@@ -53,7 +53,7 @@ where boardnum = #{boardnum}
 </update>
 <!-- 글 삭제 -->
 <delete id="deleteBoard" parameterType="int">
-delete board
+delete from board
 where boardnum = #{boardnum}
 </delete>
 <!-- 글 검색(글 번호) -->
@@ -63,7 +63,7 @@ select
 		, title
 		, name 
 		, hits
-		, indate
+		, to_char(indate, 'yy/mm/dd') indate
 from board
 where boardnum = #{boardnum}
 </select>
@@ -74,8 +74,36 @@ select
 		, title
 		, name 
 		, hits
-		, indate
+		, to_char(indate, 'yy/mm/dd') indate
 from board
-where title like '%'#||{title}||'%' 
+where lower(title) like lower('%'||#{title}||'%') 
+</select>
+<!-- 글 검색(글 내용) -->
+<select id="findBoardContent" parameterType="String" resultType="Board">
+select
+		boardnum
+		, title
+		, name
+		, hits
+		, to_char(indate, 'yy/mm/dd') indate
+from board
+where lower(content) like lower('%'||#{content}||'%')
+</select>
+<!-- col: 1-작성자 검색 2-제목 3-본문검색 -->
+<!-- word: 검색할 단어 -->
+<select id="search" parameterType="map" resultType="Board">
+select * from board
+<where>
+	<if test="col == 1">
+		lower(title) like lower('%'||#{word}||'%')
+	</if>
+	<if test="col == 2">
+		lower(content) like lower('%'||#{word}||'%')
+	</if>
+	<if test="col == 3">
+		lower(name) like lower('%'||#{word}||'%')
+	</if>
+</where> 
+order by boardnum
 </select>
 </mapper>

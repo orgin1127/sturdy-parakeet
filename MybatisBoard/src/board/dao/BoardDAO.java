@@ -1,6 +1,7 @@
 package board.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -101,16 +102,35 @@ public class BoardDAO {
 		}
 		return result;
 	}
-	//글 검색 (글번호)
-	public ArrayList<Board> findBoardNum(int i) {
+	
+	public ArrayList<Board> findBoard(int select, String word) {
 		SqlSession session = null;
 		ArrayList<Board> list = null;
+		HashMap<String, Object> map = new HashMap<>();
+		
 		try {
 			session = factory.openSession();
 			BoardMapper bm = session.getMapper(BoardMapper.class);
-			list = bm.findBoardNum();
+			switch (select) {
+			case 1:
+				map.put("col", select);
+				map.put("word", word);
+				break;
+			case 2:
+				map.put("col", select);
+				map.put("word", word);
+				break;
+			case 3:
+				map.put("col", select);
+				map.put("word", word);
+				break;
+			default:
+				break;
+			}				
+			list = bm.search(map);
 			session.commit();
 		}
+		
 		catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -119,23 +139,83 @@ public class BoardDAO {
 		}
 		return list;
 	}
-	//글 검색 (제목)
-	public ArrayList<Board> findBoardTitle(String title) {
-		SqlSession session = null;
-		ArrayList<Board> list = null;
-		try {
-			session = factory.openSession();
-			BoardMapper bm = session.getMapper(BoardMapper.class);
-			list = bm.findBoardTitle(title);
-			session.commit();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (session != null) session.close();
-		}
-		return list;
-	}
+	
+	
+	//동적 SQL 쓰기 전의 찾기.. 아까워라
+//	//글 검색 (글번호)
+//	public ArrayList<Board> findBoardNum(int number) {
+//		SqlSession session = null;
+//		ArrayList<Board> list = null;
+//		try {
+//			session = factory.openSession();
+//			BoardMapper bm = session.getMapper(BoardMapper.class);
+//			list = bm.findBoardNum(number);
+//			session.commit();
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		finally {
+//			if (session != null) session.close();
+//		}
+//		return list;
+//	}
+//	
+//	//글 검색 (제목)
+//	public ArrayList<Board> findBoardTitle(String title) {
+//		SqlSession session = null;
+//		ArrayList<Board> list = null;
+//		try {
+//			session = factory.openSession();
+//			BoardMapper bm = session.getMapper(BoardMapper.class);
+//			list = bm.findBoardTitle(title);
+//			session.commit();
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		finally {
+//			if (session != null) session.close();
+//		}
+//		return list;
+//	}
+//	
+//	//글 검색(본문내용)
+//	public ArrayList<Board> findBoardContent(String content) {
+//		SqlSession session = null;
+//		ArrayList<Board> list = null;
+//		try {
+//			session = factory.openSession();
+//			BoardMapper bm = session.getMapper(BoardMapper.class);
+//			list = bm.findBoardContent(content);
+//			session.commit();
+//		}
+//		catch (Exception e)	{
+//			e.printStackTrace();
+//		}
+//		finally {
+//			if (session != null) session.close();
+//		}
+//		return list;
+//	}
+//	
+//	//글 검색(글쓴이)
+//	public ArrayList<Board> findBoardWriter(String writer) {
+//		SqlSession session = null;
+//		ArrayList<Board> list = null;
+//		try {
+//			session = factory.openSession();
+//			BoardMapper bm = session.getMapper(BoardMapper.class);
+//			list = bm.findBoardWriter(writer);
+//			session.commit();
+//		}
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		finally {
+//			if (session != null) session.close();
+//		}
+//		return list;
+//	}
 
 }
