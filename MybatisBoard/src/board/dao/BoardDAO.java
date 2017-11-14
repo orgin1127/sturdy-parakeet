@@ -1,5 +1,6 @@
 package board.dao;
 
+import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import board.vo.Board;
+import board.vo.Reply;
 import oracle.net.ns.SessionAtts;
 
 //DB관련 작업
@@ -37,7 +39,7 @@ public class BoardDAO {
 		return result;
 		//세션 시작
 		//BoardMapper 객체 생성
-		//BoardMapper의 추상메서드 insertBoard() 호출하여 Board rorcpwjwkd
+		//BoardMapper의 추상메서드 insertBoard() 호출하여 Board 객체저장
 		//세션 커밋
 		//리턴값 0이면 false 리턴
 		//리턴값 1이면 true 리턴
@@ -103,6 +105,7 @@ public class BoardDAO {
 		return result;
 	}
 	
+	//글 검색(동적sql)
 	public ArrayList<Board> findBoard(int select, String word) {
 		SqlSession session = null;
 		ArrayList<Board> list = null;
@@ -124,6 +127,9 @@ public class BoardDAO {
 				map.put("col", select);
 				map.put("word", word);
 				break;
+			case 4:
+				map.put("col", select);
+				map.put("word", word);
 			default:
 				break;
 			}				
@@ -140,6 +146,45 @@ public class BoardDAO {
 		return list;
 	}
 	
+	//리플 찾아서 전달
+	public ArrayList<Reply> findReply(int number) {
+		SqlSession session = null;
+		ArrayList<Reply> list = null;
+		try {
+			session = factory.openSession();
+			BoardMapper bm = session.getMapper(BoardMapper.class);
+			list = bm.findReply(number);
+			session.commit();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (session != null) session.close();
+		}
+		return list;
+	}
+	
+	//리플작성
+	public boolean writeReply(Reply reply) {
+		boolean result = false;
+		SqlSession session = null;
+		try {
+			session = factory.openSession();
+			BoardMapper bm = session.getMapper(BoardMapper.class);
+			if (bm.writeReply(reply) == 1) {
+				result = true;
+				session.commit();
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (session != null) session.close();
+		}
+		return result;
+	}
 	
 	//동적 SQL 쓰기 전의 찾기.. 아까워라
 //	//글 검색 (글번호)

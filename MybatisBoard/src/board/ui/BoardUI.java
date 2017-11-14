@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import board.dao.BoardDAO;
 import board.vo.Board;
+import board.vo.Reply;
 
 /**
  * 사용자 화면, 입출력
@@ -132,7 +133,58 @@ public class BoardUI {
 			return;
 		}
 		Board b = dao.readBoard(number);
-		b.readBoard();
+		if (b==null) {
+			System.out.println("글이 존재하지 않습니다");
+		}
+		else {
+			b.readBoard();
+		}
+		
+		//현재 글에 달린 리플들 검색해서 출력
+		ArrayList<Reply> list = dao.findReply(number);
+		for (Reply showReply : list) {
+			showReply.showReply();
+		}
+		System.out.println("");
+		//이 글에 리플을 달 것인지 선택
+		while (true) {
+			System.out.print("이 글에 리플을 작성하시겠습니까? (Y/N) => ");
+			String select = sc.nextLine();
+			if (select.toLowerCase().equals("n")) {
+				return;
+			}
+			//리플 입력하여 DB에 저장
+			else if (select.toLowerCase().equals("y")) {
+				String replyWriter;
+				String replyText;
+				StringBuffer sb = new StringBuffer();
+				System.out.print("리플 작성자: ");
+				replyWriter = sc.nextLine();
+				System.out.print("리플 내용 입력(종료시에는 엔터를 한번 더 눌러주세요): ");
+				while (true) {
+					replyText = sc.nextLine();
+					if (replyText.isEmpty()) {
+						break;
+					}
+					sb.append(replyText);
+					sb.append(replyText = System.getProperty("line.separator"));
+				}
+				replyText = sb.toString();
+				Reply reply = new Reply(number, replyWriter, replyText);
+				if (dao.writeReply(reply)) {
+					System.out.println("등록성공");
+					return;
+				}
+				else {
+					System.err.println("등록실패");
+					return;
+				}
+			}
+			else {
+				System.out.println("잘못된 입력입니다.");
+				continue;
+			}
+		}
 	}
 	
 	public void deleteBoard() {
@@ -165,7 +217,8 @@ public class BoardUI {
 		System.out.println("1. 제목으로 검색");
 		System.out.println("2. 글 내용으로 검색");
 		System.out.println("3. 작성자로 검색");
-		System.out.println("4. 상위메뉴로");
+		System.out.println("4. 전체");
+		System.out.println("0. 상위메뉴로");
 		System.out.print("검색 방법을 선택하여 주세요: ");
 		selectFindMenu = sc.nextLine();
 		
@@ -196,7 +249,15 @@ public class BoardUI {
 					boardForShow.showBoard();
 				}
 				break;
-
+			case 4:
+				System.out.println("찾을 글의 키워드를 입력하여 주세요: ");
+				findWord = sc.nextLine();
+				ArrayList<Board> listForFindKeyword = dao.findBoard(intselectFindMenu, findWord);
+				for (Board boardForShow : listForFindKeyword) {
+					boardForShow.showBoard();
+				}
+			case 0:
+				return;
 			default:
 				break;
 			}

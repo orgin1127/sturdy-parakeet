@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import board.vo.Board;
+import board.vo.Reply;
 
 public interface BoardMapper {
 	//글 저장
@@ -18,6 +19,10 @@ public interface BoardMapper {
 	public int deleteBoard(int i);
 	//검색(동적SQL 사용)
 	public ArrayList<Board> search(HashMap<String, Object> map);
+	//리플 출력
+	public ArrayList<Reply> findReply(int number);
+	//리플 작성
+	public int writeReply(Reply reply);
 	
 	//동적 sql 사용 전
 //	//글 검색 (글번호)

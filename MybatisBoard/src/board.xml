@@ -103,7 +103,29 @@ select * from board
 	<if test="col == 3">
 		lower(name) like lower('%'||#{word}||'%')
 	</if>
+	<if test="col == 4">
+		  lower(title) like lower('%'||#{word}||'%')
+		  or lower(content)like lower('%'||#{word}||'%')
+		  or lower(name)) like lower('%'||#{word}||'%')
+	</if>
 </where> 
 order by boardnum
 </select>
+<!-- 리플 가져오기 -->
+<select id="findReply" parameterType="int" resultType="Reply">
+select *
+from reply
+where boardnum = #{boardnum}
+order by replynum
+</select>
+<!-- 리플작성 -->
+<insert id="writeReply" parameterType="Reply">
+insert into reply 
+values (
+		replyseq.nextval
+		, #{boardnum}
+		, #{name}
+		, #{retext}
+)
+</insert>
 </mapper>
