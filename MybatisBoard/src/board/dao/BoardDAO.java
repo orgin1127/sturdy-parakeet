@@ -19,6 +19,7 @@ public class BoardDAO {
 	
 	//글 저장
 	public boolean insertBoard(Board b) {
+		System.out.println("실험중...");
 		SqlSession session = null;
 		boolean result = false;
 		try {
