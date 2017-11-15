@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="User.DAO.UserMapper">
+
+<!-- 회원 기본 정보 저장 -->
+<!-- 원래는 풀 경로board.vo.Board를 parameterType에 써야하지만 mybatis-config에서 alias 지정해서 별칭으로 사용이 가능-->
+<insert id="basicUserInsert" parameterType="UserVO"> 
+insert into userinfo (
+	id
+	, name
+	, gender
+)
+values (
+	 #{id}
+	, #{name}
+	, #{gender}
+)
+</insert>
+<!-- 회원 부가정보 저장 -->
+<insert id="advanceUserInsert" parameterType="UserVO">
+insert into useraddr (
+	id
+	, phone
+	, address
+)
+values (
+	#{id}
+	, #{phone}
+	, #{address}
+)
+
+</insert>
+<!-- 회원 아이디 검색 -->
+<select id="idSearch" parameterType="String" resultType="String">
+select id from userinfo where id = #{id}
+</select>
+
+<!-- 전체 회원 출력 -->
+<select id="show" resultType="UserVO">
+select
+    i.id  
+    , i.name 
+    , i.gender
+    , nvl(a.phone,'입력안됨') as "phone"
+    , nvl(a.address,'입력안됨') as "address"
+from userinfo i, useraddr a 
+where i.id = a.id(+)
+order by a.id
+</select>
+</mapper>
