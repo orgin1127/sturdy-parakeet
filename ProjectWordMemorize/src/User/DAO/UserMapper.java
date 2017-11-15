@@ -1,5 +1,9 @@
 package User.DAO;
 
-public class UserMapper {
+import User.VO.UserInfomation;
+
+public interface UserMapper {
+	
+	public int insertUser(UserInfomation user);
 
 }

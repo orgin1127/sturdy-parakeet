@@ -14,6 +14,9 @@ public class UserUI {
 		String selectMainMenu = sc.nextLine();
 		switch (checkNumberValidity(selectMainMenu)) {
 		case 1:
+			if (dao.insertUser(registUser())) {
+				System.out.println("등록 성공");
+			}
 			
 			break;
 		case 2:
@@ -39,12 +42,18 @@ public class UserUI {
 	}
 
 	public UserInfomation registUser() {
-		String account;
+		String userID;
 		String password;
+		UserInfomation userInfo;
 		System.out.print("ユ―ザアカウントネーム：　");
-		
+		userID = sc.nextLine();
+		System.out.print("暗証番号：　");
+		password = sc.nextLine();
+		userInfo = new UserInfomation(userID, password);
+		return userInfo;
 	}
 	
+	//String으로 받은 문자열 안에 숫자만 존재하는지를 정규식을 통하여 검사하는 Method
 	public int checkNumberValidity(String select) {
 		int selectedMenu = 0;
 		if (Pattern.matches("^[0-9]*$", select)) {

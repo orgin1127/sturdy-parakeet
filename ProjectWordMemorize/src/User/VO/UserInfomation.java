@@ -54,7 +54,7 @@ public class UserInfomation {
 	@Override
 	public String toString() {
 		String s = "会員番号 : "+accountnumber+", アイディー : "+userID
-				+", 暗証番号 : "+password+", 生成日 : "+createdate;
+				+", 暗証番号 : "+password+", 登録日 : "+createdate;
 		return s;
 	}
 	
