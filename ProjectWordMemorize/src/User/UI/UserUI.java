@@ -20,9 +20,7 @@ public class UserUI {
 			case 1: registUser();
 				break;
 			case 2:
-				ui.afterLoginMenu();
-				String afterLoginSelect = sc.nextLine();
-				dao.afterLogin(checkNumberValidity(afterLoginSelect));
+				dao.checkUserIsExist();
 				break;
 			case 9:
 				return;

@@ -9,12 +9,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import User.DAO.MybatisConfig;
+import User.UI2.UICompilation;
 import User.VO.UserInfomation;
 
 public class UserDAO {
 	
 	private SqlSessionFactory factory = MybatisConfig.getSqlSessionFactory();
 	Scanner sc = new Scanner(System.in);
+	UICompilation ui = new UICompilation();
 	
 	public boolean insertUser(UserInfomation user) {
 		boolean resultOfRegist = false;
@@ -36,16 +38,14 @@ public class UserDAO {
 		return resultOfRegist;
 	}
 	
-	public String checkUserID(String userID) {
+	public UserInfomation checkUserID(String userID) {
 		SqlSession session = null;
-		String check = null;
-		
+		UserInfomation user = null;
 		try {
 			session = factory.openSession();
 			UserMapper um = session.getMapper(UserMapper.class);
-			check = um.checkUserID(userID);
+			user = um.checkUserID(userID);
 			session.commit();
-			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -53,85 +53,162 @@ public class UserDAO {
 		finally {
 			if (session != null) session.close();
 		} 
-		return check;
+		return user;
 	}
 	
-	public void afterLogin(int i) {
+	public void checkUserIsExist() {
+		String userID;
+		String password;		
+		System.out.print("ユ―ザアカウントネーム ：　");
+		userID = sc.nextLine();
+		System.out.print("暗証番号 ：　");
+		password = sc.nextLine();
+		UserInfomation user = new UserInfomation(userID, password);
+		SqlSession session = null;
 		try {
-			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-		} 
+			session = factory.openSession();
+			UserMapper um = session.getMapper(UserMapper.class);
+			if (um.checkUser(user) != null) {
+				afterLogin();
+			}
+			else {
+				System.out.println("ユ―ザアカウント、または暗証番号が違います。");
+				return;
+			}
+		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		finally {
+			if (session != null) session.close();
 		}
-		SqlSession session = null;
-		ArrayList<Object> list = new ArrayList<>();
-		switch (i) {
-			case 1:
-				try {
-					session = factory.openSession();
-					UserMapper um = session.getMapper(UserMapper.class);
-					list = um.viewWordN1();
-					Collections.shuffle(list);
-					session.commit();
-					int cnt = 0;
-					while (true) {
-						System.out.println(list.get(cnt));
-						System.out.print("다음 단어를 보시겠습니까?(y/n) ");
-						String wordViewContinue = sc.nextLine();
-						if (wordViewContinue.toLowerCase().equals("y")) {
-							cnt++;
-						}
-						else if (wordViewContinue.toLowerCase().equals("n")) {
-							return;
-						}
-						else {
-							System.out.println("입력이 잘못되었습니다.");
+	}
+	
+	
+	public void afterLogin() {
+		HERE:
+		while (true) {
+			try {
+				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+			} 
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+	
+	//		try {
+	//			Thread.sleep(1000);
+	//		} catch (InterruptedException e) {
+	//			e.printStackTrace();
+	//		}
+			
+			ui.afterLoginMenu();
+			String afterLoginSelect = sc.nextLine();
+			int afterLoginSelectNumber = 0;
+			if (Pattern.matches("^[0-9]*$", afterLoginSelect)) {
+				afterLoginSelectNumber = Integer.parseInt(afterLoginSelect);
+			}
+			
+			SqlSession session = null;
+			ArrayList<Object> list = new ArrayList<>();
+			switch (afterLoginSelectNumber) {
+				case 1:
+					try {
+						session = factory.openSession();
+						UserMapper um = session.getMapper(UserMapper.class);
+						list = um.viewWordN1();
+						Collections.shuffle(list);
+						session.commit();
+						int cnt = 0;
+						while (true) {
+							System.out.println("");
+							System.out.println("");
+							System.out.println("\t"+"\t"+list.get(cnt)+"\t"+"\t");
+							System.out.println("");
+							System.out.println("");
+							System.out.print("다음 단어를 보시겠습니까?(y/n) ");
+							String wordViewContinue = sc.nextLine();
+							if (wordViewContinue.toLowerCase().equals("y")) {
+								cnt++;
+							}
+							else if (wordViewContinue.toLowerCase().equals("n")) {
+								continue HERE;
+							}
+							else {
+								System.out.println("입력이 잘못되었습니다.");
+							}
 						}
 					}
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-				finally {
-					if (session != null) session.close();
-				} 
-				break;
-			case 2:
-				try {
-					session = factory.openSession();
-					UserMapper um = session.getMapper(UserMapper.class);
-					list = um.viewWordN2();
-					Collections.shuffle(list);
-					session.commit();
-					int cnt = 0;
-					while (true) {
-						System.out.println(list.get(cnt));
-						System.out.print("다음 단어를 보시겠습니까?(y/n) ");
-						String wordViewContinue = sc.nextLine();
-						if (wordViewContinue.toLowerCase().equals("y")) {
-							cnt++;
-						}
-						else if (wordViewContinue.toLowerCase().equals("n")) {
-							return;
-						}
-						else {
-							System.out.println("입력이 잘못되었습니다.");
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+					finally {
+						if (session != null) session.close();
+					} 
+					break;
+				case 2:
+					try {
+						session = factory.openSession();
+						UserMapper um = session.getMapper(UserMapper.class);
+						list = um.viewWordN2();
+						Collections.shuffle(list);
+						session.commit();
+						int cnt = 0;
+						while (true) {
+							System.out.println(list.get(cnt));
+							System.out.print("다음 단어를 보시겠습니까?(y/n) ");
+							String wordViewContinue = sc.nextLine();
+							if (wordViewContinue.toLowerCase().equals("y")) {
+								cnt++;
+							}
+							else if (wordViewContinue.toLowerCase().equals("n")) {
+								continue HERE;
+							}
+							else {
+								System.out.println("입력이 잘못되었습니다.");
+							}
 						}
 					}
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-				finally {
-					if (session != null) session.close();
-				} 
-				break;
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+					finally {
+						if (session != null) session.close();
+					} 
+					break;
+				case 3:
+					try {
+						session = factory.openSession();
+						UserMapper um = session.getMapper(UserMapper.class);
+						list = um.viewWordN3();
+						Collections.shuffle(list);
+						session.commit();
+						int cnt = 0;
+						while (true) {
+							System.out.println(list.get(cnt));
+							System.out.print("다음 단어를 보시겠습니까?(y/n) ");
+							String wordViewContinue = sc.nextLine();
+							if (wordViewContinue.toLowerCase().equals("y")) {
+								cnt++;
+							}
+							else if (wordViewContinue.toLowerCase().equals("n")) {
+								continue HERE;
+							}
+							else {
+								System.out.println("입력이 잘못되었습니다.");
+							}
+						}
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+					finally {
+						if (session != null) session.close();
+					} 
+					break;
+				default:
+					System.out.println("올바른 번호를 입력하여 주세요");
+					continue;
+			}
 		}
 	}
 

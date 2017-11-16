@@ -23,9 +23,16 @@ values (
 )
 </insert>
 <!-- 회원 ID 검색 -->
-<select id="checkUser" parameterType="String" resultType="UserInfomation"> 
-select UserID, password from UserAccount
-where userID = #{userID}
+<select id="checkUserID" parameterType="String" resultType="UserInfomation"> 
+select userID, password from UserAccount
+where userID = #{userID} 
+</select>
+<!-- 회원 검색 -->
+<select id="checkUser" parameterType="UserInfomation" resultType="UserInfomation">
+select * from UserAccount
+where 
+		userID = #{userID}
+		AND password = #{password}
 </select>
 <!-- 단어 출력(N1) -->
 <select id="viewWordN1" resultType="addedWordN1">
