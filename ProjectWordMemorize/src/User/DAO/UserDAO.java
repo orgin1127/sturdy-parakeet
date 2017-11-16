@@ -81,18 +81,6 @@ public class UserDAO {
 	public void afterLogin(UserInfomation user) {
 		HERE:
 		while (true) {
-			try {
-				new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-			} 
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-	
-	//		try {
-	//			Thread.sleep(1000);
-	//		} catch (InterruptedException e) {
-	//			e.printStackTrace();
-	//		}
 			
 			ui.afterLoginMenu();
 			String afterLoginSelect = sc.nextLine();
@@ -115,13 +103,14 @@ public class UserDAO {
 						while (true) {
 							System.out.println("");
 							System.out.println("");
-							System.out.println("\t"+"\t"+list.get(cnt)+"\t"+"\t");
+							System.out.println("\t"+list.get(cnt)+"\t");
 							System.out.println("");
 							System.out.println("");
 							System.out.print("다음 단어를 보시겠습니까?(y/n) ");
 							String wordViewContinue = sc.nextLine();
 							if (wordViewContinue.toLowerCase().equals("y")) {
 								cnt++;
+								UICompilation.clear();
 							}
 							else if (wordViewContinue.toLowerCase().equals("n")) {
 								continue HERE;
@@ -147,11 +136,16 @@ public class UserDAO {
 						session.commit();
 						int cnt = 0;
 						while (true) {
-							System.out.println(list.get(cnt));
+							System.out.println("");
+							System.out.println("");
+							System.out.println("\t"+list.get(cnt)+"\t");
+							System.out.println("");
+							System.out.println("");
 							System.out.print("다음 단어를 보시겠습니까?(y/n) ");
 							String wordViewContinue = sc.nextLine();
 							if (wordViewContinue.toLowerCase().equals("y")) {
 								cnt++;
+								UICompilation.clear();
 							}
 							else if (wordViewContinue.toLowerCase().equals("n")) {
 								continue HERE;
@@ -177,11 +171,16 @@ public class UserDAO {
 						session.commit();
 						int cnt = 0;
 						while (true) {
-							System.out.println(list.get(cnt));
+							System.out.println("");
+							System.out.println("");
+							System.out.println("\t"+list.get(cnt)+"\t");
+							System.out.println("");
+							System.out.println("");
 							System.out.print("다음 단어를 보시겠습니까?(y/n) ");
 							String wordViewContinue = sc.nextLine();
 							if (wordViewContinue.toLowerCase().equals("y")) {
 								cnt++;
+								UICompilation.clear();
 							}
 							else if (wordViewContinue.toLowerCase().equals("n")) {
 								continue HERE;

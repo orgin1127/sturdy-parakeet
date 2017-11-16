@@ -41,5 +41,11 @@ public class UICompilation {
 		System.out.println("===============会員登録画面に入りました。================");		
 		System.out.println("今からIDとPasswordを入力します。");
 	}
+	
+	public static void clear() {
+		for (int i = 0; i < 35; i++) {
+			System.out.println("");
+		}
+	}
 
 }

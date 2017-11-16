@@ -14,12 +14,16 @@ public class UserUI {
 	
 	public UserUI() {
 		while (true) {
+			UICompilation.clear();
 			ui.startMenu();
 			String selectMainMenu = sc.nextLine();
 			switch (checkNumberValidity(selectMainMenu)) {
-			case 1: registUser();
+			case 1: 
+				UICompilation.clear();
+				registUser();
 				break;
 			case 2:
+				
 				login();
 				break;
 			case 9:
@@ -69,6 +73,7 @@ public class UserUI {
 		password = sc.nextLine();
 		UserInfomation user = dao.checkUserIsExist(userID, password);
 		if (user != null) {
+			UICompilation.clear();
 			dao.afterLogin(user);
 		}
 	}
