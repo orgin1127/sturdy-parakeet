@@ -9,20 +9,26 @@ import User.VO.UserInfomation;
 public class UserUI {
 	Scanner sc = new Scanner(System.in);
 	UserDAO dao = new UserDAO();
+	
 	public UserUI() {
-		printMainUI();
-		String selectMainMenu = sc.nextLine();
-		switch (checkNumberValidity(selectMainMenu)) {
-		case 1: registUser();
-			break;
-		case 2:
-			break;
-		case 0:
-			System.out.println("正しいメニュ―を選択して下さい"); 
-			break;
-		default:
-			System.out.println("正しいメニュ―を選択して下さい");
-			break;
+		while (true) {
+			printMainUI();
+			String selectMainMenu = sc.nextLine();
+			switch (checkNumberValidity(selectMainMenu)) {
+			case 1: registUser();
+				break;
+			case 2:
+				dao.printLoginUI();
+				break;
+			case 9:
+				return;
+			case 0:
+				System.out.println("正しいメニュ―を選択して下さい"); 
+				break;
+			default:
+				System.out.println("正しいメニュ―を選択して下さい");
+				break;
+			}
 		}
 	}
 	
@@ -47,10 +53,10 @@ public class UserUI {
 			password = sc.nextLine();
 			UserInfomation userInfo = new UserInfomation(userID, password);
 			if(dao.insertUser(userInfo)) {
-				System.out.println("등록되었습니다.");
+				System.out.println("登録されました。");
 			}
 			else {
-				System.err.println("등록에 실패하였습니다.");
+				System.err.println("登録に失敗しました。");
 			}
 			
 			return;
@@ -61,6 +67,8 @@ public class UserUI {
 		}		
 		
 	}
+	
+	
 	
 	//String으로 받은 문자열 안에 숫자만 존재하는지를 정규식을 통하여 검사하는 Method
 	public int checkNumberValidity(String select) {

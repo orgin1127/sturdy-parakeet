@@ -22,11 +22,22 @@ values (
 	, sysdate
 )
 </insert>
-
+<!-- 회원 ID 검색 -->
 <select id="checkUserID" parameterType="String" resultType="String"> 
 select UserID from UserAccount
 where userID = #{userID}
 </select>
-
+<!-- 단어 출력(N1) -->
+<select id="viewWordN1" resultType="addedWordN1">
+select * from memorizeN1
+</select>
+<!-- 단어 출력(N2) -->
+<select id="viewWordN2" resultType="addedWordN2">
+select * from memorizeN2
+</select>
+<!-- 단어 출력(N3) -->
+<select id="viewWordN3" resultType="addedWordN3">
+select * from memorizeN3
+</select>
  
 </mapper>
