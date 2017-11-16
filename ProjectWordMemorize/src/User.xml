@@ -23,8 +23,8 @@ values (
 )
 </insert>
 <!-- 회원 ID 검색 -->
-<select id="checkUserID" parameterType="String" resultType="String"> 
-select UserID from UserAccount
+<select id="checkUser" parameterType="String" resultType="UserInfomation"> 
+select UserID, password from UserAccount
 where userID = #{userID}
 </select>
 <!-- 단어 출력(N1) -->
