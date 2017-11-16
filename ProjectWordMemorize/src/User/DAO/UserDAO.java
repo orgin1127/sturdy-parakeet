@@ -56,24 +56,16 @@ public class UserDAO {
 		return user;
 	}
 	
-	public void checkUserIsExist() {
-		String userID;
-		String password;		
-		System.out.print("ユ―ザアカウントネーム ：　");
-		userID = sc.nextLine();
-		System.out.print("暗証番号 ：　");
-		password = sc.nextLine();
+	public UserInfomation checkUserIsExist(String userID, String password) {
+		
 		UserInfomation user = new UserInfomation(userID, password);
 		SqlSession session = null;
 		try {
 			session = factory.openSession();
 			UserMapper um = session.getMapper(UserMapper.class);
-			if (um.checkUser(user) != null) {
-				afterLogin();
-			}
-			else {
+			if (um.checkUser(user) == null) {
 				System.out.println("ユ―ザアカウント、または暗証番号が違います。");
-				return;
+				return null;
 			}
 		}
 		catch (Exception e) {
@@ -82,10 +74,11 @@ public class UserDAO {
 		finally {
 			if (session != null) session.close();
 		}
+		return user;
 	}
 	
 	
-	public void afterLogin() {
+	public void afterLogin(UserInfomation user) {
 		HERE:
 		while (true) {
 			try {
@@ -205,6 +198,8 @@ public class UserDAO {
 						if (session != null) session.close();
 					} 
 					break;
+				case 0:
+					return;
 				default:
 					System.out.println("올바른 번호를 입력하여 주세요");
 					continue;

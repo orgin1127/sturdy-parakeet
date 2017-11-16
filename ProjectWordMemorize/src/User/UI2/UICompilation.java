@@ -12,6 +12,7 @@ public class UICompilation {
 		System.out.println("2. N2の単語");
 		System.out.println("3. N3の単語");
 		System.out.println("4. カスタム単語");
+		System.out.println("0. ログアウト");
 		System.out.print("==> ");	
 	}
 	
@@ -26,6 +27,7 @@ public class UICompilation {
 		System.out.println("===============メニューを選択して下さい==================");
 		System.out.println("1. アカウント登録");
 		System.out.println("2. ログイン");
+		System.out.println("0. プログラム終了");
 		System.out.print("==> ");
 	}
 	

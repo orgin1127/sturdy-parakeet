@@ -20,13 +20,13 @@ public class UserUI {
 			case 1: registUser();
 				break;
 			case 2:
-				dao.checkUserIsExist();
+				login();
 				break;
 			case 9:
 				return;
 			case 0:
-				System.out.println("正しいメニュ―を選択して下さい"); 
-				break;
+				System.err.println("[お知らせ]　プログラムを終了します。");
+				return;
 			default:
 				System.out.println("正しいメニュ―を選択して下さい");
 				break;
@@ -60,7 +60,18 @@ public class UserUI {
 		
 	}
 	
-	
+	public void login() {
+		String userID;
+		String password;		
+		System.out.print("ユ―ザアカウントネーム ：　");
+		userID = sc.nextLine();
+		System.out.print("暗証番号 ：　");
+		password = sc.nextLine();
+		UserInfomation user = dao.checkUserIsExist(userID, password);
+		if (user != null) {
+			dao.afterLogin(user);
+		}
+	}
 	
 	//String으로 받은 문자열 안에 숫자만 존재하는지를 정규식을 통하여 검사하는 Method
 	public int checkNumberValidity(String select) {
