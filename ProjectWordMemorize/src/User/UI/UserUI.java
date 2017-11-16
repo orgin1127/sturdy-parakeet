@@ -4,21 +4,25 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import User.DAO.UserDAO;
+import User.UI2.UICompilation;
 import User.VO.UserInfomation;
 
 public class UserUI {
 	Scanner sc = new Scanner(System.in);
 	UserDAO dao = new UserDAO();
+	UICompilation ui = new UICompilation();
 	
 	public UserUI() {
 		while (true) {
-			printMainUI();
+			ui.startMenu();
 			String selectMainMenu = sc.nextLine();
 			switch (checkNumberValidity(selectMainMenu)) {
 			case 1: registUser();
 				break;
 			case 2:
-				dao.printLoginUI();
+				ui.afterLoginMenu();
+				String afterLoginSelect = sc.nextLine();
+				dao.afterLogin(checkNumberValidity(afterLoginSelect));
 				break;
 			case 9:
 				return;
@@ -32,18 +36,8 @@ public class UserUI {
 		}
 	}
 	
-	public void printMainUI() {
-		System.out.println("*****************************************");
-		System.out.println("*********	Word Memorize	*********");
-		System.out.println("*****************************************");
-		System.out.println(" ");
-		System.out.println("============メニューを選択して下さい============");
-		System.out.println("1. アカウント登録");
-		System.out.println("2. ログイン");
-		System.out.print("==> ");
-	}
-
 	public void registUser() {
+		ui.joinMemberMenu();
 		String userID;
 		String password;		
 		System.out.print("ユ―ザアカウントネーム ：　");

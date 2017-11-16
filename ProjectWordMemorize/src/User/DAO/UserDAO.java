@@ -56,50 +56,82 @@ public class UserDAO {
 		return check;
 	}
 	
-	public void printLoginUI() {
+	public void afterLogin(int i) {
 		try {
 			new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("");
-		System.out.println("==========[로그인 성공]==========");
-		System.out.println("");
-//		try {
-//			Thread.sleep(100);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-		
-		System.out.println("1. 単語を見る");
-		System.out.println("2. ");
-		String selectLoginMenu = sc.nextLine();
-		int loginMenu = 0;
-		if (Pattern.matches("^[0-9]*$", selectLoginMenu)) {
-			loginMenu = Integer.parseInt(selectLoginMenu);
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		switch (loginMenu) {
-		case 1:
-			SqlSession session = null;
-			ArrayList<Object> list = new ArrayList<>();
-			try {
-				session = factory.openSession();
-				UserMapper um = session.getMapper(UserMapper.class);
-				list = um.viewWordN1();
-				Collections.shuffle(list);
-				session.commit();
-				for (int i = 0; i < list.size(); i++) {
-					System.out.println(list.get(i));
+		SqlSession session = null;
+		ArrayList<Object> list = new ArrayList<>();
+		switch (i) {
+			case 1:
+				try {
+					session = factory.openSession();
+					UserMapper um = session.getMapper(UserMapper.class);
+					list = um.viewWordN1();
+					Collections.shuffle(list);
+					session.commit();
+					int cnt = 0;
+					while (true) {
+						System.out.println(list.get(cnt));
+						System.out.print("다음 단어를 보시겠습니까?(y/n) ");
+						String wordViewContinue = sc.nextLine();
+						if (wordViewContinue.toLowerCase().equals("y")) {
+							cnt++;
+						}
+						else if (wordViewContinue.toLowerCase().equals("n")) {
+							return;
+						}
+						else {
+							System.out.println("입력이 잘못되었습니다.");
+						}
+					}
 				}
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-			finally {
-				if (session != null) session.close();
-			} 
-			break;
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+				finally {
+					if (session != null) session.close();
+				} 
+				break;
+			case 2:
+				try {
+					session = factory.openSession();
+					UserMapper um = session.getMapper(UserMapper.class);
+					list = um.viewWordN2();
+					Collections.shuffle(list);
+					session.commit();
+					int cnt = 0;
+					while (true) {
+						System.out.println(list.get(cnt));
+						System.out.print("다음 단어를 보시겠습니까?(y/n) ");
+						String wordViewContinue = sc.nextLine();
+						if (wordViewContinue.toLowerCase().equals("y")) {
+							cnt++;
+						}
+						else if (wordViewContinue.toLowerCase().equals("n")) {
+							return;
+						}
+						else {
+							System.out.println("입력이 잘못되었습니다.");
+						}
+					}
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+				finally {
+					if (session != null) session.close();
+				} 
+				break;
 		}
 	}
 

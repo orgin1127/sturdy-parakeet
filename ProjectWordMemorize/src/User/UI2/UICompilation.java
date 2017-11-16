@@ -1,23 +1,10 @@
-package 정대영패키지;
+package User.UI2;
 
 public class UICompilation {
 	
-	public static void main(String[] args) {
-		startMenu();
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-		joinMemberMenu();
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-		afterLoginMenu();
-		
-	}
-	
-	public static void afterLoginMenu() {
+	public void afterLoginMenu() {
 		System.out.println("|==============================================|");
-		System.out.println("|　　　　　　　　　　　　          ログイン成功          　    　　　　　　　　　  |");
+		System.out.println("|　　　　　　　　　　　　          ログイン成功          　    　　　　　　  |");
 		System.out.println("|==============================================|");
 		System.out.println();
 		System.out.println("===============メニューを選択して下さい==================");
@@ -28,10 +15,10 @@ public class UICompilation {
 	}
 	
 	
-	public static void startMenu() {
+	public void startMenu() {
 		System.out.println("|==============================================|");
 		System.out.println("|                                              |");
-		System.out.println("|　　　　　　　　　　　　　　　皆の単語帳　　　　　　　　　　　　　　  |");
+		System.out.println("|　　　　　　　　　　　　　　　皆の単語帳　　　　　　　　　　　　  |");
 		System.out.println("|                                              |");
 		System.out.println("|==============================================|");
 		System.out.println();
@@ -41,10 +28,10 @@ public class UICompilation {
 		System.out.print("==> ");
 	}
 	
-	public static void joinMemberMenu() {
+	public void joinMemberMenu() {
 		System.out.println("|==============================================|");
 		System.out.println("|                                              |");
-		System.out.println("|　　　　　　　　　　　　　-会員登録 画面-　　　　　　　　　　　　　   |");
+		System.out.println("|　　　　　　　　　　　　　-会員登録 画面-　　　　　　　　　　　   |");
 		System.out.println("|                                              |");
 		System.out.println("|==============================================|");
 		System.out.println("");
