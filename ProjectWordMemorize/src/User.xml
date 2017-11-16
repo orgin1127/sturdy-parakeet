@@ -22,5 +22,11 @@ values (
 	, sysdate
 )
 </insert>
+
+<select id="checkUserID" parameterType="String" resultType="String"> 
+select UserID from UserAccount
+where userID = #{userID}
+</select>
+
  
 </mapper>

@@ -13,11 +13,7 @@ public class UserUI {
 		printMainUI();
 		String selectMainMenu = sc.nextLine();
 		switch (checkNumberValidity(selectMainMenu)) {
-		case 1:
-			if (dao.insertUser(registUser())) {
-				System.out.println("등록 성공");
-			}
-			
+		case 1: registUser();
 			break;
 		case 2:
 			break;
@@ -38,19 +34,32 @@ public class UserUI {
 		System.out.println("============メニューを選択して下さい============");
 		System.out.println("1. アカウント登録");
 		System.out.println("2. ログイン");
-		System.out.print("==>");
+		System.out.print("==> ");
 	}
 
-	public UserInfomation registUser() {
+	public void registUser() {
 		String userID;
-		String password;
-		UserInfomation userInfo;
-		System.out.print("ユ―ザアカウントネーム：　");
+		String password;		
+		System.out.print("ユ―ザアカウントネーム ：　");
 		userID = sc.nextLine();
-		System.out.print("暗証番号：　");
-		password = sc.nextLine();
-		userInfo = new UserInfomation(userID, password);
-		return userInfo;
+		if(dao.checkUserID(userID) == null) {
+			System.out.print("暗証番号 ：　");
+			password = sc.nextLine();
+			UserInfomation userInfo = new UserInfomation(userID, password);
+			if(dao.insertUser(userInfo)) {
+				System.out.println("등록되었습니다.");
+			}
+			else {
+				System.err.println("등록에 실패하였습니다.");
+			}
+			
+			return;
+		}
+		else {
+			System.err.println("重腹したIDがあります。");
+			return;
+		}		
+		
 	}
 	
 	//String으로 받은 문자열 안에 숫자만 존재하는지를 정규식을 통하여 검사하는 Method

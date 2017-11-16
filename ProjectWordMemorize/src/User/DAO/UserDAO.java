@@ -29,5 +29,25 @@ public class UserDAO {
 		} 
 		return resultOfRegist;
 	}
+	
+	public String checkUserID(String userID) {
+		SqlSession session = null;
+		String check = null;
+		
+		try {
+			session = factory.openSession();
+			UserMapper um = session.getMapper(UserMapper.class);
+			check = um.checkUserID(userID);
+			session.commit();
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (session != null) session.close();
+		} 
+		return check;
+	}
 
 }
