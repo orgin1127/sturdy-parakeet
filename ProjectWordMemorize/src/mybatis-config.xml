@@ -9,7 +9,7 @@
 	<typeAliases>
 		<typeAlias type="User.VO.UserInfomation" alias="UserInfomation" />
 	</typeAliases>
-	
+	 
 	<!-- DB접속 정보 셋팅 -->
 	<environments default="development">
 		<environment id="development">

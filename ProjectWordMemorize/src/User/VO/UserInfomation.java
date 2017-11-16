@@ -56,7 +56,7 @@ public class UserInfomation {
 		String s = "会員番号 : "+accountnumber+", アイディー : "+userID
 				+", 暗証番号 : "+password+", 登録日 : "+createdate;
 		return s;
-	}
+	} 
 	
 	
 	

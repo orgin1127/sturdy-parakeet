@@ -4,6 +4,6 @@ import User.VO.UserInfomation;
 
 public interface UserMapper {
 	
-	public int insertUser(UserInfomation user);
+	public int insertUser(UserInfomation user); 
 
 }

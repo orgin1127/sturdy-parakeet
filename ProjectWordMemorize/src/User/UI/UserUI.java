@@ -22,7 +22,7 @@ public class UserUI {
 		case 2:
 			break;
 		case 0:
-			System.out.println("正しいメニュ―を選択して下さい");
+			System.out.println("正しいメニュ―を選択して下さい"); 
 			break;
 		default:
 			System.out.println("正しいメニュ―を選択して下さい");

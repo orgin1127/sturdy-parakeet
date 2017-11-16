@@ -17,5 +17,5 @@ values (
 	, sysdate
 )
 </insert>
-
+ 
 </mapper>

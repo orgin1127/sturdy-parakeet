@@ -25,7 +25,7 @@ public class UserDAO {
 		}
 		finally {
 			if (session != null) session.close();
-		}
+		} 
 		return resultOfRegist;
 	}
 
