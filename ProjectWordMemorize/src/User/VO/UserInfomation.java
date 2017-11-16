@@ -19,6 +19,8 @@ public class UserInfomation {
 		this.createdate = createdate;
 	}
 
+	
+	
 	public int getAccountnumber() {
 		return accountnumber;
 	}

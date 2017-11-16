@@ -9,10 +9,15 @@
 <!-- 회원 기본 정보 저장 -->
 <!-- 원래는 풀 경로board.vo.Board를 parameterType에 써야하지만 mybatis-config에서 alias 지정해서 별칭으로 사용이 가능-->
 <insert id="insertUser" parameterType="UserInfomation"> 
-insert into userAccount 
+insert into userAccount (
+	AccountNumber
+	, userID
+	, Password
+	, createdate
+)
 values (
 	 useraccseq.nextVal
-	, #{id}
+	, #{userID}
 	, #{password}
 	, sysdate
 )

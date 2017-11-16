@@ -18,6 +18,7 @@ public class UserDAO {
 			UserMapper um = session.getMapper(UserMapper.class);
 			if (um.insertUser(user) == 1) {
 				resultOfRegist = true;
+				session.commit();
 			}
 		}
 		catch (Exception e) {
