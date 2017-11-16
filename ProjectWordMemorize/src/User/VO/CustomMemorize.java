@@ -20,7 +20,6 @@ public class CustomMemorize {
 	
 	public CustomMemorize() {}
 	public CustomMemorize(int accountNumber, String customKanji, String customYomigana, String customMeaning) {
-		super();
 		this.accountNumber = accountNumber;
 		this.customKanji = customKanji;
 		this.customYomigana = customYomigana;

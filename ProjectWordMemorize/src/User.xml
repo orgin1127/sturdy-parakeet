@@ -24,7 +24,20 @@ values (
 </insert>
 <!-- 커스텀 단어 등록 -->
 <insert id="makeCustomWord" parameterType="CustomMemorize">
-
+insert into customMemorize (
+	CUSTOMWORDNUMBER
+	, ACCOUNTNUMBER
+	, CUSTOMKANJI
+	, CUSTOMYOMIGANA
+	, CUSTOMMEANING
+)
+values (
+	 customseq.nextVal
+	, #{accountNumber}
+	, #{customKanji}
+	, #{customYomigana}
+	, #{customMeaning}
+)
 </insert>
 <!-- 회원 ID 검색 -->
 <select id="checkUserID" parameterType="String" resultType="UserInfomation"> 
@@ -37,6 +50,11 @@ select * from UserAccount
 where 
 		userID = #{userID}
 		AND password = #{password}
+</select>
+<!-- 커스텀 단어 중복검색 -->
+<select id="checkDuplicateWord" parameterType="String" resultType="String">
+select CustomKanji from CustomMemorize
+where CustomKanji = #{CustomKanji}
 </select>
 <!-- 단어 출력(N1) -->
 <select id="viewWordN1" resultType="addedWordN1">

@@ -20,4 +20,6 @@ public interface UserMapper {
 	public UserInfomation checkUser(UserInfomation user);
 	//커스텀 단어 만들기
 	public int makeCustomWord(CustomMemorize customedWord);
+	//커스텀 단어 중복검색
+	public String checkDuplicateWord(String customkanji);
 }
