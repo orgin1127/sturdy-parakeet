@@ -8,6 +8,7 @@
 	<!-- Java Class에 대한 alias 지정 -->
 	<typeAliases>
 		<typeAlias type="User.VO.UserInfomation" alias="UserInfomation" />
+		<typeAlias type="User.VO.CustomMemorize" alias="CustomMemorize" />
 		<typeAlias type="User.VO.N1" alias="addedWordN1" />
 		<typeAlias type="User.VO.N2" alias="addedWordN2" />
 		<typeAlias type="User.VO.N3" alias="addedWordN3" />

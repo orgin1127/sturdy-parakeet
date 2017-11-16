@@ -2,6 +2,7 @@ package User.DAO;
 
 import java.util.ArrayList;
 
+import User.VO.CustomMemorize;
 import User.VO.UserInfomation;
 
 public interface UserMapper {
@@ -17,4 +18,6 @@ public interface UserMapper {
 	public ArrayList<Object> viewWordN3(); 
 	//유저 로그인 검색
 	public UserInfomation checkUser(UserInfomation user);
+	//커스텀 단어 만들기
+	public int makeCustomWord(CustomMemorize customedWord);
 }

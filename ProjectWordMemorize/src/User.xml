@@ -22,6 +22,10 @@ values (
 	, sysdate
 )
 </insert>
+<!-- 커스텀 단어 등록 -->
+<insert id="makeCustomWord" parameterType="CustomMemorize">
+
+</insert>
 <!-- 회원 ID 검색 -->
 <select id="checkUserID" parameterType="String" resultType="UserInfomation"> 
 select userID, password from UserAccount

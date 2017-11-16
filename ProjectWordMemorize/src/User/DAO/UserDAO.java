@@ -64,7 +64,9 @@ public class UserDAO {
 			session = factory.openSession();
 			UserMapper um = session.getMapper(UserMapper.class);
 			if (um.checkUser(user) == null) {
-				System.out.println("ユ―ザアカウント、または暗証番号が違います。");
+				System.err.println("ユ―ザアカウント、または暗証番号が違います。");
+				UICompilation.delay();
+				UICompilation.clear();
 				return null;
 			}
 		}
@@ -106,7 +108,7 @@ public class UserDAO {
 							System.out.println("\t"+list.get(cnt)+"\t");
 							System.out.println("");
 							System.out.println("");
-							System.out.print("다음 단어를 보시겠습니까?(y/n) ");
+							System.out.print("次の単語を読みます？(y/n) ");
 							String wordViewContinue = sc.nextLine();
 							if (wordViewContinue.toLowerCase().equals("y")) {
 								cnt++;
@@ -116,7 +118,7 @@ public class UserDAO {
 								continue HERE;
 							}
 							else {
-								System.out.println("입력이 잘못되었습니다.");
+								System.out.println("入力が違います。");
 							}
 						}
 					}
@@ -141,17 +143,18 @@ public class UserDAO {
 							System.out.println("\t"+list.get(cnt)+"\t");
 							System.out.println("");
 							System.out.println("");
-							System.out.print("다음 단어를 보시겠습니까?(y/n) ");
+							System.out.print("次の単語を読みます？(y/n) ");
 							String wordViewContinue = sc.nextLine();
 							if (wordViewContinue.toLowerCase().equals("y")) {
 								cnt++;
 								UICompilation.clear();
 							}
 							else if (wordViewContinue.toLowerCase().equals("n")) {
+								UICompilation.clear();
 								continue HERE;
 							}
 							else {
-								System.out.println("입력이 잘못되었습니다.");
+								System.out.println("入力が違います。");
 							}
 						}
 					}
@@ -176,17 +179,20 @@ public class UserDAO {
 							System.out.println("\t"+list.get(cnt)+"\t");
 							System.out.println("");
 							System.out.println("");
-							System.out.print("다음 단어를 보시겠습니까?(y/n) ");
+							System.out.print("次の単語を読みます？(y/n) ");
 							String wordViewContinue = sc.nextLine();
 							if (wordViewContinue.toLowerCase().equals("y")) {
 								cnt++;
 								UICompilation.clear();
 							}
 							else if (wordViewContinue.toLowerCase().equals("n")) {
+								UICompilation.clear();
 								continue HERE;
 							}
 							else {
-								System.out.println("입력이 잘못되었습니다.");
+								System.out.println("入力が違います。");
+								UICompilation.delay();
+								UICompilation.clear();
 							}
 						}
 					}
@@ -200,7 +206,9 @@ public class UserDAO {
 				case 0:
 					return;
 				default:
-					System.out.println("올바른 번호를 입력하여 주세요");
+					System.out.println("正しい番号を入力してください。");
+					UICompilation.delay();
+					UICompilation.clear();
 					continue;
 			}
 		}

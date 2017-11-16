@@ -20,7 +20,13 @@ public class UICompilation {
 	public void startMenu() {
 		System.out.println("|==============================================|");
 		System.out.println("|                                              |");
-		System.out.println("|　　　　　　　　　　　　　　　皆の単語帳　　　　　　　　　        　　　  |");
+		System.out.println("|                                              |");
+		System.out.println("|                                              |");
+		System.out.println("|                                              |");
+		System.out.println("|　　　　　　　　　　　　　　　皆の単語帳　　　　　　　　　        　|");
+		System.out.println("|                                              |");
+		System.out.println("|                                              |");
+		System.out.println("|                                              |");
 		System.out.println("|                                              |");
 		System.out.println("|==============================================|");
 		System.out.println();
@@ -45,6 +51,15 @@ public class UICompilation {
 	public static void clear() {
 		for (int i = 0; i < 35; i++) {
 			System.out.println("");
+		}
+	}
+	
+	public static void delay() {
+		try {
+			Thread.sleep(3000);
+		}
+		catch (Exception e) {
+			
 		}
 	}
 

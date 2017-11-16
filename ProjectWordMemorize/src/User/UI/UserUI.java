@@ -1,6 +1,8 @@
 package User.UI;
 
 import java.util.Scanner;
+
+import java.util.TimerTask;
 import java.util.regex.Pattern;
 
 import User.DAO.UserDAO;
@@ -11,7 +13,7 @@ public class UserUI {
 	Scanner sc = new Scanner(System.in);
 	UserDAO dao = new UserDAO();
 	UICompilation ui = new UICompilation();
-	
+
 	public UserUI() {
 		while (true) {
 			UICompilation.clear();
@@ -23,7 +25,6 @@ public class UserUI {
 				registUser();
 				break;
 			case 2:
-				
 				login();
 				break;
 			case 9:
@@ -32,7 +33,8 @@ public class UserUI {
 				System.err.println("[お知らせ]　プログラムを終了します。");
 				return;
 			default:
-				System.out.println("正しいメニュ―を選択して下さい");
+				System.err.println("[お知らせ] 正しいメニュ―を選択して下さい");
+				UICompilation.delay();
 				break;
 			}
 		}
@@ -49,21 +51,27 @@ public class UserUI {
 			password = sc.nextLine();
 			UserInfomation userInfo = new UserInfomation(userID, password);
 			if(dao.insertUser(userInfo)) {
+				
 				System.out.println("登録されました。");
+				UICompilation.delay();
 			}
 			else {
 				System.err.println("登録に失敗しました。");
+				UICompilation.delay();
 			}
 			
 			return;
 		}
 		else {
+			
 			System.err.println("重腹したIDがあります。");
+			UICompilation.delay();
 			return;
 		}		
 		
 	}
 	
+	//Login method, 이미 등록된 유저인지 확인하여 있으면 해당 객체를 가져와 사용한다.
 	public void login() {
 		String userID;
 		String password;		
@@ -80,7 +88,7 @@ public class UserUI {
 	
 	//String으로 받은 문자열 안에 숫자만 존재하는지를 정규식을 통하여 검사하는 Method
 	public int checkNumberValidity(String select) {
-		int selectedMenu = 0;
+		int selectedMenu = 99;
 		if (Pattern.matches("^[0-9]*$", select)) {
 			selectedMenu = Integer.parseInt(select);
 			return selectedMenu;
@@ -89,4 +97,6 @@ public class UserUI {
 			return selectedMenu;
 		}
 	}
+
+
 }
