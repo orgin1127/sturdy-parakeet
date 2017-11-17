@@ -1,5 +1,7 @@
 package User.DAO;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -14,12 +16,13 @@ public class MakeWordDAO {
 	private SqlSessionFactory factory = MybatisConfig.getSqlSessionFactory();
 	Scanner sc = new Scanner(System.in);
 	UICompilation uic = new UICompilation();
+	
 	public void customWordPhase(UserInfomation user) {
 		while (true) {
 			UICompilation.clear();
 			uic.customWordPhase();
 			String selectCustomPhase = sc.nextLine();
-			int intselectCustomPhase = 0;
+			int intselectCustomPhase = 99;
 			if (Pattern.matches("^[0-9]*$", selectCustomPhase)) {
 				intselectCustomPhase = Integer.parseInt(selectCustomPhase);
 			}
@@ -29,6 +32,7 @@ public class MakeWordDAO {
 			}
 			switch(intselectCustomPhase) {
 			case 1:
+				printCustomWords(user);
 				break;
 			case 2:
 				UICompilation.clear();
@@ -54,6 +58,8 @@ public class MakeWordDAO {
 				finally {
 					if (session != null) session.close();
 				}
+				break;
+			case 3:
 				break;
 			case 0:
 				UICompilation.clear();
@@ -96,6 +102,61 @@ public class MakeWordDAO {
 			if (session != null) session.close();
 		} 
 		return customedWord;
+	}
+	
+	public void printCustomWords (UserInfomation user) {
+		SqlSession session = null;
+		ArrayList<CustomMemorize> list = new ArrayList<>();
+		try {
+			session = factory.openSession();
+			UserMapper um = session.getMapper(UserMapper.class);
+			list = um.viewWordCustom(user);
+			int cnt = 0;
+			if (list == null) {
+				System.err.println("登録された単語がございません。");
+				UICompilation.delay();
+				UICompilation.clear();
+				return;
+			}
+			Collections.shuffle(list);
+			HERE:
+			while (true) {
+				System.out.println("");
+				System.out.println("");
+				System.out.println("\t"+"単語番号: "+cnt+" "+list.get(cnt)+"\t");
+				System.out.println("");
+				System.out.println("");
+				System.out.print("次の単語を読みます？(y/n) ");
+				String wordViewContinue = sc.nextLine();
+				if (wordViewContinue.toLowerCase().equals("y")) {
+					cnt++;
+					try {
+						list.get(cnt);
+						UICompilation.clear();
+						continue HERE;
+					}
+					catch (Exception e) {
+						System.err.println("読む単語がございません。最後の単語です。");
+						cnt--;
+						UICompilation.delay();
+						UICompilation.clear();
+						continue HERE;
+					}
+				}
+				else if (wordViewContinue.toLowerCase().equals("n")) {
+					return;
+				}
+				else {
+					System.out.println("入力が違います。");
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (session != null) session.close();
+		}
 	}
 
 }

@@ -15,7 +15,9 @@ public interface UserMapper {
 	//단어장 출력(N2)
 	public ArrayList<Object> viewWordN2(); 
 	//단어장 출력(N3)
-	public ArrayList<Object> viewWordN3(); 
+	public ArrayList<Object> viewWordN3();
+	//유저별 커스텀 단어장 출력
+	public ArrayList<CustomMemorize> viewWordCustom(UserInfomation user);
 	//유저 로그인 검색
 	public UserInfomation checkUser(UserInfomation user);
 	//커스텀 단어 만들기

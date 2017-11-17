@@ -71,5 +71,8 @@ select * from memorizeN2
 <select id="viewWordN3" resultType="addedWordN3">
 select * from memorizeN3
 </select>
- 
+<!-- 단어 출력(유저별 커스텀 단어) -->
+<select id="viewWordCustom" parameterType="UserInfomation" resultType="CustomMemorize">
+select * from CustomMemorize where accountNumber = #{accountnumber}
+</select>
 </mapper>

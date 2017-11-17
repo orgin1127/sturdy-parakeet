@@ -23,7 +23,7 @@ public class UICompilation {
 		System.out.println("|                                              |");
 		System.out.println("|                                              |");
 		System.out.println("|                                              |");
-		System.out.println("|　　　　　　　　　　　　　　　皆の単語帳　　　　　　　　　        　|");
+		System.out.println("|　　　　　　　　　　　　　　　皆の単語帳　　　　　　　　　        　 |");
 		System.out.println("|                                              |");
 		System.out.println("|                                              |");
 		System.out.println("|                                              |");
@@ -40,7 +40,7 @@ public class UICompilation {
 	public void joinMemberMenu() {
 		System.out.println("|==============================================|");
 		System.out.println("|                                              |");
-		System.out.println("|　　　　　　　　　　　　　-会員登録 画面-　　　　　　　　　        |");
+		System.out.println("|　　　　　　　　　　　　　-会員登録 画面-　　　　　　　　　          |");
 		System.out.println("|                                              |");
 		System.out.println("|==============================================|");
 		System.out.println("");
@@ -56,6 +56,7 @@ public class UICompilation {
 		System.out.println("===============メニューを選択して下さい==================");
 		System.out.println("1. カスタム単語を読む");
 		System.out.println("2. カスタム単語を作る");
+		System.out.println("3. カスタム単語を修正する");
 		System.out.println("0. 戻る");
 		System.out.print("==> ");
 	}

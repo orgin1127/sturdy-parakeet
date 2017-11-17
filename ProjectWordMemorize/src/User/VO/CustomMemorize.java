@@ -36,8 +36,7 @@ public class CustomMemorize {
 	}
 	@Override
 	public String toString() {
-		String s = ", 漢字  : "+customKanji+
-				", よみがな  : "+customYomigana+", 意味  : "+customMeaning;
+		String s = "漢字  : "+customKanji+	", よみがな  : "+customYomigana+", 意味  : "+customMeaning;
 		return s;
 	} 
 	

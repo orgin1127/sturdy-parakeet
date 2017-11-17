@@ -119,7 +119,18 @@ public class UserDAO {
 							String wordViewContinue = sc.nextLine();
 							if (wordViewContinue.toLowerCase().equals("y")) {
 								cnt++;
-								UICompilation.clear();
+								try {
+									list.get(cnt);
+									UICompilation.clear();
+									continue;
+								}
+								catch (Exception e) {
+									System.err.println("読む単語がございません。最後の単語です。");
+									cnt--;
+									UICompilation.delay();
+									UICompilation.clear();
+									continue;
+								}
 							}
 							else if (wordViewContinue.toLowerCase().equals("n")) {
 								continue HERE;
@@ -154,7 +165,18 @@ public class UserDAO {
 							String wordViewContinue = sc.nextLine();
 							if (wordViewContinue.toLowerCase().equals("y")) {
 								cnt++;
-								UICompilation.clear();
+								try {
+									list.get(cnt);
+									UICompilation.clear();
+									continue;
+								}
+								catch (Exception e) {
+									System.err.println("読む単語がございません。最後の単語です。");
+									cnt--;
+									UICompilation.delay();
+									UICompilation.clear();
+									continue;
+								}
 							}
 							else if (wordViewContinue.toLowerCase().equals("n")) {
 								UICompilation.clear();
@@ -190,7 +212,18 @@ public class UserDAO {
 							String wordViewContinue = sc.nextLine();
 							if (wordViewContinue.toLowerCase().equals("y")) {
 								cnt++;
-								UICompilation.clear();
+								try {
+									list.get(cnt);
+									UICompilation.clear();
+									continue;
+								}
+								catch (Exception e) {
+									System.err.println("読む単語がございません。最後の単語です。");
+									cnt--;
+									UICompilation.delay();
+									UICompilation.clear();
+									continue;
+								}
 							}
 							else if (wordViewContinue.toLowerCase().equals("n")) {
 								UICompilation.clear();
