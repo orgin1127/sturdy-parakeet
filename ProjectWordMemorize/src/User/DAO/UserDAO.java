@@ -19,6 +19,7 @@ public class UserDAO {
 	Scanner sc = new Scanner(System.in);
 	UICompilation ui = new UICompilation();
 	
+	
 	public boolean insertUser(UserInfomation user) {
 		boolean resultOfRegist = false;
 		SqlSession session = null;
@@ -67,7 +68,7 @@ public class UserDAO {
 			UserMapper um = session.getMapper(UserMapper.class);
 			userCheck = um.checkUser(user);
 			session.commit();
-			if (um.checkUser(userCheck) == null){
+			if (userCheck == null){
 				System.err.println("ユ―ザアカウント、または暗証番号が違います。");
 				UICompilation.delay();
 				UICompilation.clear();
@@ -85,6 +86,7 @@ public class UserDAO {
 	
 	
 	public void afterLogin(UserInfomation user) {
+		
 		HERE:
 		while (true) {
 			
@@ -209,25 +211,10 @@ public class UserDAO {
 					} 
 					break;
 				case 4:
-					try {
-						session = factory.openSession();
-						UserMapper um = session.getMapper(UserMapper.class);
-						if (um.makeCustomWord(makeCustomWord(user)) == 1) {
-							System.out.println("登録に成功しました。");
-							session.commit();
-						}
-						else {
-							System.out.println("登録に失敗しました。");
-						}
-					}
-					catch(Exception e) {
-						
-					}
-					finally {
-						if (session != null) {
-							session.close();
-						}
-					}
+					UICompilation.clear();
+					MakeWordDAO mwd = new MakeWordDAO();
+					mwd.customWordPhase(user);
+					break;
 				case 0:
 					return;
 				default:
@@ -237,40 +224,6 @@ public class UserDAO {
 					continue;
 			}
 		}
-	}
-	
-	public CustomMemorize makeCustomWord(UserInfomation user) {
-		SqlSession session = null;
-		CustomMemorize customedWord = null;
-		System.out.print("新しい単語を入力してください：");
-		String customKanji = sc.nextLine();
-		try {
-			session = factory.openSession();
-			UserMapper um = session.getMapper(UserMapper.class);
-			String check = um.checkDuplicateWord(customKanji);
-			session.commit();
-			if (check != null) {
-				System.out.println("もう登録されている単語です。");
-				UICompilation.delay();
-				UICompilation.clear();
-				return null;
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (session != null) session.close();
-		} 
-		
-		
-		System.out.print("よみがなを入力してください：");
-		String customYomigana = sc.nextLine();
-		System.out.print("意味を入力してください：");
-		String customMeaning = sc.nextLine();
-		customedWord = new CustomMemorize(user.getAccountnumber(), customKanji
-									, customYomigana, customMeaning);
-		return customedWord;
 	}
 
 }

@@ -21,5 +21,5 @@ public interface UserMapper {
 	//커스텀 단어 만들기
 	public int makeCustomWord(CustomMemorize customedWord);
 	//커스텀 단어 중복검색
-	public String checkDuplicateWord(String customkanji);
+	public String checkDuplicateWord(CustomMemorize customedWord);
 }

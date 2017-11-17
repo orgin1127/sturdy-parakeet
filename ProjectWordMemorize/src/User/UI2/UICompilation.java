@@ -4,7 +4,7 @@ public class UICompilation {
 	
 	public void afterLoginMenu() {
 		System.out.println("|==============================================|");
-		System.out.println("|　　　　　　　　　　　　          ログイン成功          　    　　　　            　　  |");
+		System.out.println("|　　　　　　　　　　　　          ログイン成功          　    　　　　          |");
 		System.out.println("|==============================================|");
 		System.out.println();
 		System.out.println("===============メニューを選択して下さい==================");
@@ -40,12 +40,24 @@ public class UICompilation {
 	public void joinMemberMenu() {
 		System.out.println("|==============================================|");
 		System.out.println("|                                              |");
-		System.out.println("|　　　　　　　　　　　　　-会員登録 画面-　　　　　　　　　        　　   |");
+		System.out.println("|　　　　　　　　　　　　　-会員登録 画面-　　　　　　　　　        |");
 		System.out.println("|                                              |");
 		System.out.println("|==============================================|");
 		System.out.println("");
 		System.out.println("===============会員登録画面に入りました。================");		
 		System.out.println("今からIDとPasswordを入力します。");
+	}
+	
+	public void customWordPhase() {
+		System.out.println("|==============================================|");
+		System.out.println("|		カスタム単語帳		|");
+		System.out.println("|==============================================|");
+		System.out.println("");
+		System.out.println("===============メニューを選択して下さい==================");
+		System.out.println("1. カスタム単語を読む");
+		System.out.println("2. カスタム単語を作る");
+		System.out.println("0. 戻る");
+		System.out.print("==> ");
 	}
 	
 	public static void clear() {
