@@ -12,6 +12,7 @@ public class UICompilation {
 		System.out.println("2. N2の単語");
 		System.out.println("3. N3の単語");
 		System.out.println("4. カスタム単語");
+		System.out.println("5. 俺の単語力");
 		System.out.println("0. ログアウト");
 		System.out.print("==> ");	
 	}

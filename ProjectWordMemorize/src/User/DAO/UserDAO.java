@@ -247,6 +247,9 @@ public class UserDAO {
 					MakeWordDAO mwd = new MakeWordDAO();
 					mwd.customWordPhase(user);
 					break;
+				case 5:
+					
+					break;
 				case 0:
 					return;
 				default:
