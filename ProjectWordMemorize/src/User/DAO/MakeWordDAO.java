@@ -60,6 +60,7 @@ public class MakeWordDAO {
 				}
 				break;
 			case 3:
+				editCustomWord(user);
 				break;
 			case 0:
 				UICompilation.clear();
@@ -157,6 +158,67 @@ public class MakeWordDAO {
 		finally {
 			if (session != null) session.close();
 		}
+	}
+	
+	public void editCustomWord(UserInfomation user) {
+		ArrayList<CustomMemorize> list = new ArrayList<>();
+		SqlSession session = null;
+		try {
+			session = factory.openSession();
+			UserMapper um = session.getMapper(UserMapper.class);
+			list = um.viewWordCustom(user);
+			int cnt = 1;
+			if (list == null) {
+				System.err.println("登録された単語がございません。");
+				UICompilation.delay();
+				UICompilation.clear();
+				return;
+			}
+			HERE:
+			while (true) {
+				for (CustomMemorize customMemorize : list) {
+					System.out.println("\t"+"登録番号: "+customMemorize.getCustomWordNumber()+" "+customMemorize);
+					cnt++;
+				}
+				System.out.println("0. 戻る");
+				System.out.print("修正する単語の登録番号を入力してください：");
+				String select = sc.nextLine();
+				if (Pattern.matches("^[0-9]*$", select)) {
+					int intEditCustomWordNumber = Integer.parseInt(select);
+					if (intEditCustomWordNumber == 0) {
+						UICompilation.clear();
+						return;
+					}
+					System.out.print("単語を入力してください：");
+					String customKanji = sc.nextLine();
+					System.out.print("よみがなを入力してください：");
+					String customYomigana = sc.nextLine();
+					System.out.print("意味を入力してください：");
+					String customMeaning = sc.nextLine();
+					
+					CustomMemorize editedCustomWord = new CustomMemorize(intEditCustomWordNumber, user.getAccountnumber()
+							, customKanji, customYomigana, customMeaning);
+					if (um.editCustomWord(editedCustomWord) == 1) {
+						System.out.println("登録に成功しました。");
+						session.commit();
+						return;
+					}
+				}
+				else {
+					System.out.println("[お知らせ] 正しいメニュ―を選択して下さい");
+					UICompilation.delay();
+					UICompilation.clear();
+					continue HERE;
+				}
+			}
+		}
+		catch (Exception e ) {
+			e.printStackTrace();
+		}
+		finally {
+			if (session != null) session.close();
+		}
+		
 	}
 
 }

@@ -39,6 +39,15 @@ values (
 	, #{customMeaning}
 )
 </insert>
+<!-- 커스텀 단어 수정 -->
+<update id="editCustomWord" parameterType="CustomMemorize">
+update customMemorize
+set customKanji = #{customKanji}
+	, customYomigana = #{customYomigana}
+	, customMeaning = #{customMeaning}
+where customWordNumber = #{customWordNumber} and 
+		accountNumber = #{accountNumber}
+</update>
 <!-- 회원 ID 검색 -->
 <select id="checkUserID" parameterType="String" resultType="UserInfomation"> 
 select userID, password from UserAccount

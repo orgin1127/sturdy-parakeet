@@ -24,4 +24,6 @@ public interface UserMapper {
 	public int makeCustomWord(CustomMemorize customedWord);
 	//커스텀 단어 중복검색
 	public String checkDuplicateWord(CustomMemorize customedWord);
+	//커스텀 단어 수정
+	public int editCustomWord(CustomMemorize customedWord);
 }

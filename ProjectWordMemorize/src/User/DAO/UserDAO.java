@@ -10,7 +10,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import User.DAO.MybatisConfig;
 import User.UI2.UICompilation;
-import User.VO.CustomMemorize;
 import User.VO.UserInfomation;
 
 public class UserDAO {
