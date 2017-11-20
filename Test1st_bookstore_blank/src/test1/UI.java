@@ -277,7 +277,6 @@ public class UI {
 		} while(option == 0);
 		return option;
 	}
-	
 	public void zeroException() throws Exception {
 		throw new Exception();
 	}
