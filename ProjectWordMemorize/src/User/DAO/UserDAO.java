@@ -10,14 +10,14 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import User.DAO.MybatisConfig;
 import User.UI2.UICompilation;
-import User.VO.UserInfomation;
+import User.VO.*;
 
 public class UserDAO {
 	
 	private SqlSessionFactory factory = MybatisConfig.getSqlSessionFactory();
 	Scanner sc = new Scanner(System.in);
 	UICompilation ui = new UICompilation();
-	
+	BlinkGame bg = new BlinkGame();
 	
 	public boolean insertUser(UserInfomation user) {
 		boolean resultOfRegist = false;
@@ -98,20 +98,21 @@ public class UserDAO {
 			}
 			
 			SqlSession session = null;
-			ArrayList<Object> list = new ArrayList<>();
+			
 			switch (afterLoginSelectNumber) {
 				case 1:
 					try {
+						ArrayList<N1> list = new ArrayList<>();
 						session = factory.openSession();
 						UserMapper um = session.getMapper(UserMapper.class);
-						list = um.viewWordN1();
+						list = um.viewWordN1("N1");
 						Collections.shuffle(list);
 						session.commit();
 						int cnt = 0;
 						while (true) {
 							System.out.println("");
 							System.out.println("");
-							System.out.println("\t"+list.get(cnt)+"\t");
+							System.out.println("\t"+"単語番号: "+cnt+", "+list.get(cnt).showWords()+"\t");
 							System.out.println("");
 							System.out.println("");
 							System.out.print("次の単語を読みます？(y/n) ");
@@ -148,16 +149,17 @@ public class UserDAO {
 					break;
 				case 2:
 					try {
+						ArrayList<N2> list = new ArrayList<>();
 						session = factory.openSession();
 						UserMapper um = session.getMapper(UserMapper.class);
-						list = um.viewWordN2();
+						list = um.viewWordN2("N2");
 						Collections.shuffle(list);
 						session.commit();
 						int cnt = 0;
 						while (true) {
 							System.out.println("");
 							System.out.println("");
-							System.out.println("\t"+list.get(cnt)+"\t");
+							System.out.println("\t"+"単語番号: "+cnt+", "+list.get(cnt).showWords()+"\t");
 							System.out.println("");
 							System.out.println("");
 							System.out.print("次の単語を読みます？(y/n) ");
@@ -195,16 +197,17 @@ public class UserDAO {
 					break;
 				case 3:
 					try {
+						ArrayList<N3> list = new ArrayList<>();
 						session = factory.openSession();
 						UserMapper um = session.getMapper(UserMapper.class);
-						list = um.viewWordN3();
+						list = um.viewWordN3("N3");
 						Collections.shuffle(list);
 						session.commit();
 						int cnt = 0;
 						while (true) {
 							System.out.println("");
 							System.out.println("");
-							System.out.println("\t"+list.get(cnt)+"\t");
+							System.out.println("\t"+"単語番号: "+cnt+", "+list.get(cnt).showWords()+"\t");
 							System.out.println("");
 							System.out.println("");
 							System.out.print("次の単語を読みます？(y/n) ");
@@ -248,7 +251,7 @@ public class UserDAO {
 					mwd.customWordPhase(user);
 					break;
 				case 5:
-					
+					bg.blinkGameStart(user);
 					break;
 				case 0:
 					return;

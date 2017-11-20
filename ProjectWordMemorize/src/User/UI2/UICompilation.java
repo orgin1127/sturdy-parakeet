@@ -70,7 +70,7 @@ public class UICompilation {
 	
 	public static void delay() {
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(2000);
 		}
 		catch (Exception e) {
 			

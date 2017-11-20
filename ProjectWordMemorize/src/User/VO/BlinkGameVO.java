@@ -28,6 +28,13 @@ public class BlinkGameVO {
 		this.maxCombo = maxCombo;
 		this.highScore = highScore;
 	}
+	
+	public BlinkGameVO(int accountNumber, int clearWordCount, int maxCombo, int highScore) {
+		this.accountNumber = accountNumber;
+		this.clearWordCount = clearWordCount;
+		this.maxCombo = maxCombo;
+		this.highScore = highScore;
+	}
 	public BlinkGameVO(int blinkGameNumber, int accountNumber) {
 		this.blinkGameNumber = blinkGameNumber;
 		this.accountNumber = accountNumber;

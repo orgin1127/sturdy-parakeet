@@ -25,27 +25,52 @@ values (
 <!-- 커스텀 단어 등록 -->
 <insert id="makeCustomWord" parameterType="CustomMemorize">
 insert into customMemorize (
-	CUSTOMWORDNUMBER
+	WORDNUMBER
+	, KANJI
+	, YOMIGANA
+	, MEANING
 	, ACCOUNTNUMBER
-	, CUSTOMKANJI
-	, CUSTOMYOMIGANA
-	, CUSTOMMEANING
 )
 values (
 	 customseq.nextVal
+	, #{kanji}
+	, #{yomigana}
+	, #{meaning}
 	, #{accountNumber}
-	, #{customKanji}
-	, #{customYomigana}
-	, #{customMeaning}
 )
 </insert>
+<!-- BlinkGame 점수등록 -->
+<insert id="blinkGameResult" parameterType="blinkGameVO">
+insert into blinkGameTable (
+	blinkgamenumber
+	, accountNumber
+	, clearWordCount
+	, maxCombo
+	, highScore
+)
+values (
+	blinkGameNumberSeq.nextVal
+	, #{accountNumber}
+	, #{clearWordCount}
+	, #{maxCombo}
+	, #{highScore}
+)
+</insert>
+<!-- BlinkGame 점수 갱신 -->
+<update id="blinkGameUpdate" parameterType="blinkGameVO">
+update blinkGameTable
+set clearWordCount = #{clearWordCount}
+	, maxCombo = #{maxCombo}
+	, hignScore = #{highScore}
+where accountNumber = #{accountNumber}
+</update>
 <!-- 커스텀 단어 수정 -->
 <update id="editCustomWord" parameterType="CustomMemorize">
 update customMemorize
-set customKanji = #{customKanji}
-	, customYomigana = #{customYomigana}
-	, customMeaning = #{customMeaning}
-where customWordNumber = #{customWordNumber} and 
+set Kanji = #{kanji}
+	, Yomigana = #{yomigana}
+	, Meaning = #{meaning}
+where WordNumber = #{wordnumber} and 
 		accountNumber = #{accountNumber}
 </update>
 <!-- 회원 ID 검색 -->
@@ -60,28 +85,45 @@ where
 		userID = #{userID}
 		AND password = #{password}
 </select>
+<!-- BlinkGame 이력 조회 -->
+<select id="searchResult" parameterType="UserInfomation" resultType="BlinkGameVO">
+select * from blinkgametable 
+where accountnumber = #{accountnumber}
+</select>
 <!-- 커스텀 단어 중복검색 -->
 <select id="checkDuplicateWord" parameterType="CustomMemorize" resultType="String">
-select CustomKanji from CustomMemorize
+select kanji from CustomMemorize
 where 
-		CustomKanji = #{customKanji}　
+		Kanji = #{kanji}　
 		AND
 		accountNumber = (select accountNumber from UserAccount where accountNumber = #{accountNumber}) 
 </select>
-<!-- 단어 출력(N1) -->
-<select id="viewWordN1" resultType="addedWordN1">
-select * from memorizeN1
+<!-- 단어 출력(n1) -->
+<select id="viewWordN1" parameterType="String" resultType="WordN1">
+select * from memorize 
+where Levels = #{Levels}
 </select>
-<!-- 단어 출력(N2) -->
-<select id="viewWordN2" resultType="addedWordN2">
-select * from memorizeN2
+<!-- 단어 출력(n2) -->
+<select id="viewWordN2" parameterType="String" resultType="WordN2">
+select * from memorize 
+where Levels = #{Levels}
 </select>
-<!-- 단어 출력(N3) -->
-<select id="viewWordN3" resultType="addedWordN3">
-select * from memorizeN3
+<!-- 단어 출력(n3) -->
+<select id="viewWordN3" parameterType="String" resultType="WordN3">
+select * from memorize 
+where Levels = #{Levels}
 </select>
 <!-- 단어 출력(유저별 커스텀 단어) -->
 <select id="viewWordCustom" parameterType="UserInfomation" resultType="CustomMemorize">
 select * from CustomMemorize where accountNumber = #{accountnumber}
+</select>
+<!-- 모든 단어 출력 -->
+<select id="viewAllWords" resultType="Word">
+select kanji, yomigana, meaning from memorize
+</select>
+<!-- blinkgame top 10 -->
+<select id="printBlinkGameRaink" resultType="BlinkGameVO">
+select * from blinkgameTable 
+order by highScore
 </select>
 </mapper>

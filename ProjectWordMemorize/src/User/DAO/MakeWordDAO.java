@@ -80,8 +80,7 @@ public class MakeWordDAO {
 		String customYomigana = sc.nextLine();
 		System.out.print("意味を入力してください：");
 		String customMeaning = sc.nextLine();
-		customedWord = new CustomMemorize(user.getAccountnumber(), customKanji
-									, customYomigana, customMeaning);
+		customedWord = new CustomMemorize(customKanji, customYomigana, customMeaning, user.getAccountnumber());
 		try {
 			session = factory.openSession();
 			UserMapper um = session.getMapper(UserMapper.class);
@@ -196,8 +195,8 @@ public class MakeWordDAO {
 					System.out.print("意味を入力してください：");
 					String customMeaning = sc.nextLine();
 					
-					CustomMemorize editedCustomWord = new CustomMemorize(intEditCustomWordNumber, user.getAccountnumber()
-							, customKanji, customYomigana, customMeaning);
+					CustomMemorize editedCustomWord = new CustomMemorize(intEditCustomWordNumber
+							, customKanji, customYomigana, customMeaning, user.getAccountnumber());
 					if (um.editCustomWord(editedCustomWord) == 1) {
 						System.out.println("登録に成功しました。");
 						session.commit();

@@ -1,65 +1,16 @@
 package User.VO;
 
-public class N3 {
+public class N3 extends Word{
 	
-	private int wordnumberN3;
-	private String kanjiN3;
-	private String yomiganaN3;
-	private String meaningN3;
+	private String typeN3;
+
+	public String getTypeN2() {return typeN3;}
+	public void setTypeN2(String typeN2) {this.typeN3 = typeN2;}
 	
-	public N3(){}
-	
-	public N3(int wordnumberN3, String kanjiN3, String yomiganaN3, String meaningN3) {
-		this.wordnumberN3 = wordnumberN3;
-		this.kanjiN3 = kanjiN3;
-		this.yomiganaN3 = yomiganaN3;
-		this.meaningN3 = meaningN3;
+	public N3() {}
+	public N3(int wordnumber, String kanji, String yomigana, String meaning, String typeN3) {
+		super(wordnumber, kanji, yomigana, meaning);
+		this.typeN3 = typeN3;
 	}
-	
-	public N3(String kanjiN3, String yomiganaN3, String meaningN3) {
-		this.kanjiN3 = kanjiN3;
-		this.yomiganaN3 = yomiganaN3;
-		this.meaningN3 = meaningN3;
-	}
-
-	public int getWordnumberN3() {
-		return wordnumberN3;
-	}
-
-	public void setWordnumberN3(int wordnumberN3) {
-		this.wordnumberN3 = wordnumberN3;
-	}
-
-	public String getKanjiN3() {
-		return kanjiN3;
-	}
-
-	public void setKanjiN3(String kanjiN3) {
-		this.kanjiN3 = kanjiN3;
-	}
-
-	public String getYomiganaN3() {
-		return yomiganaN3;
-	}
-
-	public void setYomiganaN3(String yomiganaN3) {
-		this.yomiganaN3 = yomiganaN3;
-	}
-
-	public String getMeaningN3() {
-		return meaningN3;
-	}
-
-	public void setMeaningN3(String meaningN3) {
-		this.meaningN3 = meaningN3;
-	}
-	
-	@Override
-	public String toString() {
-		String s = "漢字番号  : "+wordnumberN3+", 漢字  : "+kanjiN3+
-				", よみがな  : "+yomiganaN3+", 意味  : "+meaningN3;
-		return s;
-	}
-	
 
 }
