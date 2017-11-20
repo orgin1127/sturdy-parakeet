@@ -61,7 +61,7 @@ values (
 update blinkGameTable
 set clearWordCount = #{clearWordCount}
 	, maxCombo = #{maxCombo}
-	, hignScore = #{highScore}
+	, highScore = #{highScore}
 where accountNumber = #{accountNumber}
 </update>
 <!-- 커스텀 단어 수정 -->
