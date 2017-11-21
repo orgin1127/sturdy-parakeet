@@ -1,0 +1,20 @@
+create table Gamer (
+        id varchar2(20) not null primary key
+        , password varchar2(30) not null
+        , createdate date default sysdate
+);
+
+create table status (
+        id varchar2(20) not null
+        , money number default 100000
+        , win_count number default 0
+        , lose_count number default 0
+        , constraint status_fk foreign key (id)
+        references Gamer(id) on delete cascade
+);
+
+select * from Gamer;
+select * from status;
+drop table status;
+drop table Gamer;
+commit;

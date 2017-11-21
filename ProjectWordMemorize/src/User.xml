@@ -90,6 +90,11 @@ where
 select * from blinkgametable 
 where accountnumber = #{accountnumber}
 </select>
+<!-- BlackJack 이력 조회 -->
+<select id="searchBlackJack" parameterType="UserInfomation" resultType="BlackJackVO">
+select * from blackjacktable
+where accountNumer = #{accountnumber}
+</select>
 <!-- 커스텀 단어 중복검색 -->
 <select id="checkDuplicateWord" parameterType="CustomMemorize" resultType="String">
 select kanji from CustomMemorize
@@ -122,8 +127,15 @@ select * from CustomMemorize where accountNumber = #{accountnumber}
 select kanji, yomigana, meaning from memorize
 </select>
 <!-- blinkgame top 10 -->
-<select id="printBlinkGameRaink" resultType="BlinkGameVO">
-select * from blinkgameTable 
-order by highScore
+<select id="printBlinkGameRank" resultType="BlinkGameVO">
+select acc.userID, 
+		bt.accountnumber
+		, bt.clearwordcount
+		, bt.maxcombo
+		, bt.highscore 
+from blinkgameTable bt
+	, useraccount acc
+where acc.accountnumber = bt.accountnumber
+order by highScore desc
 </select>
 </mapper>

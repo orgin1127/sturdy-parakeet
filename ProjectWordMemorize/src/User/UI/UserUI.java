@@ -89,11 +89,16 @@ public class UserUI {
 	//String으로 받은 문자열 안에 숫자만 존재하는지를 정규식을 통하여 검사하는 Method
 	public int checkNumberValidity(String select) {
 		int selectedMenu = 99;
-		if (Pattern.matches("^[0-9]*$", select)) {
-			selectedMenu = Integer.parseInt(select);
-			return selectedMenu;
+		try {
+			if (Pattern.matches("^[0-9]*$", select) && select !="") {
+				selectedMenu = Integer.parseInt(select);
+				return selectedMenu;
+			}
+			else {
+				return selectedMenu;
+			}
 		}
-		else {
+		catch (Exception e) {
 			return selectedMenu;
 		}
 	}

@@ -57,6 +57,31 @@ public class UserDAO {
 		return user;
 	}
 	
+	public void printUserInformation (UserInfomation user) {
+		SqlSession session = null;
+		BlinkGameVO bg = null;
+		
+		try {
+			session = factory.openSession();
+			UserMapper um = session.getMapper(UserMapper.class);
+			bg = um.searchResult(user);
+			session.commit();
+			System.out.println("アカウントナンバー："+user.getAccountnumber());
+			System.out.println("ユーザーID："+user.getUserID());
+			System.out.println("アカウント登録日："+user.getCreatedate());
+			System.out.println("BLINKゲーム最高点数："+bg.getHighScore());
+			System.out.println("最高COMBO数："+bg.getMaxCombo());
+			System.out.println("今まで解けた漢字の数："+bg.getClearWordCount());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (session != null) session.close();
+		}
+		
+	}
+	
 	public UserInfomation checkUserIsExist(String userID, String password) {
 		
 		UserInfomation user = new UserInfomation(userID, password);
@@ -252,6 +277,9 @@ public class UserDAO {
 					break;
 				case 5:
 					bg.blinkGameStart(user);
+					break;
+				case 6:
+					printUserInformation(user);
 					break;
 				case 0:
 					return;

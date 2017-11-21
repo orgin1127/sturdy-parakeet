@@ -176,7 +176,7 @@ public class MakeWordDAO {
 			HERE:
 			while (true) {
 				for (CustomMemorize customMemorize : list) {
-					System.out.println("\t"+"登録番号: "+customMemorize.getCustomWordNumber()+" "+customMemorize);
+					System.out.println("\t"+"\t"+" "+customMemorize);
 					cnt++;
 				}
 				System.out.println("0. 戻る");

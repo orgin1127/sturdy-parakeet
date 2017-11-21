@@ -17,14 +17,15 @@ public class BlinkGame {
 	UICompilation ui = new UICompilation();
 	
 	public void blinkGameStart(UserInfomation user) {
-		printBlinkGameMenu();
-		String selectBlinkGameMenu = sc.nextLine();
 		while (true) {
+			printBlinkGameMenu();
+			String selectBlinkGameMenu = sc.nextLine();
 			switch (afterValidCheckNumber(selectBlinkGameMenu)) {
 				case 1:
 					startBlinkGame(user);
 					break;
 				case 2:
+					showRanking(user);
 					break;
 				case 99:
 					break;
@@ -80,10 +81,10 @@ public class BlinkGame {
 					do {
 						if (blinkCount <= 5) {
 							//출력하고
-							System.err.println("\t"+"\t"+"\t"+"\t"+"残りライフ："+lifeForBlinkGame);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"点数："+highScore);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"Combo："+combo);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"点数："+score);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"残りライフ："+lifeForBlinkGame);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"HighScore："+highScore);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"Combo："+combo);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"点数："+score);
 							System.out.println("");
 							System.out.println("\t"+"\t"+"No. "+cnt+" "+listForBlinkGameN1.get(cnt).getKanji());
 							System.out.println("");
@@ -150,10 +151,10 @@ public class BlinkGame {
 					do {
 						if (blinkCount <= 5) {
 							//출력하고
-							System.err.println("\t"+"\t"+"\t"+"\t"+"残りライフ："+lifeForBlinkGame);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"点数："+highScore);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"Combo："+combo);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"点数："+score);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"残りライフ："+lifeForBlinkGame);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"HighScore："+highScore);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"Combo："+combo);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"点数："+score);
 							System.out.println("");
 							System.out.println("\t"+"\t"+"No. "+cnt+" "+listForBlinkGameN2.get(cnt).getKanji());
 							System.out.println("");
@@ -212,7 +213,6 @@ public class BlinkGame {
 					break;
 				case 3:
 					ArrayList<N3> listForBlinkGameN3;
-					session = factory.openSession();
 					listForBlinkGameN3 = um.viewWordN3("N3");
 					session.commit();
 					Collections.shuffle(listForBlinkGameN3);
@@ -220,10 +220,10 @@ public class BlinkGame {
 					do {
 						if (blinkCount <= 5) {
 							//출력하고
-							System.err.println("\t"+"\t"+"\t"+"\t"+"残りライフ："+lifeForBlinkGame);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"点数："+highScore);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"Combo："+combo);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"点数："+score);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"残りライフ："+lifeForBlinkGame);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"HighScore："+highScore);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"Combo："+combo);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"点数："+score);
 							System.out.println("");
 							System.out.println("\t"+"\t"+"No. "+cnt+" "+" "+listForBlinkGameN3.get(cnt).getKanji());
 							System.out.println("");
@@ -289,10 +289,10 @@ public class BlinkGame {
 					do {
 						if (blinkCount <= 5) {
 							//출력하고
-							System.err.println("\t"+"\t"+"\t"+"\t"+"残りライフ："+lifeForBlinkGame);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"点数："+highScore);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"Combo："+combo);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"点数："+score);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"残りライフ："+lifeForBlinkGame);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"HighScore："+highScore);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"Combo："+combo);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"点数："+score);
 							System.out.println("");
 							System.out.println("\t"+"\t"+"No. "+cnt+" "+listForBlinkGameCustom.get(cnt).getKanji());
 							System.out.println("");
@@ -360,10 +360,10 @@ public class BlinkGame {
 					do {
 						if (blinkCount <= 5) {
 							//출력하고
-							System.err.println("\t"+"\t"+"\t"+"\t"+"残りライフ："+lifeForBlinkGame);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"点数："+highScore);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"Combo："+combo);
-							System.err.println("\t"+"\t"+"\t"+"\t"+"点数："+score);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"残りライフ："+lifeForBlinkGame);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"HighScore："+highScore);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"Combo："+combo);
+							System.out.println("\t"+"\t"+"\t"+"\t"+"点数："+score);
 							System.out.println("");
 							System.out.println("\t"+"\t"+"No. "+cnt+", "+listForBlinkGameAll.get(cnt).getKanji());
 							System.out.println("");
@@ -435,19 +435,30 @@ public class BlinkGame {
 		}
 	}
 	
-	public void showRanking() {
+	public void showRanking(UserInfomation user) {
 		ArrayList<BlinkGameVO> rankList = new ArrayList<>();
 		SqlSession session = null;
-		session = factory.openSession();
-		UserMapper um = session.getMapper(UserMapper.class);
-		rankList = um.printBlinkGameRaink();
-		int cnt = 0;
-		for (BlinkGameVO blinkGameVO : rankList) {
-			if (cnt <=9 ) {
-			System.out.println(blinkGameVO);
-			cnt++;
+		try {
+			session = factory.openSession();
+			UserMapper um = session.getMapper(UserMapper.class);
+			rankList = um.printBlinkGameRank();
+			session.commit();
+			
+			int cnt = 0;
+			for (BlinkGameVO blinkGameVO : rankList) {
+				if (cnt <=9 ) {
+					System.out.println(blinkGameVO.showRanking());
+				cnt++;
+				}
 			}
 		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (session != null) session.close();
+		}
+		
 	}
 
 	public void printBlinkGameMenu() {
