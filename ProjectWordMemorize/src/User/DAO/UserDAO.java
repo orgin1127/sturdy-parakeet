@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import User.DAO.MybatisConfig;
 import User.UI2.UICompilation;
 import User.VO.*;
+import oracle.net.ns.SessionAtts;
 
 public class UserDAO {
 	
@@ -108,6 +109,26 @@ public class UserDAO {
 		return userCheck;
 	}
 	
+	public void searchword() {
+		System.out.println("探す単語を入力してください");
+		String word = sc.nextLine();
+		SqlSession session = null;
+		ArrayList<Word> wordList = new ArrayList<>();
+		try {
+			session = factory.openSession();
+			UserMapper um = session.getMapper(UserMapper.class);
+			wordList = um.searchWord(word);
+			for (Word word2 : wordList) {
+				System.out.println(word2.showWords());
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			if (session != null) session.close();
+		}
+	}
 	
 	public void afterLogin(UserInfomation user) {
 		
@@ -121,7 +142,12 @@ public class UserDAO {
 			if (Pattern.matches("^[0-9]*$", afterLoginSelect)) {
 				afterLoginSelectNumber = Integer.parseInt(afterLoginSelect);
 			}
-			
+			else {
+				System.out.println("正しい番号を入力してください。");
+				UICompilation.delay();
+				UICompilation.clear();
+				continue;
+			}
 			SqlSession session = null;
 			
 			switch (afterLoginSelectNumber) {
@@ -276,11 +302,17 @@ public class UserDAO {
 					mwd.customWordPhase(user);
 					break;
 				case 5:
-					bg.blinkGameStart(user);
+					searchword();
 					break;
 				case 6:
+					bg.blinkGameStart(user);
+					break;
+				case 7:
 					printUserInformation(user);
 					break;
+				case 34:
+					BlackJack bj = new BlackJack();
+					bj.startBlackJack(user);
 				case 0:
 					return;
 				default:

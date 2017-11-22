@@ -56,12 +56,27 @@ values (
 	, #{highScore}
 )
 </insert>
+<!-- BlackJack 유저 등록 -->
+<insert id="insertBlackJackUser" parameterType="BlackJackVO">
+insert into blackjacktable (
+	accountnumber)
+values (
+#{accountNumber})
+</insert>
 <!-- BlinkGame 점수 갱신 -->
 <update id="blinkGameUpdate" parameterType="blinkGameVO">
 update blinkGameTable
 set clearWordCount = #{clearWordCount}
 	, maxCombo = #{maxCombo}
 	, highScore = #{highScore}
+where accountNumber = #{accountNumber}
+</update>
+<!-- BlackJack 결과 갱신 -->
+<update id="updateBlackJack" parameterType="BlackJackVO">
+update blackjacktable
+set money = #{money}
+	, win_count = #{winCount}
+	, lose_count = #{loseCount}
 where accountNumber = #{accountNumber}
 </update>
 <!-- 커스텀 단어 수정 -->
@@ -88,12 +103,12 @@ where
 <!-- BlinkGame 이력 조회 -->
 <select id="searchResult" parameterType="UserInfomation" resultType="BlinkGameVO">
 select * from blinkgametable 
-where accountnumber = #{accountnumber}
+where accountNumber = #{accountnumber}
 </select>
 <!-- BlackJack 이력 조회 -->
 <select id="searchBlackJack" parameterType="UserInfomation" resultType="BlackJackVO">
 select * from blackjacktable
-where accountNumer = #{accountnumber}
+where accountNumber = #{accountnumber}
 </select>
 <!-- 커스텀 단어 중복검색 -->
 <select id="checkDuplicateWord" parameterType="CustomMemorize" resultType="String">
@@ -125,6 +140,13 @@ select * from CustomMemorize where accountNumber = #{accountnumber}
 <!-- 모든 단어 출력 -->
 <select id="viewAllWords" resultType="Word">
 select kanji, yomigana, meaning from memorize
+</select>
+<!-- 검색 -->
+<select id="searchWord" parameterType="String" resultType="Word">
+select kanji, yomigana, meaning from memorize 
+where 
+		kanji like '%'||#{word}||'%' OR
+		yomigana like '%'||#{word}||'%'
 </select>
 <!-- blinkgame top 10 -->
 <select id="printBlinkGameRank" resultType="BlinkGameVO">

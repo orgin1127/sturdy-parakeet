@@ -102,8 +102,9 @@ public class BlinkGame {
 						}
 						if (blinkCount == 5) {
 							blinkCount = 1;
-							System.out.print("単語のよみがなを入力して下さい： ");
-							System.out.print("（ゲームを中止したい場合にはもう１回エンターを入力して下さい。）＝＞");
+							System.out.println("単語のよみがなを入力して下さい： ");
+							System.out.println("（ゲームを中止したい場合にはもう１回エンターを入力して下さい。）");
+							System.out.println("＝＞");
 							String answer = sc.nextLine();
 							if (answer.equals(listForBlinkGameN1.get(cnt).getYomigana())) {
 								System.err.println("正解、次の単語を出力します。");
@@ -172,8 +173,9 @@ public class BlinkGame {
 						}
 						if (blinkCount == 5) {
 							blinkCount = 1;
-							System.out.print("単語のよみがなを入力して下さい： ");
-							System.out.print("（ゲームを中止したい場合にはもう１回エンターを入力して下さい。）＝＞");
+							System.out.println("単語のよみがなを入力して下さい： ");
+							System.out.println("（ゲームを中止したい場合にはもう１回エンターを入力して下さい。）");
+							System.out.println("＝＞");
 							String answer = sc.nextLine();
 							if (answer.equals(listForBlinkGameN2.get(cnt).getYomigana())) {
 								System.err.println("正解、次の単語を出力します。");
@@ -241,8 +243,9 @@ public class BlinkGame {
 						}
 						if (blinkCount == 5) {
 							blinkCount = 1;
-							System.out.print("単語のよみがなを入力して下さい： ");
-							System.out.print("（ゲームを中止したい場合にはもう１回エンターを入力して下さい。）＝＞");
+							System.out.println("単語のよみがなを入力して下さい： ");
+							System.out.println("（ゲームを中止したい場合にはもう１回エンターを入力して下さい。）");
+							System.out.println("＝＞");
 							String answer = sc.nextLine();
 							if (answer.equals(listForBlinkGameN3.get(cnt).getYomigana())) {
 								System.err.println("正解、次の単語を出力します。");
@@ -310,8 +313,9 @@ public class BlinkGame {
 						}
 						if (blinkCount == 5) {
 							blinkCount = 1;
-							System.out.print("単語のよみがなを入力して下さい： ");
-							System.out.print("（ゲームを中止したい場合にはもう１回エンターを入力して下さい。）＝＞");
+							System.out.println("単語のよみがなを入力して下さい： ");
+							System.out.println("（ゲームを中止したい場合にはもう１回エンターを入力して下さい。）");
+							System.out.println("＝＞");
 							String answer = sc.nextLine();
 							if (answer.equals(listForBlinkGameCustom.get(cnt).getYomigana())) {
 								System.err.println("正解、次の単語を出力します。");
@@ -381,8 +385,9 @@ public class BlinkGame {
 						}
 						if (blinkCount == 5) {
 							blinkCount = 1;
-							System.out.print("単語のよみがなを入力して下さい： ");
-							System.out.print("（ゲームを中止したい場合にはもう１回エンターを入力して下さい。）＝＞");
+							System.out.println("単語のよみがなを入力して下さい： ");
+							System.out.println("（ゲームを中止したい場合にはもう１回エンターを入力して下さい。）");
+							System.out.println("＝＞");
 							String answer = sc.nextLine();
 							if (listForBlinkGameAll.get(cnt).toString().contains(answer)) {
 								System.err.println("正解、次の単語を出力します。");
@@ -447,7 +452,7 @@ public class BlinkGame {
 			int cnt = 0;
 			for (BlinkGameVO blinkGameVO : rankList) {
 				if (cnt <=9 ) {
-					System.out.println(blinkGameVO.showRanking());
+					System.out.println((cnt+1)+" 位"+" "+blinkGameVO.showRanking());
 				cnt++;
 				}
 			}

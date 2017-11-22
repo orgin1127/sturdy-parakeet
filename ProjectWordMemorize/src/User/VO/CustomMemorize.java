@@ -22,7 +22,7 @@ public class CustomMemorize extends Word {
 	}
 	@Override
 	public String showWords() {
-		return super.showWords()+", アカウントナンバー："+accountNumber;
+		return super.showWords();
 	}
 	
 	

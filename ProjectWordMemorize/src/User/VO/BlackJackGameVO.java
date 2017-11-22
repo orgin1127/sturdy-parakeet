@@ -50,7 +50,8 @@ public class BlackJackGameVO {
 	}
 	
 	public String openCard() {
-		return pattern+"/"+numbers;
+		String s =  pattern+numbers;
+		return s;
 	}
 	
 	@Override
@@ -99,11 +100,5 @@ public class BlackJackGameVO {
 			return false;
 		return true;
 	}
-
-
-
-	
-	
-	
 
 }

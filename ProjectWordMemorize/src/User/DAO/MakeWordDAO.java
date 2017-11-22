@@ -123,7 +123,7 @@ public class MakeWordDAO {
 			while (true) {
 				System.out.println("");
 				System.out.println("");
-				System.out.println("\t"+"単語番号: "+cnt+" "+list.get(cnt)+"\t");
+				System.out.println("\t"+"単語番号: "+(cnt+1)+" "+list.get(cnt).showWords()+"\t");
 				System.out.println("");
 				System.out.println("");
 				System.out.print("次の単語を読みます？(y/n) ");

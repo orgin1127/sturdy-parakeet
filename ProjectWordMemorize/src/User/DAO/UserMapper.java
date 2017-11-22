@@ -20,6 +20,8 @@ public interface UserMapper {
 	public ArrayList<CustomMemorize> viewWordCustom(UserInfomation user);
 	//전체 단어장 출력
 	public ArrayList<Word> viewAllWords();
+	//단어검색
+	public ArrayList<Word> searchWord(String word);
 	//유저 로그인 검색
 	public UserInfomation checkUser(UserInfomation user);
 	//커스텀 단어 만들기
@@ -39,5 +41,7 @@ public interface UserMapper {
 	//BlackJack 유저 검색
 	public BlackJackGameVO searchBlackJack(UserInfomation user);
 	//BlackJack 유저 등록
-	public int inserBlackJackUser();
+	public int insertBlackJackUser(BlackJackGameVO bj);
+	//BlackJack 기록 갱신
+	public int updateBlackJack(BlackJackGameVO bj);
 }
