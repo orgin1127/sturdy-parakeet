@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.TimerTask;
 import java.util.regex.Pattern;
 
+import User.DAO.Admin;
 import User.DAO.UserDAO;
 import User.UI2.UICompilation;
 import User.VO.UserInfomation;
@@ -12,6 +13,7 @@ import User.VO.UserInfomation;
 public class UserUI {
 	Scanner sc = new Scanner(System.in);
 	UserDAO dao = new UserDAO();
+	Admin admin = new Admin();
 	UICompilation ui = new UICompilation();
 
 	public UserUI() {
@@ -82,6 +84,9 @@ public class UserUI {
 		UserInfomation user = dao.checkUserIsExist(userID, password);
 		if (user != null) {
 			UICompilation.clear();
+			if (user.getLevels()==1) {
+				admin.adminMode(user);
+			}
 			dao.afterLogin(user);
 		}
 	}

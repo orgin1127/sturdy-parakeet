@@ -38,10 +38,13 @@ public interface UserMapper {
 	public BlinkGameVO searchResult(UserInfomation user);
 	//BlinkGame Top 10 
 	public ArrayList<BlinkGameVO> printBlinkGameRank();
-	//BlackJack 유저 검색
-	public BlackJackGameVO searchBlackJack(UserInfomation user);
-	//BlackJack 유저 등록
-	public int insertBlackJackUser(BlackJackGameVO bj);
-	//BlackJack 기록 갱신
-	public int updateBlackJack(BlackJackGameVO bj);
+	//admin wordInsert
+	public int adminWordInsertN1(N1 N1);
+	public int adminWordInsertN2(N2 N2);
+	public int adminWordInsertN3(N3 N3);
+	//admin wordDelete
+	public int adminWordDelete(int number);
+	//admin printAllUser
+	public ArrayList<UserInfomation> printAllUser();
+	public int adminUserDelete (int number);
 }

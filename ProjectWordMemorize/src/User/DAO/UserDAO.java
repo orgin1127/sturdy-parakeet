@@ -11,7 +11,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import User.DAO.MybatisConfig;
 import User.UI2.UICompilation;
 import User.VO.*;
-import oracle.net.ns.SessionAtts;
 
 public class UserDAO {
 	
@@ -73,6 +72,8 @@ public class UserDAO {
 			System.out.println("BLINKゲーム最高点数："+bg.getHighScore());
 			System.out.println("最高COMBO数："+bg.getMaxCombo());
 			System.out.println("今まで解けた漢字の数："+bg.getClearWordCount());
+			System.out.println("===========================================");
+			UICompilation.delay();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -310,9 +311,7 @@ public class UserDAO {
 				case 7:
 					printUserInformation(user);
 					break;
-				case 34:
-					BlackJack bj = new BlackJack();
-					bj.startBlackJack(user);
+
 				case 0:
 					return;
 				default:

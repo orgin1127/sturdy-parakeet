@@ -5,6 +5,7 @@ public class UserInfomation {
 	private String userID;
 	private String password;
 	private String createdate;
+	private int levels;
 	
 	public UserInfomation() {}
 
@@ -17,6 +18,22 @@ public class UserInfomation {
 		this.userID = userID;
 		this.password = password;
 		this.createdate = createdate;
+	}
+
+	public UserInfomation(int accountnumber, String userID, String password, String createdate, int levels) {
+		this.accountnumber = accountnumber;
+		this.userID = userID;
+		this.password = password;
+		this.createdate = createdate;
+		this.levels = levels;
+	}
+
+	public int getLevels() {
+		return levels;
+	}
+
+	public void setLevels(int levels) {
+		this.levels = levels;
 	}
 
 	public int getAccountnumber() {

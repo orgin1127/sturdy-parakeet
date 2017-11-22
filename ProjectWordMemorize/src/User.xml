@@ -7,7 +7,6 @@
 <mapper namespace="User.DAO.UserMapper">
 
 <!-- 회원 기본 정보 저장 -->
-<!-- 원래는 풀 경로board.vo.Board를 parameterType에 써야하지만 mybatis-config에서 alias 지정해서 별칭으로 사용이 가능-->
 <insert id="insertUser" parameterType="UserInfomation"> 
 insert into userAccount (
 	AccountNumber
@@ -39,6 +38,67 @@ values (
 	, #{accountNumber}
 )
 </insert>
+<!-- n1 insert -->
+<insert id="adminWordInsertN1" parameterType="WordN1">
+insert into memorize (
+	wordnumber
+	, kanji
+	, yomigana
+	, meaning
+	, levels
+)
+values (
+	memoseq.nextVal
+	, #{kanji}
+	, #{yomigana}
+	, #{meaning}
+	, #{typeN1}
+)
+</insert>
+<!-- n2 insert -->
+<insert id="adminWordInsertN2" parameterType="WordN2">
+insert into memorize (
+	wordnumber
+	, kanji
+	, yomigana
+	, meaning
+	, levels
+)
+values (
+	memoseq.nextVal
+	, #{kanji}
+	, #{yomigana}
+	, #{meaning}
+	, #{typeN2}
+)
+</insert>
+<!-- n3 insert -->
+<insert id="adminWordInsertN3" parameterType="WordN3">
+insert into memorize (
+	wordnumber
+	, kanji
+	, yomigana
+	, meaning
+	, levels
+)
+values (
+	memoseq.nextVal
+	, #{kanji}
+	, #{yomigana}
+	, #{meaning}
+	, #{typeN3}
+)
+</insert>
+<!-- wordDelete -->
+<delete id="adminWordDelete" parameterType="int">
+delete memorize
+where wordnumber = #{wordnumber}
+</delete>
+<!-- userDelete -->
+<delete id="adminUserDelete" parameterType="int">
+delete useraccount
+where accountNumber = #{accountNumber}
+</delete>
 <!-- BlinkGame 점수등록 -->
 <insert id="blinkGameResult" parameterType="blinkGameVO">
 insert into blinkGameTable (
@@ -56,27 +116,12 @@ values (
 	, #{highScore}
 )
 </insert>
-<!-- BlackJack 유저 등록 -->
-<insert id="insertBlackJackUser" parameterType="BlackJackVO">
-insert into blackjacktable (
-	accountnumber)
-values (
-#{accountNumber})
-</insert>
 <!-- BlinkGame 점수 갱신 -->
 <update id="blinkGameUpdate" parameterType="blinkGameVO">
 update blinkGameTable
 set clearWordCount = #{clearWordCount}
 	, maxCombo = #{maxCombo}
 	, highScore = #{highScore}
-where accountNumber = #{accountNumber}
-</update>
-<!-- BlackJack 결과 갱신 -->
-<update id="updateBlackJack" parameterType="BlackJackVO">
-update blackjacktable
-set money = #{money}
-	, win_count = #{winCount}
-	, lose_count = #{loseCount}
 where accountNumber = #{accountNumber}
 </update>
 <!-- 커스텀 단어 수정 -->
@@ -100,14 +145,13 @@ where
 		userID = #{userID}
 		AND password = #{password}
 </select>
+<!-- all user -->
+<select id="printAllUser" resultType="UserInfomation">
+select * from UserAccount order by accountNumber
+</select>
 <!-- BlinkGame 이력 조회 -->
 <select id="searchResult" parameterType="UserInfomation" resultType="BlinkGameVO">
 select * from blinkgametable 
-where accountNumber = #{accountnumber}
-</select>
-<!-- BlackJack 이력 조회 -->
-<select id="searchBlackJack" parameterType="UserInfomation" resultType="BlackJackVO">
-select * from blackjacktable
 where accountNumber = #{accountnumber}
 </select>
 <!-- 커스텀 단어 중복검색 -->
@@ -143,7 +187,7 @@ select kanji, yomigana, meaning from memorize
 </select>
 <!-- 검색 -->
 <select id="searchWord" parameterType="String" resultType="Word">
-select kanji, yomigana, meaning from memorize 
+select * from memorize 
 where 
 		kanji like '%'||#{word}||'%' OR
 		yomigana like '%'||#{word}||'%'
