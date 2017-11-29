@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>폼 태그 연습</title>
+</head>
+<body>
+<h1>[ Form 연습 ]</h1>
+
+<!-- <form></form>사이의 데이터가 서버로 전송된다. method와 action 속성은 필수 -->
+<form method="get" action="../index.html">
+<!-- 한줄짜리 입력은 input 태그 p150 -->
+
+<table>
+	<tr>
+		<td>아이디 : </td>
+		<td rowspan="4" width="5"></td>
+		<td><input type="text" name="id" placeholder="아이디를 입력하세요"></td>
+	</tr>
+	<tr>
+		<td>비밀번호 : </td>
+		<td><input type="password" name="pw" placeholder="비밀번호를 입력하여 주세요"></td>
+	</tr>
+	<tr>
+		<td>전화번호 : </td>
+		<td><input type="tel" name="phone"></td>
+	</tr>
+	<tr>
+		<td>e-mail : </td>
+		<td><input type="email" name=e-mail></td>
+	</tr>
+	<tr>
+		<td> 현재날짜: </td>
+		<td><input type="datetime-local" name=지금날짜></td>
+	</tr>
+	<tr>
+		<td> 첨부파일: </td>
+		<td><input type="file" name=파일></td>
+	</tr>
+	<tr>
+		<td> 색깔: </td>
+		<td><input type="color" name=색깔></td>
+	</tr>
+	<tr>
+		<td> 검색: </td>
+		<td><input type="search" name=검색></td>
+	</tr>
+</table>
+
+	<br>
+	<!-- 모든 데이터를 action으로 보내는 역할 -->
+	<input type="submit" value="전송">
+	<input type="reset" value="다시 쓰기">
+</form>
+<br>
+체크박스
+<br>
+<!-- 체크박스 
+name이 같게 할 경우 서버에는 배열로 데이터가 넘어간다-->
+<input type="checkbox" name="a" value="1">스포츠
+<input type="checkbox" name="a" value="2">음악
+<input type="checkbox" name="a" value="3" checked="checked">IT
+<br>
+라디오버튼<br>
+<!-- 라디오버튼
+ 라디오버튼의 경우는 name을 같게 해줘야 한다 -->
+ 성별<br>
+<input type="radio" name="gender" value="male" checked="checked">남
+<input type="radio" name="gender" value="female">여
+<br>
+통신사<br>
+<input type="radio" name="tel" value="kt">KT
+<input type="radio" name="tel" value="skt">SKT
+<input type="radio" name="tel" value="lg">LG
+<br>
+<!-- 리스트/셀렉트  p179 -->
+리스트<br>
+<select name="job" size="4" multiple="multiple">
+	<option value="programer">프로그래머</option>
+	<option value="company_slave">사축</option>
+	<option value="student">학생</option>
+	<option value="masterSlave">대학원생</option>
+	<option value="ect">기타</option>
+</select>
+<!-- 여러줄 입력란 textarea태그 사이에는 아무것도 치면 안된다. 엔터나 탭이 사용자가 입력하기 전에 들어가버리기 때문 -->
+<textarea rows="" cols="30" placeholder="이곳에 입력하여 주세요"></textarea>
+<ul>
+	<li>
+	<a href="../index.html">메인화면으로 이동</a>
+	</li>
+</ul>
+</body>
+</html>

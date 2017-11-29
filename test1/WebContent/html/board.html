@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>[ 게시판 ]</title>
+<link href="../CSS/board.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1 class="title" style="text-align: center;">[ 게 시 판 ]</h1>
+
+<table class="board">
+	<tr>
+		<th class="contentNumber">번호</th>
+		<th class="contentTitle">제목</th>
+		<th class="contentWriter">작성자</th>
+		<th class="contentWritedDay">작성일</th>
+		<th class="contentViewCount">조회수</th>
+	</tr>
+	<tr>
+		<td>11</td>
+		<td class="titlecontent"><div class="titles"><a href="./image/butnoabs.jpg">만약에 말야 우리....</a></div></td>
+		<td>JJ</td>
+		<td>17.01.05</td>
+		<td>45</td>
+	</tr>
+	<tr>
+		<td>10</td>
+		<td class="titlecontent"><div class="titles"><a href="./image/goback.jpg">들어와</a></div></td>
+		<td>abc</td>
+		<td>17.01.01</td>
+		<td>9</td>
+	</tr>
+	<tr>
+		<td>9</td>
+		<td class="titlecontent"><div class="titles">동의? 어 보감</div></td>
+		<td>abc</td>
+		<td>17.01.01</td>
+		<td>2</td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td class="titlecontent"><div class="titles"><a href="./image/ningen.jpg">중생이여 네 어딜 헤메느냐</a></div></td>
+		<td>시계</td>
+		<td>17.01.01</td>
+		<td>5</td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td class="titlecontent"><div class="titles">점심 뭐 먹을까요</div></td>
+		<td>오늘뭐먹지</td>
+		<td>17.01.01</td>
+		<td>15</td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td class="titlecontent"><div class="titles">긴 제목 글 test중입니다 긴 글 제목을 쓰는 중입니다 긴 글 제목표시 기능을 test합니다 test test test중입니다</div></td>
+		<td>tester</td>
+		<td>17.01.01</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td class="titlecontent"><div class="titles">글쓰기text</div></td>
+		<td>tester</td>
+		<td>17.01.01</td>
+		<td>10</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td class="titlecontent"><div class="titles">졸리네요</div></td>
+		<td>하히후헤호</td>
+		<td>17.01.01</td>
+		<td>6</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td class="titlecontent"><div class="titles">게시판 테스트</div></td>
+		<td>관리자</td>
+		<td>17.01.01</td>
+		<td>9</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td class="titlecontent"><div class="titles">테스트중입니다 글쓰기를 테스트중입니다 글글글그르그그글</div></td>
+		<td>작성자</td>
+		<td>17.01.01</td>
+		<td>6</td>
+	</tr>
+	
+</table>
+<br>
+<div class="boardfooter">
+	<img src="../image/back.png" width="60" height="60">
+	<img src="../image/foward.png" width="60" height="60">
+	<img src="../image/write.png" width="45" height="45">
+	<form>
+		<select name="searchOption">
+			<option value=titles>제목</option>
+			<option value=contents>내용</option>
+			<option value=titles>글쓴이</option>
+		</select>
+		<input type="text" name="searchForm">&nbsp;
+		<input type="submit" name="">
+	</form>
+</div>
+</body>
+</html>

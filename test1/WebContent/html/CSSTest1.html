@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS 연습 페이지</title>
+
+<style>
+/* CSS주석 */
+	p {
+		color: springgreen;
+		font-size: 15px;
+		background-color: SlateGrey;
+	}
+	h1, h2, h3 {
+		color: OrangeRed;
+	}
+	h1 {
+		background-color: Grey;
+	}
+	p.text {
+		background-color: Black;
+		color: HotPink;
+	}
+	p.text2 {
+		background-color: DarkKhaki;
+		font-size: 20px;	
+		color: DarkRed;
+	}
+	#textid {
+		color: Yellow;	
+		background-color: Salmon;
+	}
+	div p {
+		color: olive;
+		border: pink;
+	}
+	input[type="text"] {
+		background-color: lime;
+	}
+	a:link {
+		color:black;
+		text-decoration: none;
+	}
+	a:visited {
+		color:red;
+		text-decoration: none;
+	}
+
+
+	td.img1 {
+		background-color: lime;
+	}
+	
+	img.over { border-width:0px; display:inline; }
+	img.imgHover { display:none; } 
+  
+ 	img.over:hover  { display:none; }
+ 	img.imgHover:hover  { display:inline; } 
+
+	
+	
+	
+/* 선택자를 쓸 때 div p 를 하게 되면 div 태그 안에 있는 모든 p 태그를 대상으로 적용한다
+	div > p 로 작성하면 div 바로 아래의 p만을 대상으로 지정한다 */
+
+/* */
+
+/* name = 여러개 클레스에 각각 다른 이름을 붙이거나 다 같은 이름을 붙일수 있고, 주로 하는 일은 서버로 값을 넘길때 사용
+		   같은 name이 여러개일 경우 넘어갈때 배열로 넘어감
+   class = CSS에서 구체적인 대상을 지정하기 위해 사용
+   id = HTML 문서 내에서 특정 대상을 지정하기 위해 사용, 겹치면 안됨 */
+</style>
+
+</head>
+<body>
+<h1>[ 선택자 ]</h1>
+<p>p태그를 사용한 문자열</p>
+<p>p태그를 사용한 문자열</p>
+<p class="text">class가 지정된 문자열</p>
+<!-- 아래처럼 class에 이름을 여러개 지정할수 있다 
+	  이럴경우 해당 class는 text, text2 두 개로 지정이 되어 두가지 CSS의 영향을 다 받는다. -->
+<p class="text text2">class가 지정된 문자열</p>
+<p id="textid">ID가 지정된 문자열</p>
+<h2>h2를 사용한 문자열</h2>
+<h3>h3를 사용한 문자열</h3>
+<input type="text"><br>
+<p><a href="#">링크가 걸린 문자열</a></p>
+<br>
+<div>
+	<p>div 내의 p태그</p>
+</div>
+
+<table border="1">
+	<tr>
+		<td>집을 나서는 순간부터</td>
+		<td>집에 가고 싶다</td>
+	</tr>
+	<tr>
+		<td class="img1" rowspan="2">
+		<a href="#" class="rollover"><img src="./image/30.jpg" width=160 height=160 class="over"></a>
+		<img src="./image/31.jpg" width=160 height=160 class="imgHover"></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>이렇게 테이블을 만들어서</td>
+	</tr>
+</table>
+
+<h2>
+	<ul>
+		<li>
+			<a href="../index.html">메인화면으로 이동</a>
+		</li>
+	</ul>
+</h2>
+
+</body>
+</html>

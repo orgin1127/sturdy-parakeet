@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회 원 가 입</title>
+</head>
+<body>
+<font color="red">(*)</font>부분은 필수 입력 사항입니다.
+
+<table border="1">
+	<tr>
+		<td width="190">
+			고객님의 이름<font color="red">(*)</font>
+		</td>
+		<td >
+			&nbsp;<input type="text" name="name">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			희망 아이디(ID)<font color="red">(*)</font>
+		</td>
+		<td>
+			<br>
+			&nbsp;<input type="text" name="ID"> <input type="button" value="중복확인"><br>
+			&nbsp;<font color="grey">· 3~12자리 영문, 숫자 조합(대소문자 구분 없으며, 특수기호 사용은 불가)</font><br>
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			비밀번호 입력<font color="red">(*)</font>
+		</td>
+		<td>
+			&nbsp;<input type="text" name="password"> <font color="grey">· 5~8자리 문자와 숫자를 이용하여 만드실 수 있습니다.</font>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			비밀번호 다시입력<font color="red">(*)</font>
+		</td>
+		<td>
+			&nbsp;<input type="text" name="passwordRepeat"> <font color="grey">· 영문은 대소문자를 구분합니다.</font>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			주로 사용하는 이메일<font color="red">(*)</font>
+		</td>
+		<td>
+			&nbsp;<input type="email" name=emailName>@<input type="email" name=emailAdress>
+		    &nbsp;<select>
+				<option value="default">선택하세요</option>
+				<option value="naver">naver.com</option>
+				<option value="gmail">gmail.com</option>
+				<option value="daum">daum.net</option>
+			</select><br>
+			&nbsp;<input type="checkbox" name=confirmDefaultEmail value=confirmedDefaultEmail>&nbsp;천리안 메일을 주로 사용하는 메일로 설정하시겠습니까?
+		</td>
+	</tr>
+	<tr>
+		<td>
+			주소<font color="red">(*)</font>
+		</td>
+		<td>
+			&nbsp;<input type="text" name=addressNumber>&nbsp;-&nbsp;<input type="text" name=addressNumber>&nbsp;<input type="button" value="우편번호 검색"><br>
+			&nbsp;<input type="text" name=autoSelectedAddress size=65><br>
+			&nbsp;나머지 주소&nbsp;<input type="text" name=leftedAddress size=60>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			휴대폰 번호<font color="red">(*)</font>
+		</td>
+		<td>
+			<select>
+				<option value="default">선택</option>
+				<option value="010">010</option>
+				<option value="011">011</option>
+			</select>
+			-<input type="text" name=middlePhoneNumber>-<input type="text" name=lastPhoneNumber>
+			&nbsp;&nbsp;
+			<input type="radio" value="tel">SKT&nbsp;&nbsp;
+			<input type="radio" value="tel">KT&nbsp;&nbsp;
+			<input type="radio" value="tel">LG
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		</td>
+	</tr>
+		<td>
+			일반 전화번호
+		</td>
+		<td>
+			<input type="text" name=phoneFirst size=10>-<input type="text" name=phoneMiddle size=25>-<input type="text" name=phoneMiddle size=25>
+			&nbsp;&nbsp;
+			<input type="radio" value="phone">집&nbsp;&nbsp;
+			<input type="radio" value="phone">직장&nbsp;&nbsp;
+		</td>
+	<tr>
+		<td>
+			천리안 소식지 및 휴대폰 문자(SMS) 수신
+		</td>
+		<td>
+			<br>
+			<input type="checkbox" name=mailSubscription value=mailSubscription checked="checked">천리안 소식 메일을 수신합니다.<br>
+			<input type="checkbox" name=notificationSubscription value=notificationSubscription checked="checked">알림 및 소식등 정보 휴대폰 문자 수신<br>
+			<br>
+		</td>
+	</tr>
+</table>
+
+</body>
+</html>

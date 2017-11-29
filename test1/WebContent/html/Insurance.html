@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>보험상담 신청</title>
+</head>
+<body>
+<h2><img src="../image/direction.png" width=20>보험상담 쓰기</h2>
+<table border="1">
+	<tr>
+		<td>
+			<font size = 1>■ </font>상담제목
+		</td>
+		<td>
+			<input type="text" name=title size=65>&nbsp;
+			<input type="checkbox" name="secret" value="secret">비밀글 설정
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<font size = 1>■ </font>이름
+		</td>
+		<td>
+			<input type="text" name=writerName>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<font size = 1>■ </font>관심사항
+		</td>
+		<td>
+			<input type="checkbox" name="favorite" checked="checked">질병상해보장&nbsp;
+			<input type="checkbox" name="favorite">노후준비&nbsp;
+			<input type="checkbox" name="favorite">자녀교육&nbsp;
+			<input type="checkbox" name="favorite">재무설계&nbsp;
+			<input type="checkbox" name="favorite">보장분석&nbsp;
+			<input type="checkbox" name="favorite">기타&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<font size = 1>■ </font>성별
+		</td>
+		<td>
+			<select>
+				<option value="genderMan">남성</option>
+				<option value="genderWoman">여성</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<font size = 1>■ </font>결혼여부
+		</td>
+		<td>
+			<select>
+				<option value="gender">기혼</option>
+				<option value="gender">미혼</option>
+			</select>
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<font size = 1>■ </font>직업
+		</td>
+		<td>
+			<input type="text" name=job>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<font size = 1>■ </font>흡연여부
+		</td>
+		<td>
+			<select>
+				<option value="smoke">흡연</option>
+				<option value="smoke">비흡연</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<font size = 1>■ </font>운전여부
+		</td>
+		<td>
+			<input type="checkbox" name="drive" checked="checked">운전(자가용)&nbsp;
+			<input type="checkbox" name="drive">운전(영업용)&nbsp;
+			<input type="checkbox" name="drive">운전(화물용)&nbsp;
+			<input type="checkbox" name="drive">비운전&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<font size = 1>■ </font>통화가능시간
+		</td>
+		<td>
+			<input type="checkbox" name="canCall">9시-11시&nbsp;
+			<input type="checkbox" name="canCall">11시-13시&nbsp;
+			<input type="checkbox" name="canCall">13시-15시&nbsp;
+			<input type="checkbox" name="canCall">15시-17시&nbsp;
+			<input type="checkbox" name="canCall" checked="checked">17시-19시&nbsp;
+			<input type="checkbox" name="canCall">19시-21시&nbsp;
+			<input type="checkbox" name="canCall">기타시간&nbsp;
+		</td>
+	</tr>
+</table>
+</body>
+</html>
