@@ -29,6 +29,36 @@ function calc() {
 	number3.value = parseInt(number1.value) + parseInt(number2.value);
 	
 }
+
+function cal2() {
+	var num1 = document.getElementById('calNum1');
+	var num2 = document.getElementById('calNum2');
+	var caltype = document.getElementById('calType');
+	var total = document.getElementById('result');
+	if (caltype.value == "+") {
+		total.value = parseInt(num1.value) + parseInt(num2.value);
+	}
+	else if (caltype.value == "-") {
+		total.value = parseInt(num1.value) - parseInt(num2.value);
+	}
+	else if (caltype.value == "*") {
+		total.value = parseInt(num1.value) * parseInt(num2.value);
+	}
+	else if (caltype.value == "/") {
+		total.value = parseInt(num1.value) / parseInt(num2.value);
+	}
+}
+
+function mailInput() {
+	var mail2 = document.getElementById('mail');
+	var select = document.getElementById('list');
+	if (select.value == "custom") {
+		mail2.value = "";
+	}
+	else {
+		mail2.value = select.value;
+	}
+}
 </script>
 </head>
 <body>
@@ -43,7 +73,7 @@ function calc() {
 %>
 	b = <%= b %><br>
 <form>
-	<% Calendar c = Calendar.getInstance();
+	<%! Calendar c = Calendar.getInstance();
 	int year = c.get(Calendar.YEAR);
 	int month = c.get(Calendar.MONTH); 
 	int today = c.get(Calendar.DATE); %>
@@ -123,8 +153,41 @@ for (int i = 1; i<=9; i++) { %>
 숫자 2 <input type="text" id="num2">
 <input type="button" value="=" onclick="calc()">
 <input type="text" id="num3">
-
-
+<br>
+<br>
+	*계산 2 : 
+	<select id="calNum1" onchange="cal2()">
+		<%for (int i=1; i<=10; i++) { %>
+			<option value="<%=i %>"><%=i %></option>
+		<%} %>
+	</select>
+	&nbsp;
+	<select id="calType">
+		<option value="+">+</option>
+		<option value="-">-</option>
+		<option value="*">*</option>
+		<option value="/">/</option>
+	</select>
+	&nbsp;
+	<select id="calNum2" onchange="cal2()">
+		<%for (int i=1; i<=10; i++) { %>
+			<option value="<%=i %>"><%=i %></option>
+		<%} %>
+	</select>
+	=
+<input type="text" id="result">
+<br><br>
+* 메일 : 
+	<input type="text" id="mailFirst">
+	@
+	<input type="text" id="mail">
+	<select id="list" onchange="mailInput()">
+		<option value="" selected="selected">선택하여 주세요</option>
+		<option value="naver.com">naver.com</option>
+		<option value="gmail.com">gmail.com</option>
+		<option value="nate.com">nate.com</option>
+		<option value="custom">직접입력</option>
+	</select>
 </form>
 </body>
 </html>
