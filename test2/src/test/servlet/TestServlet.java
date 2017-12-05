@@ -24,7 +24,7 @@ public class TestServlet extends HttpServlet {
 		String a = request.getParameter("str");
 		String b = request.getParameter("num");
 		String c = request.getParameter("ra");
-		//ArrayList<String> list = new ArrayList<>();
+		//체크박스나 같은 name을 가진 값 여러개는 배열로 받는다.
 		String[] list = request.getParameterValues("ch");
 		int i = 0;
 		if (b.isEmpty() != true) {
@@ -47,6 +47,7 @@ public class TestServlet extends HttpServlet {
 		
 		//다른 페이지로 이동
 		response.sendRedirect("index.jsp"); //요청 정보 초기화, 입력값들이 다 초기화됨
+		
 	}
 
 }
