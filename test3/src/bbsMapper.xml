@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 글 정보 처리 SQL -->
+<mapper namespace="test.jsp4.dao.BbsMapper">
+
+<!-- 글 정보 저장 -->
+<insert id="insertContent" parameterType="bbs">
+insert into jsp4bbs (
+	num
+	, name
+	, text
+)
+values (
+	jsp4bbs_seq.nextval
+	, #{name}
+	, #{text}
+)
+</insert>
+<!-- 글 삭제 -->
+<delete id="deleteContent" parameterType="int">
+delete jsp4bbs where num=#{num}
+</delete>
+<!-- 글 목록 읽기 -->
+<select id="searchBbs" resultType="bbs">
+select num, name, text, (to_char(indate, 'yyyy/mm/dd hh:mi')) indate from jsp4bbs order by num desc
+</select>
+
+</mapper>

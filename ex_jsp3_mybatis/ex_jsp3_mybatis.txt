@@ -1,0 +1,6 @@
+[ JSP, Mybatis 사용 예제 ]
+
+- JSP, Servlet, Mybatis 사용 샘플 예제
+- HTML 폼에 입력한 데이터를 DB에 저장
+- DB의 데이터를 읽어서 HTML 화면에 출력 
+
