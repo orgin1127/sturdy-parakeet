@@ -4,10 +4,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title> L o g I n </title>
+<script>
+
+function checkVaildForm() {
+	var name = document.getElementById('id');
+	if (name.value == '') {
+		alert('아이디를 입력하여 주십시오');
+		return false;
+	}
+	if (name.value.length > 9 || name.value.length <= 2) {
+		alert('아이디는 3자 이상 9자 이하여야 합니다.');
+		return false;
+	}
+	
+	var pw = document.getElementById('password');
+	if (pw.value == '') {
+		alert('비밀번호를 입력하여 주십시오');
+		return false;
+	}
+	if (pw.value.length > 12 || pw.value.length <= 3) {
+		alert('비밀번호는 4자 이상 12자 이하여야 합니다.')
+		return false;
+	}
+	return true;
+	
+}
+
+</script>
+<title> 회 원 등 록 </title>
 </head>
 <body>
-<form method="post" >
+<form method="post" action="" onsubmit="return checkVaildForm()">
 	<table>
 		<tr>
 			<td>
@@ -29,7 +56,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input type="submit">
+				<input type="submit" value="write">
 			</td>
 		</tr>
 	</table>

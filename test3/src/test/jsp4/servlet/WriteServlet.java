@@ -20,6 +20,9 @@ public class WriteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
+		//클라이언트 ip 받기
+		System.out.println(request.getRemoteAddr());
+		
 		String name = request.getParameter("name");
 		System.out.println(name);
 		String content = request.getParameter("content");
