@@ -8,7 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ID 중복 확인 </title>
-
 <style>
 	
 	body {

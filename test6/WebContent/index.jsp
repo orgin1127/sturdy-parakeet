@@ -15,7 +15,7 @@
 </style>
 </head>
 <body>
-
+<!-- GIT commit test -->
 <c:if test="${sessionScope.id != null }"><script> alert('로그인 성공')</script></c:if>
 
 <!--
