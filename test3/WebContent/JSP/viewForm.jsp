@@ -11,16 +11,19 @@
 	thead {
 		padding: 30px;
 		text-align: center;
-		background-color: black;
+		background-color: #444444;
 		color: white; 
 		width: 20px;
-		height: 5px;
+	}
+	thead tr {
+		height: 60px;
+		width: 30px;
 	}
 	tbody {
 		border: 1px solid grey;
 		text-align: center;
 		padding: 3px;
-		background-color: NavajoWhite
+		background-color: #b3b2ef;
 	}
 	.bbsTitle {
 		width: 300px;
@@ -41,7 +44,7 @@
 		word-break: break-all;
 	}
 	tbody tr:hover {
-		background-color: AntiqueWhite;
+		background-color: #ffb871;
 	}
 }
 </style>

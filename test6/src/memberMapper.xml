@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원 정보 처리 SQL -->
+<mapper namespace="test.jsp6.dao.MemberMapper">
+
+<!-- 회원 정보 저장 -->
+<insert id="insertMember" parameterType="member">
+insert into jsp6member (
+	id
+	, password
+	, name
+	, phone
+	, address
+)
+values (
+	#{id}
+	, #{password}
+	, #{name}
+	, #{phone}
+	, #{address}
+)
+</insert>
+<!-- 회원정보 update -->
+<update id="updateMember" parameterType="member">
+update jsp6member 
+set
+	name = #{name}
+	, phone = #{phone}
+	, address = #{address}
+<if test="password != null and password != ''">
+	, password = #{password}
+</if>
+where id = #{id}
+</update>
+
+
+<!-- Member 검색 -->
+<select id="searchMember" parameterType="String" resultType="member">
+select * from jsp6member where id = #{id}
+</select>
+
+<!-- 회원 로그인 -->
+<select id="loginMember" parameterType="member" resultType="member">
+select * from jsp6member where id = #{id} and password = #{password}
+</select>
+
+
+
+
+<!-- 글 삭제 
+<delete id="deleteContent" parameterType="int">
+delete jsp4bbs where num=#{num}
+</delete>-->
+<!-- 글 목록 읽기 
+<select id="searchBbs" resultType="bbs">
+select num, name, text, (to_char(indate, 'yyyy/mm/dd hh:mi')) indate from jsp4bbs order by num desc
+</select>-->
+
+</mapper>
