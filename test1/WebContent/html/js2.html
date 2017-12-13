@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript 2</title>
+<script>
+function check() {
+	var id = document.getElementById('id');
+	if (id.value == '') { //ID가 id인 '입력칸'의 안에 입력된 값을 꺼내오는 함수는 .value 다른 방법은 id.value.length == 0
+		alert('ID를 입력하세요.');
+		return false;
+	}
+	
+	var password = document.getElementById('password');
+	if (password.value.length <=2 || password.value.length > 10) {
+		alert('비밀번호가 너무 짧습니다. 3~10자로 입력하세요.');
+		return false;
+	}
+	
+	var passwordCheck = document.getElementById('passwordcheck');
+	if (password.value != passwordCheck.value) {
+		alert('비밀번호 재 입력을 바르게 입력하세요.');
+		return false;
+	}
+	
+	var age = document.getElementById('age');
+	if (age.value == '') {
+		alert('나이를 입력하여 주세요');
+		return false;
+	}
+	if (isNaN(age.value)) {
+		alert('나이를 숫자로 입력하여 주세요');
+		return false;
+	}
+	if (parseInt(age.value) <= 10) {
+		alert ('나이가 너무 적습니다. 돌아가');
+		return false;
+	}
+	
+	var job = document.getElementById('job');
+	if (job.selectedIndex == 0) {
+		alert ('직업을 선택하여 주세요');
+		return false;
+	}
+	
+	var fav = document.getElementsByName('favorite');
+	var cnt = 0;
+	for (var i = 0; i < fav.length; i++) {
+		if (fav[i].checked == false) {
+			cnt++;
+		}
+	}
+	if (cnt >= fav.length) {
+		alert('한 개 이상 선택바람');
+		return false;
+	}
+	
+	var agree = document.getElementsByName('agreement');
+	var count = 0;
+	for (var i = 0; i < agree.length; i++) {
+		if (agree[i].checked == false) {
+			count++;
+		}
+	}
+	if (count == 2) {
+		alert('동의 여부 선택');
+		return false;
+	}
+	alert('작성 완료');
+	return true;
+}
+</script>
+
+</head>
+<body>
+<!-- form 태그 method는 get과 post 방식이 있는데 get은 주소에 전송값이 다 보인다 post는 안보임 -->
+<form method="post" action="../index.html" onsubmit="return check()"> <!-- check에서 모든 항목을 검사해서 모든게 true일때 action으로 감  -->
+ID		<input type="text" name="id" id="id"><br>
+Password		<input type="password" name="password" id="password"><br>
+Password 재입력		<input type="password" name="passwordcheck" id="passwordcheck"><br>
+나이		<input type="text" name="age" id="age"><br>
+직업	
+	<select id="job">
+		<option value="0">--직업 선택--</option>
+		<option value="1">학생</option>
+		<option value="2">기타</option>
+	</select><br>
+		
+관심사
+<input type="radio" name="favorite" id="favCoding" value="coding">코딩
+<input type="radio" name="favorite" id="favSleeping" value="sleep">잠자기
+<input type="radio" name="favorite" id="favGourmet" value="Gourmet">맛있는거
+<input type="radio" name="favorite" id="favCat" value="cat">고양이
+<input type="radio" name="favorite" id="facDog" value="dog">강아지
+<br><br>
+<input type="checkbox" name="agreement" id="agree" value="agree">동의
+<input type="checkbox" name="agreement" id="disagree" value="disagree">동의하지 않음
+<br>
+<br>
+<input type="submit" value="가입"><br>
+</form>
+<h2>
+	<ul>
+		<li>
+			<a href="../index.html">메인화면으로 이동</a>
+		</li>
+	</ul>
+</h2>
+</body>
+</html>

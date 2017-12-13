@@ -1,0 +1,64 @@
+@charset "UTF-8";
+	.tb1 {
+		border-width: 1px;
+		border-style: solid;
+		border-color: black;
+		background-color: #dddddd;
+		padding: 10px;
+		border-spacing: 15px;
+		margin: auto; /*table 웹페이지 중앙정렬*/
+	}
+	.tb1 td {
+		width: 200px;
+		height: 100px;
+		border: 4px dotted lime;
+		padding: 20px;
+		
+		text-align: center;
+		vertical-align: top; /*세로정렬*/
+	}
+	tr.tr1:hover {
+		background-color: black;
+		color: white;
+	}
+	tr.tr2:hover {
+		background-color: black;
+		color: white;
+	}
+	tr.tr3:hover {
+		background-color: black;
+		color: white;
+	}
+	/*.tb1 tr:hover { }*/
+	td.td1:hover {
+		background: salmon;
+	}
+	td.td2:hover {
+		background: salmon;
+	}
+	td.td3:hover {
+		background: salmon;
+	}
+	
+	.tb2 td {
+		border: 1px solid black; 
+		width: 200px;
+		height: 150px;
+		word-break: break-all;
+	}
+	.tb2 {
+		border-collapse: collapse; /*셀 사이 간격이 한줄로 보임	*/
+	}
+	
+	#textdiv {
+		border: 1px solid black;
+		width: 260px;
+		height: 200px;
+		font-size: 20px;
+		margin: 20px;
+		background-image: url("./html/image/dd.jpg");
+		overflow-x: none; /*가로방향 내용 넘칠때*/
+		overflow-y: scroll;/*세로방향 내용 넘칠때*/
+		background-size: contain;
+	}
+	

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- DB접속정보 값을 가지고 있는 파일 설정 -->
+	<properties resource="db.properties" />
+
+	<!-- Java Class에 대한 alias 지정 -->
+	<typeAliases>
+		<typeAlias type="User.VO.UserInfomation" alias="UserInfomation" />
+		<typeAlias type="User.VO.CustomMemorize" alias="CustomMemorize" />
+		<typeAlias type="User.VO.BlinkGameVO" alias="BlinkGameVO" />
+		<typeAlias type="User.VO.Word" alias="Word" />
+		<typeAlias type="User.VO.N1" alias="WordN1" />
+		<typeAlias type="User.VO.N2" alias="WordN2" />
+		<typeAlias type="User.VO.N3" alias="WordN3" /> 
+	</typeAliases>
+	 
+	<!-- DB접속 정보 셋팅 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- Mapper 파일 include -->
+	<mappers>
+		<mapper resource="User.xml" />
+	</mappers>
+	
+</configuration>

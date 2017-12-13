@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>java script 1</title>
+
+<script>
+//java script 함수 정의
+//java script는 선언이나 자료형 기입이 필요없다.
+function test() {
+	var a = 1;
+	var b = 2;
+	var c = a+b;
+	alert('결과는 ' + c);
+}
+function test2() {
+	var a = "1";
+	var b = "2";
+	var c = a + b;
+	alert('결과는 ' + c);
+}
+function test3(num1, num2) {
+	var num3 = num1 + num2;
+	alert('결과는 ' + num3);
+}
+
+var total = 0; //전역변수
+
+function test4(num) {
+	total += num;
+	alert('결과는 ' + total);
+}
+
+function test5() {
+	//var res = confirm('계속 하시겠습니까?'); //yes or no 선택을 물어보는 함수
+	//alert(res); //그 선택을 boolean 타입으로 return 해준다
+	if (confirm('삭제하시겠습니까?')) {
+		alert('삭제되었습니다.');
+	}
+	else {
+		alert('삭제에 실패하였습니다.');
+	}
+}
+
+function test6() {
+	for (var i = 0; i < 10; i++) {
+		alert('for문 test '+ i);
+	}
+}
+
+function test7() {
+	var div = document.getElementById('textdiv');
+	div.innerHTML = '특정 범위 위치값 가져오기';
+}
+function test8() {
+	var div = document.getElementById('textdiv');
+	div.innerHTML = '';
+}
+function test9() {
+	var div = document.getElementById('textdiv');
+	div.innerHTML = '<img src=\"./image/31.jpg\">';
+}
+var cnt = 1;
+function test10() {
+	var div = document.getElementById('formdiv');
+	if (cnt <= 4) {
+		cnt++;
+		div.innerHTML += '<p><input type="text" name="test"></p>'
+	}
+	else {
+		alert("더 이상 추가할 수 없습니다");
+	}
+}
+</script>
+
+</head>
+<body>
+<h1>[ Java Script 함수 정의 ]</h1>
+
+<p><a href="javascript:test()">함수실행</a></p>
+<p><input type="button" value="함수실행" onclick="test()"></p>
+<p><img src="./image/dd.jpg" onclick="test()"></p>
+<p><input type="button" value="함수실행2" onclick="test2()"></p>
+<p><a href="javascript:test3(10, 20)">test3 실행</a></p>
+<p><a href="javascript:test4(10)">test4 실행</a></p>
+<p><a href="javascript:test5()">test5 실행</a></p>
+<p><a href="javascript:test6()">test6 실행</a></p>
+<p><a href="javascript:test7()">test7 실행</a></p>
+<p><a href="javascript:test8()">test8 실행</a></p>
+<p><a href="javascript:test9()">test9 실행</a></p>
+<p><a href="javascript:test10()">입력란 추가</a></p>
+
+<div id="formdiv">
+	<p><input type="text" name="test"></p>
+</div>
+
+======================
+
+
+<div id="textdiv"></div>
+
+
+======================
+
+
+
+</body>
+</html>

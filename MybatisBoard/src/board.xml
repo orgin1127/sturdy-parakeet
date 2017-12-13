@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="board.dao.BoardMapper">
+
+<!-- 회원 정보 저장 -->
+<!-- 원래는 풀 경로board.vo.Board를 parameterType에 써야하지만 mybatis-config에서 alias 지정해서 별칭으로 사용이 가능-->
+<insert id="insertBoard" parameterType="Board"> 
+insert into board (
+	boardnum
+	, name
+	, title
+	, content
+)
+values (
+	boardseq.nextVal
+	, #{name}
+	, #{title}
+	, #{content}
+)
+</insert>
+<!-- 전체 글 목록 -->
+<select id="showBoard" resultType="Board">
+select 
+		boardnum
+		, name
+		, title
+		, hits
+		, to_char(indate, 'yy/mm/dd') indate
+from board
+order by boardnum
+</select>
+<!-- 글 읽기(글 제목, 글쓴이, 날짜, 내용 -->
+<select id="readBoard" parameterType="int" resultType="Board">
+select 
+		boardnum
+		, title
+		, name
+		, hits
+		, to_char(indate, 'yy/mm/dd') indate
+		, content
+from board
+where boardnum = #{boardnum}
+</select>
+<!-- 글 읽기 작동시 조회수 갱신 -->
+<update id="updateHit" parameterType="int">
+update board
+set hits = hits+1
+where boardnum = #{boardnum}
+</update>
+<!-- 글 삭제 -->
+<delete id="deleteBoard" parameterType="int">
+delete from board
+where boardnum = #{boardnum}
+</delete>
+<!-- 글 검색(글 번호) -->
+<select id="findBoardNum" parameterType="int" resultType="Board">
+select 
+		boardnum
+		, title
+		, name 
+		, hits
+		, to_char(indate, 'yy/mm/dd') indate
+from board
+where boardnum = #{boardnum}
+</select>
+<!-- 글 검색(글 제목) -->
+<select id="findBoardTitle" parameterType="String" resultType="Board">
+select 
+		boardnum
+		, title
+		, name 
+		, hits
+		, to_char(indate, 'yy/mm/dd') indate
+from board
+where lower(title) like lower('%'||#{title}||'%') 
+</select>
+<!-- 글 검색(글 내용) -->
+<select id="findBoardContent" parameterType="String" resultType="Board">
+select
+		boardnum
+		, title
+		, name
+		, hits
+		, to_char(indate, 'yy/mm/dd') indate
+from board
+where lower(content) like lower('%'||#{content}||'%')
+</select>
+<!-- col: 1-작성자 검색 2-제목 3-본문검색 -->
+<!-- word: 검색할 단어 -->
+<select id="search" parameterType="map" resultType="Board">
+select * from board
+<where>
+	<if test="col == 1">
+		lower(title) like lower('%'||#{word}||'%')
+	</if>
+	<if test="col == 2">
+		lower(content) like lower('%'||#{word}||'%')
+	</if>
+	<if test="col == 3">
+		lower(name) like lower('%'||#{word}||'%')
+	</if>
+	<if test="col == 4">
+		  lower(title) like lower('%'||#{word}||'%')
+		  or lower(content)like lower('%'||#{word}||'%')
+		  or lower(name)) like lower('%'||#{word}||'%')
+	</if>
+</where> 
+order by boardnum
+</select>
+<!-- 리플 가져오기 -->
+<select id="findReply" parameterType="int" resultType="Reply">
+select *
+from reply
+where boardnum = #{boardnum}
+order by replynum
+</select>
+<!-- 리플작성 -->
+<insert id="writeReply" parameterType="Reply">
+insert into reply 
+values (
+		replyseq.nextval
+		, #{boardnum}
+		, #{name}
+		, #{retext}
+)
+</insert>
+</mapper>

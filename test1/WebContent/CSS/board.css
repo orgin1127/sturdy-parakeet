@@ -1,0 +1,66 @@
+@charset "UTF-8";
+	.board {
+		border-collapse: collapse;
+		border: 3px solid lightgrey;
+		margin: auto;
+	}
+
+	tr {
+		border-collapse: collapse;
+		border: 1px solid grey;
+		background-color: lemonchiffon;        
+	}
+	.board tr:hover {
+		background-color: #778899;
+	}
+	td {
+		overflow: hidden;
+		text-overflow:ellipsis;
+		border-collapse: collapse;
+		border: 2px solid grey;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		
+		text-align: center;
+	}
+	.titlecontent {
+		text-overflow:ellipsis;
+		height: 15px;
+		text-align: left;
+		width: 500px;
+	}
+	th {
+		border-collapse: collapse;
+		border: 2px solid grey;
+		text-align: center;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		background-color: black;
+		color: white;
+	}
+	.titles {
+    	text-overflow:ellipsis;
+		height: 20px;	
+		width:470px;
+		padding-left: 5px;
+		white-space: nowrap;
+	}
+	.contentTitle {
+		width: 500px;
+		height: 20px;
+	}
+	.contentNumber {
+		width: 50px;
+	}
+	.contentWriter {
+		width: 150px;
+	}
+	.contentWritedDay {
+		width: 80px;
+	}
+	.contentViewCount {
+		width: 60px;
+	}
+	.boardfooter {
+		text-align: center;
+	}

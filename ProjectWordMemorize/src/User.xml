@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="User.DAO.UserMapper">
+
+<!-- 회원 기본 정보 저장 -->
+<insert id="insertUser" parameterType="UserInfomation"> 
+insert into userAccount (
+	AccountNumber
+	, userID
+	, Password
+	, createdate
+)
+values (
+	 useraccseq.nextVal
+	, #{userID}
+	, #{password}
+	, sysdate
+)
+</insert>
+<!-- 커스텀 단어 등록 -->
+<insert id="makeCustomWord" parameterType="CustomMemorize">
+insert into customMemorize (
+	WORDNUMBER
+	, KANJI
+	, YOMIGANA
+	, MEANING
+	, ACCOUNTNUMBER
+)
+values (
+	 customseq.nextVal
+	, #{kanji}
+	, #{yomigana}
+	, #{meaning}
+	, #{accountNumber}
+)
+</insert>
+<!-- n1 insert -->
+<insert id="adminWordInsertN1" parameterType="WordN1">
+insert into memorize (
+	wordnumber
+	, kanji
+	, yomigana
+	, meaning
+	, levels
+)
+values (
+	memoseq.nextVal
+	, #{kanji}
+	, #{yomigana}
+	, #{meaning}
+	, #{typeN1}
+)
+</insert>
+<!-- n2 insert -->
+<insert id="adminWordInsertN2" parameterType="WordN2">
+insert into memorize (
+	wordnumber
+	, kanji
+	, yomigana
+	, meaning
+	, levels
+)
+values (
+	memoseq.nextVal
+	, #{kanji}
+	, #{yomigana}
+	, #{meaning}
+	, #{typeN2}
+)
+</insert>
+<!-- n3 insert -->
+<insert id="adminWordInsertN3" parameterType="WordN3">
+insert into memorize (
+	wordnumber
+	, kanji
+	, yomigana
+	, meaning
+	, levels
+)
+values (
+	memoseq.nextVal
+	, #{kanji}
+	, #{yomigana}
+	, #{meaning}
+	, #{typeN3}
+)
+</insert>
+<!-- wordDelete -->
+<delete id="adminWordDelete" parameterType="int">
+delete memorize
+where wordnumber = #{wordnumber}
+</delete>
+<!-- userDelete -->
+<delete id="adminUserDelete" parameterType="int">
+delete useraccount
+where accountNumber = #{accountNumber}
+</delete>
+<!-- BlinkGame 점수등록 -->
+<insert id="blinkGameResult" parameterType="blinkGameVO">
+insert into blinkGameTable (
+	blinkgamenumber
+	, accountNumber
+	, clearWordCount
+	, maxCombo
+	, highScore
+)
+values (
+	blinkGameNumberSeq.nextVal
+	, #{accountNumber}
+	, #{clearWordCount}
+	, #{maxCombo}
+	, #{highScore}
+)
+</insert>
+<!-- BlinkGame 점수 갱신 -->
+<update id="blinkGameUpdate" parameterType="blinkGameVO">
+update blinkGameTable
+set clearWordCount = #{clearWordCount}
+	, maxCombo = #{maxCombo}
+	, highScore = #{highScore}
+where accountNumber = #{accountNumber}
+</update>
+<!-- 커스텀 단어 수정 -->
+<update id="editCustomWord" parameterType="CustomMemorize">
+update customMemorize
+set Kanji = #{kanji}
+	, Yomigana = #{yomigana}
+	, Meaning = #{meaning}
+where WordNumber = #{wordnumber} and 
+		accountNumber = #{accountNumber}
+</update>
+<!-- 회원 ID 검색 -->
+<select id="checkUserID" parameterType="String" resultType="UserInfomation"> 
+select userID, password from UserAccount
+where userID = #{userID} 
+</select>
+<!-- 회원 검색 -->
+<select id="checkUser" parameterType="UserInfomation" resultType="UserInfomation">
+select * from UserAccount
+where 
+		userID = #{userID}
+		AND password = #{password}
+</select>
+<!-- all user -->
+<select id="printAllUser" resultType="UserInfomation">
+select * from UserAccount order by accountNumber
+</select>
+<!-- BlinkGame 이력 조회 -->
+<select id="searchResult" parameterType="UserInfomation" resultType="BlinkGameVO">
+select * from blinkgametable 
+where accountNumber = #{accountnumber}
+</select>
+<!-- 커스텀 단어 중복검색 -->
+<select id="checkDuplicateWord" parameterType="CustomMemorize" resultType="String">
+select kanji from CustomMemorize
+where 
+		Kanji = #{kanji}　
+		AND
+		accountNumber = (select accountNumber from UserAccount where accountNumber = #{accountNumber}) 
+</select>
+<!-- 단어 출력(n1) -->
+<select id="viewWordN1" parameterType="String" resultType="WordN1">
+select * from memorize 
+where Levels = #{Levels}
+</select>
+<!-- 단어 출력(n2) -->
+<select id="viewWordN2" parameterType="String" resultType="WordN2">
+select * from memorize 
+where Levels = #{Levels}
+</select>
+<!-- 단어 출력(n3) -->
+<select id="viewWordN3" parameterType="String" resultType="WordN3">
+select * from memorize 
+where Levels = #{Levels}
+</select>
+<!-- 단어 출력(유저별 커스텀 단어) -->
+<select id="viewWordCustom" parameterType="UserInfomation" resultType="CustomMemorize">
+select * from CustomMemorize where accountNumber = #{accountnumber}
+</select>
+<!-- 모든 단어 출력 -->
+<select id="viewAllWords" resultType="Word">
+select kanji, yomigana, meaning from memorize
+</select>
+<!-- 검색 -->
+<select id="searchWord" parameterType="String" resultType="Word">
+select * from memorize 
+where 
+		kanji like '%'||#{word}||'%' OR
+		yomigana like '%'||#{word}||'%'
+</select>
+<!-- blinkgame top 10 -->
+<select id="printBlinkGameRank" resultType="BlinkGameVO">
+select acc.userID, 
+		bt.accountnumber
+		, bt.clearwordcount
+		, bt.maxcombo
+		, bt.highscore 
+from blinkgameTable bt
+	, useraccount acc
+where acc.accountnumber = bt.accountnumber
+order by highScore desc
+</select>
+</mapper>

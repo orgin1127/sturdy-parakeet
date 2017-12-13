@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원정보 처리 SQL -->
+<mapper namespace="Game.DAO.GamerMapper">
+
+<insert id="insertGamerInfo" parameterType="Gamer">
+insert into Gamer (
+	id
+	, password
+)
+values (
+	#{id}
+	, #{password}
+)
+</insert>
+
+<insert id="AddGamerInfo" parameterType="String">
+insert into status (
+	id
+)
+values (
+	#{id}
+)
+</insert>
+
+<select id="LoginGamerCheck" parameterType="Gamer" resultType="Gamer">
+select * from Gamer
+where id = #{id} and password = #{password}
+</select>
+
+<select id="IDCheckGamer" parameterType="String" resultType="String">
+select id from Gamer
+where id = #{id}
+</select>
+
+<select id="Total_Status" parameterType="String" resultType="GamerStatus">
+select * from status
+where id = #{id}
+</select>
+
+
+<update id="WinMoney" parameterType="map">
+<!-- 돈 땃을 때 -->
+update status set money = money + #{money}
+where id = #{id}
+</update>
+
+<update id="LoseMoney" parameterType="map">
+<!-- 돈 잃을 때 -->
+update status set money = money - #{money}
+where id = #{id}
+</update>
+
+<update id="Wins_Count" parameterType="String">
+<!-- 돈 땃을 때 -->
+update status set win_count = win_count + 1
+where id = #{id}
+</update>
+
+<update id="Loses_Count" parameterType="String">
+<!-- 돈 땃을 때 -->
+update status set lose_count = lose_count + 1
+where id = #{id}
+</update>
+
+</mapper>

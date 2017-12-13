@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- 회원 정보 처리 SQL -->
+<mapper namespace="test.jsp6.dao.BoardMapper">
+
+<!-- 글 정보 저장 -->
+<insert id="write" parameterType="board">
+insert into jsp6board (
+		boardnum
+		, id
+		, title
+		, content
+		, ip
+)
+values (
+		jsp6board_seq.nextVal
+		, #{id}
+		, #{title}
+		, #{content}
+		, #{ip}
+)
+</insert>
+
+<!-- 글 삭제 -->
+<delete id="deleteContent" parameterType="board">
+delete jsp6board 
+where boardnum = #{boardNum} and id = #{id}
+</delete>
+
+<!-- 조회수 증가 -->
+<update id="addViewCount" parameterType="int">
+update 
+	jsp6board
+set
+	hits = hits +1
+where
+	boardnum = #{boardNum}
+</update>
+
+<!-- 글 수정 -->
+<update id="updateContent" parameterType="board">
+update
+	jsp6board
+set
+	title = #{title}
+	, content = #{content}
+where 
+	boardnum = #{boardNum}
+	and
+	id = #{id}
+</update>
+
+<!-- 게시판 목록 출력 -->
+<select id="viewBoard" resultType="board">
+select 	
+	boardnum
+	, id
+	, title
+	, to_char(inputdate, 'mm/dd') inputdate
+	, hits
+from 
+	jsp6board
+order by 
+	boardnum desc
+</select>
+
+<!-- 글 읽기 -->
+<select id="viewContent" parameterType="int" resultType="board">
+select
+	boardnum
+	, id
+	, title
+	, content
+	, to_char(inputdate, 'mm/dd') inputdate
+	, hits
+from
+	jsp6board
+where boardnum = #{boardnum}
+</select>
+</mapper>
