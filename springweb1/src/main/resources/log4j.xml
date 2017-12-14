@@ -11,8 +11,8 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="kr.co.abc2">
-		<level value="debug" />
+	<logger name="com.sesec.web1">
+		<level value="info" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
