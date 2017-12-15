@@ -24,6 +24,10 @@
 <P>  The time on the server is ${serverTime}. </P>
 <h1> 어서오시오 여행자여 </h1>
 
+<p><a href="output">Model을 이용한 출력</a></p>
+<p><a href="input">사용자 입력 테이터 받기</a></p>
+<p><a href="calc">실습</a></p>
+
 <form method="post" action="">
 	<table>
 		<tr>
