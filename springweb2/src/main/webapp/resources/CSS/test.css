@@ -1,0 +1,10 @@
+@CHARSET "UTF-8";
+
+p {
+	color: salmon;
+}
+
+.testTable {
+	border: 1px lightGrey dotted;
+	margin: auto;
+}
