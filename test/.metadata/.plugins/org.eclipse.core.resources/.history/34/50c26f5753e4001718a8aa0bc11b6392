@@ -1,0 +1,15 @@
+package test;
+
+import java.util.Random;
+
+public class Exercise6 {
+
+	public static void main(String[] args) {
+		//1~100사이의 임의의 값을 얻어 answer에 저장한다
+		Random r = new Random();
+		int answer = r.nextInt(100);
+		System.out.println(answer);
+
+	}
+
+}

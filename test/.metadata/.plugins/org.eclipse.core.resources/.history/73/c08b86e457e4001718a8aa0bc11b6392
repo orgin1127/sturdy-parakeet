@@ -1,0 +1,12 @@
+package test;
+
+public class Exercise1 {
+
+	public static void main(String[] args) {
+		int num = 333;
+		
+		int num2 = num-Math.decrementExact(num);
+		System.out.println(num2);
+	}
+
+}

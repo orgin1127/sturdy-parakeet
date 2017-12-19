@@ -1,0 +1,24 @@
+package test;
+
+import java.util.Random;
+
+public class Exercise1 {
+
+	public static void main(String[] args) {
+		int num = 333;
+		
+		int num2 = (num/10)*10;
+		System.out.println(num2+1);
+		Random r = new Random();
+		while(true) {
+			
+			int answer = r.nextInt(100);
+			
+			if (answer == 0) {
+				System.out.println("0¿Ã¥Ÿ");
+				break;
+			}
+		}
+	}
+
+}

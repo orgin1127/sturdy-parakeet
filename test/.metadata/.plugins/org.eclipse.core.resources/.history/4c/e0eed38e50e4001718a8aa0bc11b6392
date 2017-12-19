@@ -1,0 +1,11 @@
+package test;
+
+public class Exercise1 {
+
+	public static void main(String[] args) {
+		int num = 333;
+		int num2 = Math.abs(num);
+		System.out.println(num2);
+	}
+
+}
