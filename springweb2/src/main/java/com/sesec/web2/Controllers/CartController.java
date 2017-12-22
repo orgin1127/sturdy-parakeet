@@ -29,7 +29,8 @@ public class CartController {
 		
 		int num = 0;
 		int price = 0;
-		String cartList = "아메리카노";
+		int total = 0;
+		
 		if (session.getAttribute("cartList") == null) {
 			switch (name) {
 				case "아메리카노":
@@ -58,7 +59,11 @@ public class CartController {
 			ProductVO vo = new ProductVO(num, name, price, cnt);
 			ArrayList<ProductVO> list = new ArrayList<>();
 			list.add(vo);
+			for (int y = 0; y < list.size(); y++) {
+				total += (list.get(y).getPrice()*list.get(y).getCnt());
+			}
 			session.setAttribute("cartList", list);
+			session.setAttribute("total", total);
 		}
 		
 		else {
@@ -97,8 +102,12 @@ public class CartController {
 			
 			ProductVO vo = new ProductVO(num, name, price, cnt);
 			list.add(vo);
-		
+			
+			for (int y = 0; y < list.size(); y++) {
+				total += (list.get(y).getPrice()*list.get(y).getCnt());
+			}
 			session.setAttribute("cartList", list);
+			session.setAttribute("total", total);
 		}
 		
 		return "./JSP/cartPage";
@@ -108,6 +117,23 @@ public class CartController {
 	@RequestMapping(value="/cart", method = RequestMethod.GET)
 	public String cart() {
 		//JSP로 포워딩하여 세션의 장바구니 정보 모두 출력
+		return "./JSP/cartPage";
+	}
+	
+	//장바구니 물건 삭제
+	@RequestMapping(value="/cartDelete", method = RequestMethod.GET)
+	public String deleteCart(int num, HttpSession session) {
+		logger.debug("delete phase");
+		
+		ArrayList<ProductVO> list = (ArrayList<ProductVO>) session.getAttribute("cartList");
+		
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getNum() == num) {
+				list.remove(i);
+				session.setAttribute("cartList", list);
+			}
+		}
+		
 		return "./JSP/cartPage";
 	}
 }

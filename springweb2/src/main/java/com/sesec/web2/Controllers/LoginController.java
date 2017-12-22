@@ -23,14 +23,15 @@ public class LoginController {
 	//로그인 처리하고 메인화면으로 이동
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String loginStart (HttpSession session, String id, String password, String name) {
-		logger.debug("login Success");
 		//if-else 문으로 아이디 비밀번호 확인해 세션에 저장하고 메인으로
 		if (id.equals("testacc1") && password.equals("1231")) {
+			logger.debug("login Success");
 			session.setAttribute("id", id);
 			session.setAttribute("name", name);
-			return "redirect:home";
+			return "redirect:/";
 		}
 		else {
+			logger.debug("login Fail");
 			return "./JSP/loginPage";
 		}
 		//틀릴경우 로그인 폼으로 되돌아감

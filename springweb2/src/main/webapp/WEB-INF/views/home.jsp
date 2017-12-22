@@ -35,11 +35,16 @@
 <p><a href="./session3">세션 사용 연습3 (세션 정보 삭제)</a></p>
 
 <h2>* 로그인 연습</h2>
+<c:if test="${sessionScope.id == null}">
 <p><a href="./login">로그인</a></p>
+</c:if>
+<c:if test="${sessionScope.id != null}">
 <p><a href="./logout">로그아웃</a></p>
-
+</c:if>
+<c:if test="${sessionScope.id != null}">
 <h2>* 장바구니 연습</h2>
 <p><a href="./goCart">장바구니에 상품 담기</a></p>
 <p><a href="./cart">장바구니 보기</a></p>
+</c:if>
 </body>
 </html>

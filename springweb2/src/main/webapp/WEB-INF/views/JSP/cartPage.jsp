@@ -25,9 +25,13 @@
 </form>
 <br>
 <c:forEach var="vo" items="${sessionScope.cartList}">
-	${vo}<br>
+	<p>${vo}
+	<a href="cartDelete?num=${vo.num}">카트에서 삭제하기</a></p>
 </c:forEach>
 <br>
+<c:if test="${sessionScope.cartList != null }">
+	합계는 : ${sessionScope.total}
+</c:if>
 <p><a href="<c:url value="/" />">메인으로 가기</a></p>
 </body>
 </html>
