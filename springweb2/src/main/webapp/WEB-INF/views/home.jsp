@@ -46,5 +46,13 @@
 <p><a href="./goCart">장바구니에 상품 담기</a></p>
 <p><a href="./cart">장바구니 보기</a></p>
 </c:if>
+<h2>* 세션 사용 2</h2>
+<p><a href="./step1">세션 사용2</a></p>
+
+<h2>* 쿠키 사용</h2>
+<p><a href="./csave">쿠키 저장</a></p>
+<p><a href="./cdelete">쿠키 삭제</a></p>
+<p><a href="./cread1">쿠키 읽기1</a></p>
+<p><a href="./cread2">쿠키 읽기2</a></p>
 </body>
 </html>
