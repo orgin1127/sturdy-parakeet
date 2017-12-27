@@ -18,5 +18,34 @@
 <h1>[ web3 예제 - Mybatis 사용 ]</h1>
 
 <p><a href="./join">회원가입 예제 (DB연동)</a><p>
+<p><a href="./showPersonList">전체 회원 목록</a></p>
+
+<p>이름 검색</p>
+<form action="searchPerson" method="post">
+검색할 이름 <input type="text" name="name">
+			<input type="submit" value="검색">
+</form>
+
+<p>삭제</p>
+<form action="deletePerson" method="post">
+삭제할 이름 <input type="text" name="name">
+			<input type="submit" value="삭제">
+</form>
+
+<c:if test="${searchList != null}">
+	<p>
+		<c:forEach var="p" items="${searchList}">
+			${p}<br>
+		</c:forEach>
+	</p>
+</c:if>
+<c:if test="${personList != null}">
+	<p>
+		<c:forEach var="p" items="${personList}">
+			${p}<br>
+		</c:forEach>
+	</p>
+</c:if>
+
 </body>
 </html>

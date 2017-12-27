@@ -12,6 +12,10 @@ public class Person {
 	
 	public Person() {}
 	
+	public Person(String name) {
+		this.name = name;
+	}
+	
 	public Person(String name, int age) {
 		this.name = name;
 		this.age = age;
@@ -19,7 +23,7 @@ public class Person {
 	
 	@Override
 	public String toString() {
-		return "Person [name=" + name + ", age=" + age + "]";
+		return "이름 : " + name + ", 나이 : " + age;
 	}
 	
 	@Override
