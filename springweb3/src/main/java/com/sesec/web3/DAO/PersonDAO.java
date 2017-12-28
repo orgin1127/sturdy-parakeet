@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.sesec.web3.vo.Person;
 
 @Repository
-public class PersonDAO { // = PersonDAO personDAO = new PersonDAO(); 와 같다. @Repository어노테이션은 맨 앞을 소문자화 해서
+public class PersonDAO { //PersonDAO personDAO = new PersonDAO(); 와 같다. @Repository어노테이션은 맨 앞을 소문자화 해서
 						//객체를 만들어 준비해놓는다
 	
 	@Autowired

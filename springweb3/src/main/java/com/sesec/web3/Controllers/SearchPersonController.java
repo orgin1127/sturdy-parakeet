@@ -23,7 +23,6 @@ public class SearchPersonController {
 	
 	@RequestMapping(value = "/showPersonList", method = RequestMethod.GET)
 	public String showPersonList(Model model) {
-		//Person타입의 ArrayList를 만들면서 그 안의 값을 personDAO가 가지고 있는 메소드 showPersonList에서 가져와서 넣어라
 		ArrayList<Person> list = personDAO.showPersonList();
 		model.addAttribute("personList", list);
 		return "home";

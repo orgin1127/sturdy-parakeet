@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 글 정보 처리 SQL -->
+<mapper namespace="com.sesoc.web4.DAO.BbsMapper">
+
+<!-- 글 정보 저장 -->
+	<insert id="writeBBS" parameterType="BbsVO">
+		insert into web4bbs
+							(bbsnum
+							, name
+							, password
+							, content) 
+					values 
+							(web4bbs_seq.nextVal
+							, #{name}
+							, #{password}
+							, #{content}) 
+	</insert>
+<!-- 글 리스트 출력 -->
+	<select id="showBBSList" resultType="BbsVO">
+		select * from web4bbs
+		order by bbsnum desc
+	</select>
+<!-- 글 삭제 -->
+	<delete id="deleteContent" parameterType="BbsVO">
+		delete from web4bbs
+		where 
+			bbsnum = #{bbsnum}
+			and 
+			password = #{password}
+	</delete>
+</mapper>
