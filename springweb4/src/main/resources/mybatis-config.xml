@@ -5,6 +5,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.sesoc.web4.vo.BbsVO" alias="BbsVO" />
+		<typeAlias type="com.sesoc.web4.vo.UserVO" alias="UserVO" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="web4bbsMapper.xml" />

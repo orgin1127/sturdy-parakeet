@@ -15,6 +15,14 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
+<c:if test="${afterLogin == null }">
+	<p><a href="regi"> [ REGISTRATION ] </a></p>
+	<P><a href="login"> [ LOG - IN ] </a></P>
+</c:if>
+<c:if test="${afterLogin != null }">
+	<p><a href="logout"> [ LOG - OUT ]</a></p>
+</c:if>
+
 <p><a href="./goBbs"> [ GO TO BBS ] </a>
 </body>
 </html>

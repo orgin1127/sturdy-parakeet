@@ -3,15 +3,15 @@ package com.sesoc.web4.vo;
 public class BbsVO {
 	
 	private int bbsnum;
-	private String name;
+	private String userID;
 	private String password;
 	private String content;
 	private String inputdate;
 	
 	public int getBbsnum() {return bbsnum;}
 	public void setBbsnum(int bbsnum) {this.bbsnum = bbsnum;}
-	public String getName() {return name;}
-	public void setName(String name) {this.name = name;}
+	public String getUserID() {return userID;}
+	public void setUserID(String userID) {this.userID = userID;}
 	public String getPassword() {return password;}
 	public void setPassword(String password) {this.password = password;}
 	public String getContent() {return content;}
@@ -19,30 +19,24 @@ public class BbsVO {
 	public String getInputdate() {return inputdate;}
 	public void setInputdate(String inputdate) {this.inputdate = inputdate;}
 	
-	public BbsVO() {
-	}
+	public BbsVO() {}
 	
-	public BbsVO(String name, String password, String content) {
-		this.name = name;
+	public BbsVO(String userID, String password, String content) {
+		this.userID = userID;
 		this.password = password;
 		this.content = content;
 	}
 	
-	public BbsVO(int bbsnum, String password) {
+	public BbsVO(int bbsnum, String userID, String password, String content, String inputdate) {
 		this.bbsnum = bbsnum;
-		this.password = password;
-	}
-	
-	public BbsVO(int bbsnum, String name, String password, String content, String inputdate) {
-		this.bbsnum = bbsnum;
-		this.name = name;
+		this.userID = userID;
 		this.password = password;
 		this.content = content;
 		this.inputdate = inputdate;
 	}
 	@Override
 	public String toString() {
-		return "BbsVO [bbsnum=" + bbsnum + ", name=" + name + ", password=" + password + ", content=" + content
+		return "BbsVO [bbsnum=" + bbsnum + ", userID=" + userID + ", password=" + password + ", content=" + content
 				+ ", inputdate=" + inputdate + "]";
 	}
 	@Override
@@ -52,8 +46,8 @@ public class BbsVO {
 		result = prime * result + bbsnum;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((inputdate == null) ? 0 : inputdate.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((userID == null) ? 0 : userID.hashCode());
 		return result;
 	}
 	@Override
@@ -77,17 +71,17 @@ public class BbsVO {
 				return false;
 		} else if (!inputdate.equals(other.inputdate))
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (userID == null) {
+			if (other.userID != null)
+				return false;
+		} else if (!userID.equals(other.userID))
+			return false;
 		return true;
 	}
-
+	
 }

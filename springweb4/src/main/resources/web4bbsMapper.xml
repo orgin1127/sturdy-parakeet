@@ -10,14 +10,25 @@
 	<insert id="writeBBS" parameterType="BbsVO">
 		insert into web4bbs
 							(bbsnum
-							, name
+							, userID
 							, password
 							, content) 
 					values 
 							(web4bbs_seq.nextVal
-							, #{name}
+							, #{userID}
 							, #{password}
 							, #{content}) 
+	</insert>
+<!-- 회원 정보 저장 -->
+	<insert id="insertUser" parameterType="UserVO">
+		insert into web4user
+							(userNum
+							, userID
+							, userPassword)
+					values
+							(web4user_seq.nextVal
+							, #{userID}
+							, #{userPassword})
 	</insert>
 <!-- 글 리스트 출력 -->
 	<select id="showBBSList" resultType="BbsVO">
@@ -32,4 +43,17 @@
 			and 
 			password = #{password}
 	</delete>
+<!-- 유저 검색 -->
+	<select id="searchUser" parameterType="String" resultType="UserVO">
+		select * from web4user
+		where userID = #{userID}
+	</select>
+<!-- Login -->
+	<select id="login" parameterType="UserVO" resultType="UserVO">
+		select * from web4user
+		where 
+				userID = #{userID}
+				AND
+				userPassword = #{userPassword}
+	</select>
 </mapper>

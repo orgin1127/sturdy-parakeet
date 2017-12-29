@@ -55,7 +55,7 @@
 	<table>
 		<tr>
 			<td>이름</td>
-			<td><input type="text" name="name" id="name"></td>
+			<td><input type="text" name="userID" id="userID" value=${afterLogin.userID} readonly="readonly"></td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>

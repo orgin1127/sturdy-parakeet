@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sesoc.web4.vo.BbsVO;
+import com.sesoc.web4.vo.UserVO;
 
 @Repository
 public class BbsDAO {
@@ -29,5 +30,24 @@ public class BbsDAO {
 	public void deleteContent(BbsVO vo) {
 		BbsMapper bm = sqlSession.getMapper(BbsMapper.class);
 		bm.deleteContent(vo);
+	}
+	
+	public UserVO searchUser(String userID) {
+		UserVO vo = null;
+		BbsMapper bm = sqlSession.getMapper(BbsMapper.class);
+		vo = bm.searchUser(userID);
+		return vo;
+	}
+	
+	public void insertUser(UserVO vo) {
+		BbsMapper bm = sqlSession.getMapper(BbsMapper.class);
+		bm.insertUser(vo);
+	}
+	
+	public UserVO login(UserVO vo) {
+		BbsMapper bm = sqlSession.getMapper(BbsMapper.class);
+		UserVO afterVO = null;
+		afterVO = bm.login(vo);
+		return afterVO;
 	}
 }

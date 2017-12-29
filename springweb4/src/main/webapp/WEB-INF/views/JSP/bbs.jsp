@@ -19,13 +19,15 @@
 </head>
 <body>
 <p id="title"> [ B B S ] </p>
-<input type="button" onclick="goBBSForm()" value="글쓰기">
+<c:if test="${afterLogin != null}">
+	<input type="button" onclick="goBBSForm()" value="글쓰기">
+</c:if>
 
 <table>
 	<c:forEach var="list" items="${list}">
 		<tr>
 			<td>
-				작성자 : ${list.name}<br>
+				작성자 : ${list.userID}<br>
 				작성일 : ${list.inputdate}<br>
 				<pre>${list.content}</pre>
 				<form action="deleteContent" method="post">

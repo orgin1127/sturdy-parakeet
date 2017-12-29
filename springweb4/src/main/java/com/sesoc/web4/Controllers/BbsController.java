@@ -45,7 +45,7 @@ public class BbsController {
 		return "redirect:./goBbs";
 	}
 	
-	@RequestMapping(value = "deleteContent", method = RequestMethod.POST)
+	@RequestMapping(value = "deleteContent", method = RequestMethod.POST)    
 	public String deleteContent(BbsVO vo) {
 		logger.debug("deleteContent");
 		logger.debug(vo.toString());
