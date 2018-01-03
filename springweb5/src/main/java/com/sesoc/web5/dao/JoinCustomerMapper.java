@@ -7,4 +7,6 @@ public interface JoinCustomerMapper {
 	public int joinCustomer(Customer cu);
 	
 	public Customer searchCustomer(String custid);
+	
+	public Customer searchIDNo(String idno);
 }

@@ -31,4 +31,9 @@
 	select * from customer
 	where custid = #{custid}
 </select>
+<!-- 식별번호 검색 -->
+<select id="searchIDNo" parameterType="String" resultType="Customer">
+	select * from customer
+	where idno = #{idno}
+</select>
 </mapper>

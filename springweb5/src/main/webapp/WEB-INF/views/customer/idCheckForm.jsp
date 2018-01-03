@@ -35,7 +35,7 @@
 		<p>사용 불가한 ID 입니다.</p>
 	</c:if>
 	<c:if test="${searchID == null }">
-		<p>사용 가능한 ID 입니다. ${afterSearch}</p>
+		<p>사용 가능한 ID 입니다.</p>
 		<p><input type="button" value="ID 사용하기" onclick="usethisID()"></p>
 	</c:if>
 </c:if>
