@@ -36,4 +36,16 @@ public class JoinDAO {
 		cu = jcm.searchIDNo(idno);
 		return cu;
 	}
+	
+	//정보수정
+	public boolean updateCustomerInfo(Customer cu) {
+		JoinCustomerMapper jcm = session.getMapper(JoinCustomerMapper.class);
+		boolean updateInfoResult = false;
+		if (jcm.updateCustomerInfo(cu) == 1) {
+			updateInfoResult = true;
+		}
+		return updateInfoResult;
+	}
+	
+	
 }

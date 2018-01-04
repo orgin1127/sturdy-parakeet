@@ -9,4 +9,6 @@ public interface JoinCustomerMapper {
 	public Customer searchCustomer(String custid);
 	
 	public Customer searchIDNo(String idno);
+	
+	public int updateCustomerInfo(Customer cu);
 }

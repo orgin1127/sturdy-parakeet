@@ -15,7 +15,7 @@ import com.sesoc.web5.dao.JoinDAO;
 import com.sesoc.web5.vo.Customer;
 
 @Controller
-@SessionAttributes({"cu", "passwordValid"})
+@SessionAttributes("cu")
 @RequestMapping("cust")
 public class CustomerJoinController {
 	Logger logger = LoggerFactory.getLogger(CustomerJoinController.class);

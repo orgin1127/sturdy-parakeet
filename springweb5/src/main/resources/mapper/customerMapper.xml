@@ -36,4 +36,15 @@
 	select * from customer
 	where idno = #{idno}
 </select>
+<!-- 회원정보 수정 -->
+<update id="updateCustomerInfo" parameterType="Customer">
+	update customer
+	set password = #{password}
+		, name = #{name}
+		, email = #{email}
+		, division = #{division}
+		, idno = #{idno}
+		, address = #{address}
+	where custid = #{custid}  
+</update>
 </mapper>
