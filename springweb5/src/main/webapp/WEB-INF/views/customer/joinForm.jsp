@@ -72,8 +72,8 @@
 				고객구분 : 
 			</td>
 			<td>
-				<input type="radio" id="division" name="division" value="personal">개인
-				<input type="radio" id="division" name="division" value="company">기업
+				<input type="radio" name="division" value="personal">개인
+				<input type="radio" name="division" value="company">기업
 			</td>
 		</tr>
 		<tr>

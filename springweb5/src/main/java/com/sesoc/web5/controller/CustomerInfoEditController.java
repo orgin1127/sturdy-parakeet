@@ -28,6 +28,9 @@ public class CustomerInfoEditController {
 	
 	@RequestMapping(value = "customerInfoEdit", method = RequestMethod.GET)
 	public String customerInfoEdit(Model model, HttpSession session) {
+		
+		
+		
 		logger.debug(session.getAttribute("CustomerID").toString());
 		logger.debug("수정폼으로 이동중");
 		Customer cu = dao.searchCustomer(session.getAttribute("CustomerID").toString());

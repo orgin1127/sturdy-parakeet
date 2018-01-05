@@ -14,19 +14,19 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<c:if test="${CustomerID !=null}">
-	<p>	환영합니다 ${ CustomerID}님</p>
+<c:if test="${sessionScope.CustomerID !=null}">
+	<p>	환영합니다 ${sessionScope.CustomerID}님</p>
 </c:if>
 <ul>
-	<c:if test="${CustomerID == null }">
+	<c:if test="${sessionScope.CustomerID == null }">
 		<li><a href="cust/joinForm">회원가입</a></li>
 		<li><a href="login">로그인</a></li>
 	</c:if>
-	<c:if test="${CustomerID != null}">
+	<c:if test="${sessionScope.CustomerID != null}">
 		<li><a href="logout">로그아웃</a></li>
 		<li><a href="customerInfoEdit">개인정보 수정</a></li>
 	</c:if>
-	<li><a href="">게시판</a></li>
+	<li><a href="board/viewBoard">게시판</a></li>
 </ul>
 </body>
 </html>

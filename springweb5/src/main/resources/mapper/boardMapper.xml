@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sesoc.web5.dao.BoardMapper">
+<!-- 글 등록 -->
+<insert id="writeCustomerBoard" parameterType="Board">
+	insert into 
+				customerboard
+							( boardnum
+							, custid
+							, title
+							, content
+							<if test="originalFile != null and savedFile != null">
+							, originalFile
+							, savedFile
+							</if>
+							, ip )
+				values 		( customerboard_seq.nextVal
+							, #{custid}
+							, #{title}
+							, #{content}
+							<if test="originalFile != null and savedFile != null">
+							, #{originalFile}
+							, #{savedFile}
+							</if>
+							, #{ip} )
+</insert>
+</mapper>

@@ -46,7 +46,7 @@ public class CustomerLoginController {
 		}
 		else {
 			session.setAttribute("CustomerID", loginedCU.getCustid());
-			session.setAttribute("CustomeName", loginedCU.getName());
+			session.setAttribute("CustomerName", loginedCU.getName());
 			return "redirect:/";
 		}
 		//id, 비밀번호가 맞으면 세션에 id, 이름 저장 후 메인으로 redirect
