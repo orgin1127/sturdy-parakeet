@@ -26,4 +26,35 @@
 							</if>
 							, #{ip} )
 </insert>
+<!-- 조회수 증가 -->
+<update id="updateContentHits" parameterType="int">
+	update customerboard set hits = hits + 1
+	where boardnum = #{boardnum} 
+</update>
+<!-- 글 수정 -->
+<update id="updateBoardContent" parameterType="Board">
+	update customerboard set title = #{title}, content = #{content}
+	where boardnum = #{boardnum} and custid = #{custid}
+</update>
+<!-- 글 삭제 -->
+<delete id="deleteBoardContent" parameterType="Board">
+	delete customerboard 
+	where boardnum = #{boardnum} and custid = #{custid}
+</delete>
+<!-- 글 목록 보기 -->
+<select id="viewBoardList" resultType="Board">
+	select 
+			title
+			, boardnum
+		 	, content
+		 	, custid
+		 	, hits
+		 	, to_char(inputdate, 'yyyy-mm-dd') inputdate
+		 	from customerboard order by boardnum desc
+</select>
+<!-- 글 내용 보기 -->
+<select id="viewBoardContent" parameterType="int" resultType="Board">
+	select * from customerboard 
+	where boardnum = #{boardnum}
+</select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.sesoc.web5.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,6 +22,7 @@ import com.sesoc.web5.vo.Customer;
 
 @Controller
 @RequestMapping("board")
+@SessionAttributes("boardnum")
 public class BoardController {
 	Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
@@ -32,8 +35,11 @@ public class BoardController {
 	
 	//게시판 글 목록 보기
 	@RequestMapping(value = "viewBoard", method = RequestMethod.GET)
-	public String viewCustomerBoard() {
+	public String viewCustomerBoard(Model model) {
 		logger.debug("게시판으로 이동");
+		ArrayList<Board> list = null;
+		list = boardDAO.viewBoardList();
+		model.addAttribute("viewList", list);
 		return "/board/customerBoardForm";
 	}
 	
@@ -67,4 +73,71 @@ public class BoardController {
 		return "redirect:viewBoard";
 	}
 	
+	//게시판 글 읽기
+	@RequestMapping(value = "viewBoardContent", method = RequestMethod.GET)
+	public String viewBoardContent(int boardnum, Model model) {
+		Board bo = null;
+		bo = boardDAO.viewBoardContent(boardnum);
+		if (bo != null) {
+			boardDAO.updateContentHits(boardnum);
+		}
+		model.addAttribute("boardContent", bo);
+		return "board/customerBoardContentViewForm";
+	}
+	
+	//글 삭제
+	@RequestMapping(value = "deleteBoardContent", method = RequestMethod.GET)
+	public String deleteBoardContent(String boardnum, HttpSession session) {
+		try {
+			int bnum = 0;
+			bnum = Integer.parseInt(boardnum);
+			String custid =(String) session.getAttribute("CustomerID");
+			if (custid != null) {
+				Board bo = new Board(bnum,custid);
+				boardDAO.deleteBoardContent(bo);			
+			}
+		}
+		catch (Exception e) {
+			return "redirect:viewBoard";
+		}
+		return "redirect:viewBoard";
+	}
+	//글 수정 폼으로 이동
+	@RequestMapping(value = "editBoardContent", method = RequestMethod.GET)
+	public String editBoardContent(String boardnum, Model model) {
+		try {
+			int bnum = 0;
+			bnum = Integer.parseInt(boardnum);
+			Board bo = null;
+			bo = boardDAO.viewBoardContent(bnum);
+			model.addAttribute("beforEditContent", bo);
+			model.addAttribute("boardnum", bnum);
+		}
+		catch (Exception e) {
+			return "redirect:viewBoard";
+		}
+		return "board/customerBoardContentEditForm";
+	}
+	
+	
+	//글 수정
+	@RequestMapping(value = "editBoardContent", method = RequestMethod.POST)
+	public String editBoardContent(HttpSession session, Model model, HttpServletRequest request
+									, @ModelAttribute("boardnum") int boardnum
+									, String title, String content) {
+		String errMSG = "";
+		String custid = (String)session.getAttribute("CustomerID");
+		errMSG = bv.boardValidateCheck(title, content);
+		if (errMSG != "") {
+			logger.debug("수정 흐름확인");
+			model.addAttribute("errMSG", errMSG);
+			model.addAttribute("title", title);
+			model.addAttribute("content", content);
+			return "board/customerBoardContentEditForm";
+		}
+		Board bo = new Board(boardnum, custid, title, content);
+		logger.debug(bo.toString());
+		boardDAO.updateBoardContent(bo);
+		return "redirect:viewBoard";
+	}
 }

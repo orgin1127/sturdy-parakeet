@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+	.boardForm {
+		border: 1px solid white;
+	}
+	
+	th {
+		background-color: lightgrey;
+		text-align: auto;
+		border: 0.5px solid white;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	
+	td {
+		background-color: #E6E6FA;
+		text-align: center;
+		border : 0.5px solid white;
+	}
+	td .title {
+		text-align: auto;
+	}

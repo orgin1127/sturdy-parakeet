@@ -33,6 +33,18 @@ public class Board {
 	
 	public Board() {}
 	
+	public Board(int boardnum, String custid) {
+		this.boardnum = boardnum;
+		this.custid = custid;
+	}
+	
+	public Board(int boardnum, String custid, String title, String content) {
+		this.boardnum = boardnum;
+		this.custid = custid;
+		this.title = title;
+		this.content = content;
+	}
+	
 	public Board(String custid, String title, String content, String ip) {
 		this.custid = custid;
 		this.title = title;
