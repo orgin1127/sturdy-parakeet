@@ -1,6 +1,7 @@
 package com.sesoc.web5.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,10 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.sesoc.web5.dao.BoardDAO;
 import com.sesoc.web5.dao.JoinDAO;
+import com.sesoc.web5.dao.PageNavigator;
 import com.sesoc.web5.vo.Board;
 import com.sesoc.web5.vo.Customer;
 
@@ -35,11 +38,37 @@ public class BoardController {
 	
 	//게시판 글 목록 보기
 	@RequestMapping(value = "viewBoard", method = RequestMethod.GET)
-	public String viewCustomerBoard(Model model) {
-		logger.debug("게시판으로 이동");
+	public String viewCustomerBoard(Model model
+									, @RequestParam(value="searchText", defaultValue="")String searchText
+									, @RequestParam(value="page", defaultValue="1") int page
+									, @RequestParam(value="searchType", defaultValue="") String searchType) {
+		logger.debug("검색어 : " + searchText);
+		logger.debug("페이지번호 : " + page);
+		logger.debug("검색방법 : "+searchType);
+		
 		ArrayList<Board> list = null;
-		list = boardDAO.viewBoardList();
+		HashMap<String, String> searchMap = new HashMap<>();
+		searchMap.put("searchText", searchText);
+		searchMap.put("searchType", searchType);
+		
+		//전체 글 개수
+		int countContent = boardDAO.countBoardContent(searchMap);
+		logger.debug("글개수: {}", countContent);
+		
+		//PageNavigator객체를 만들면서 
+		PageNavigator pn = new PageNavigator(10, 5, page, countContent);
+		
+		//검색어, 현재 페이지 첫 글의 위치값, 페이지당 글 수를 전달하여 DAO에서 ROW BOUND에 삽입
+		//startRecord = 현재 페이지 기준으로 첫 글의 위치 값
+		//countPerPage = 페이지 당 출력 글 개수
+		list = boardDAO.viewBoardList(searchMap,pn.getStartRecord(), pn.getCountPerPage());
+		
+		//페이지 정보 객체와 글 목록, 검색어를 모델에 저장
 		model.addAttribute("viewList", list);
+		model.addAttribute("searchText", searchText);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("pn", pn);
+		logger.debug("게시판으로 이동");
 		return "/board/customerBoardForm";
 	}
 	
@@ -94,7 +123,7 @@ public class BoardController {
 			String custid =(String) session.getAttribute("CustomerID");
 			if (custid != null) {
 				Board bo = new Board(bnum,custid);
-				boardDAO.deleteBoardContent(bo);			
+				boardDAO.deleteBoardContent(bo);
 			}
 		}
 		catch (Exception e) {

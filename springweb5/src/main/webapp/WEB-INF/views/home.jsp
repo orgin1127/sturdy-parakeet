@@ -7,6 +7,11 @@
 <html>
 <head>
 	<title>Home</title>
+<script>
+	function check() {
+		
+	}
+</script>
 </head>
 <body>
 <h1>
@@ -16,6 +21,11 @@
 <P>  The time on the server is ${serverTime}. </P>
 <c:if test="${sessionScope.CustomerID !=null}">
 	<p>	환영합니다 ${sessionScope.CustomerID}님</p>
+</c:if>
+<c:if test="${sessionScope.CustomerID !=null && sessionScope.CustomerID == 'aaa'}">
+<script>
+	alert('안녕하세요 선생님');
+</script>
 </c:if>
 <ul>
 	<c:if test="${sessionScope.CustomerID == null }">

@@ -1,7 +1,9 @@
 package com.sesoc.web5.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +27,12 @@ public class BoardDAO {
 		}
 	}
 	
-	public ArrayList<Board> viewBoardList() {
+	public ArrayList<Board> viewBoardList(HashMap<String, String> searchMap, int start, int cnt) {
 		BoardMapper bm = session.getMapper(BoardMapper.class);
 		ArrayList<Board> list = null;
-		list = bm.viewBoardList();
+		//row bounds객체에 전달받은 값을 넣는다
+		RowBounds rb = new RowBounds(start, cnt);
+		list = bm.viewBoardList(searchMap, rb);
 		return list;
 	}
 	
@@ -56,6 +60,13 @@ public class BoardDAO {
 		if(bm.updateBoardContent(bo) == 1) {
 			logger.debug("수정성공");
 		}
+	}
+	
+	public int countBoardContent(HashMap<String, String> searchMap) {
+		BoardMapper bm = session.getMapper(BoardMapper.class);
+		int count = 0;
+		count = bm.countBoardContent(searchMap);
+		return count;
 	}
 	
 }

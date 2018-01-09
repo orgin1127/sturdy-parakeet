@@ -23,7 +23,7 @@
 </head>
 <body>
 <h1>[ 회 원 가 입 ]</h1>
-<form action="joinForm" method="post">
+<form action="joinForm" method="post"  onsubmit="emailFusion()">
 	<table>
 		<tr>
 			<td>
@@ -58,7 +58,7 @@
 			<td>
 				<input type="hidden" id="email" name="email">
 				<input type="text" id="emailHead">@
-				<select name="emailFoot" id="emailFoot" onchange="emailFusion()">
+				<select name="emailFoot" id="emailFoot">
 					<option value="blank" selected="selected">=주소를 선택하여 주세요=</option>
 					<option>gmail.com</option>
 					<option>naver.com</option>

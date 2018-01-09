@@ -17,9 +17,18 @@
 			location.href="deleteBoardContent?boardnum="+boardnum
 		}
 	}
+	
+	function pagingFormSubmit(pnum) {
+		alert(pnum);
+		var pagingForm = document.getElementById('pagingForm');
+		var page = document.getElementById('page');
+		page.value = pnum; // 폼에 요청할 페이지번호 저장
+		pagingForm.submit(); //폼 전송
+	}
 </script>
 <body>
 <h1> [ 게 시 판 ] </h1>
+<p>전체 글 개수 : ${pn.totalRecordsCount}</p>
 <c:if test="${sessionScope.CustomerID != null}">
 	<p><a href="writeCustomerBoard"><input type="button" value="글쓰기"></a></p>
 </c:if>
@@ -63,5 +72,36 @@
 	</c:forEach>
 </table>
 </c:if>
+
+<div id="navigator">
+<!-- 페이지 이동 부분 -->                      
+	<a href="javascript:pagingFormSubmit(${pn.currentPage - pn.pagePerGroup})">◁◁ </a> &nbsp;&nbsp;
+	<a href="javascript:pagingFormSubmit(${pn.currentPage - 1})">◀</a> &nbsp;&nbsp;
+
+	<c:forEach var="counter" begin="${pn.startPageGroup}" end="${pn.endPageGroup}"> 
+		<c:if test="${counter == pn.currentPage}"><b></c:if>
+			<a href="javascript:pagingFormSubmit(${counter})">${counter}</a>&nbsp;
+		<c:if test="${counter == pn.currentPage}"></b></c:if>
+	</c:forEach>
+	&nbsp;&nbsp;
+	<a href="javascript:pagingFormSubmit(${pn.currentPage + 1})">▶</a> &nbsp;&nbsp;
+	<a href="javascript:pagingFormSubmit(${pn.currentPage + pn.pagePerGroup})">▷▷</a>
+
+<!-- /페이지 이동 끝 -->                      
+
+<form id="pagingForm" method="get" action="viewBoard">
+	<input type="hidden" name="page" id="page">
+	<select name="searchType">
+		<option value="" <c:if test="${searchType == '' }"> selected="selected" </c:if>>==검색방법을 선택하여 주세요==</option>
+		<option value="title" <c:if test="${searchType == 'title'}"> selected="selected" </c:if>>제목</option>
+		<option value="custid" <c:if test="${searchType == 'custid'}"> selected="selected" </c:if>>글쓴이</option>
+		<option value="content" <c:if test="${searchType == 'content'}"> selected="selected" </c:if>>내용</option>
+		<option value="titleAndID" <c:if test="${searchType == 'titleAndId'}"> selected="selected" </c:if>>제목 & 글쓴이</option>
+	</select>
+	<input type="text" name="searchText" value="${searchText}">
+	<input type="button" onclick="pagingFormSubmit(1)" value="검색">
+</form>
+</div>
+
 </body>
 </html>

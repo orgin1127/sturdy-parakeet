@@ -16,7 +16,8 @@
 							, savedFile
 							</if>
 							, ip )
-				values 		( customerboard_seq.nextVal
+				values 		
+							( customerboard_seq.nextVal
 							, #{custid}
 							, #{title}
 							, #{content}
@@ -42,19 +43,67 @@
 	where boardnum = #{boardnum} and custid = #{custid}
 </delete>
 <!-- 글 목록 보기 -->
-<select id="viewBoardList" resultType="Board">
+<select id="viewBoardList" parameterType="Hashmap" resultType="Board">
 	select 
-			title
-			, boardnum
-		 	, content
-		 	, custid
-		 	, hits
-		 	, to_char(inputdate, 'yyyy-mm-dd') inputdate
-		 	from customerboard order by boardnum desc
+		title
+		, boardnum
+		, content
+		, custid
+		, hits
+		, to_char(inputdate, 'yyyy-mm-dd') inputdate
+	from 
+		customerboard
+	<!--
+	 	단일 parameter가 넘어왔을때 직접 호출할 이름을 지칭하지 못하므로 
+		넘어오는 하나의 파라메터를 지칭하는 _parameter로 부른다. (자료형 상관x)
+	-->
+	<if test="searchText != null and searchType == 'title'"> 
+	where
+		lower(title) like '%'|| lower(#{searchText}) ||'%'
+	</if>
+	<if test="searchText != null and searchType == 'custid'"> 
+	where
+		lower(custid) like '%'|| lower#{searchText}) ||'%'
+	</if>
+	<if test="searchText != null and searchType == 'content'"> 
+	where
+		lower(content) like '%'|| lower(#{searchText}) ||'%'
+	</if>
+	<if test="searchText != null and searchType == 'titleAndID'"> 
+	where
+		lower(title) like '%'|| lower(#{searchText}) ||'%' 
+			OR
+		lower(custid) like '%'||lower(#{searchText}) ||'%' 
+	</if>
+	order by boardnum desc
 </select>
 <!-- 글 내용 보기 -->
 <select id="viewBoardContent" parameterType="int" resultType="Board">
 	select * from customerboard 
 	where boardnum = #{boardnum}
+</select>
+
+<!-- 전체 글 갯수(검색 대응) -->
+<select id="countBoardContent" parameterType="Hashmap" resultType="int">
+	select count(*)
+	from customerboard
+	<if test="searchText != null and searchType == 'title'"> 
+	where
+		lower(title) like '%'|| lower(#{searchText}) ||'%'
+	</if>
+	<if test="searchText != null and searchType == 'custid'"> 
+	where
+		lower(custid) like '%'|| lower#{searchText}) ||'%'
+	</if>
+	<if test="searchText != null and searchType == 'content'"> 
+	where
+		lower(content) like '%'|| lower(#{searchText}) ||'%'
+	</if>
+	<if test="searchText != null and searchType == 'titleAndID'"> 
+	where
+		lower(title) like '%'|| lower(#{searchText}) ||'%' 
+			OR
+		lower(custid) like '%'||lower(#{searchText}) ||'%' 
+	</if>
 </select>
 </mapper>
