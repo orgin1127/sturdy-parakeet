@@ -34,7 +34,14 @@
 </update>
 <!-- 글 수정 -->
 <update id="updateBoardContent" parameterType="Board">
-	update customerboard set title = #{title}, content = #{content}
+	update customerboard 
+	set 
+		title = #{title}
+		, content = #{content}
+		<if test="originalFile != null and savedFile != null">
+		, originalFile = #{originalFile}
+		, savedFile = #{savedFile}
+		</if>
 	where boardnum = #{boardnum} and custid = #{custid}
 </update>
 <!-- 글 삭제 -->
@@ -51,6 +58,9 @@
 		, custid
 		, hits
 		, to_char(inputdate, 'yyyy-mm-dd') inputdate
+		, originalFile
+		, savedFile
+		, (select name from customer where customerboard.custid = customer.CUSTID ) name
 	from 
 		customerboard
 	<!--
@@ -63,7 +73,7 @@
 	</if>
 	<if test="searchText != null and searchType == 'custid'"> 
 	where
-		lower(custid) like '%'|| lower#{searchText}) ||'%'
+		lower(custid) like '%'|| lower(#{searchText}) ||'%'
 	</if>
 	<if test="searchText != null and searchType == 'content'"> 
 	where
@@ -93,11 +103,11 @@
 	</if>
 	<if test="searchText != null and searchType == 'custid'"> 
 	where
-		lower(custid) like '%'|| lower#{searchText}) ||'%'
+		lower(custid) like '%'|| lower(#{searchText}) ||'%'
 	</if>
 	<if test="searchText != null and searchType == 'content'"> 
 	where
-		lower(content) like '%'|| lower(#{searchText}) ||'%'
+		lower(content) like '%'||lower(#{searchText}) ||'%'
 	</if>
 	<if test="searchText != null and searchType == 'titleAndID'"> 
 	where
@@ -105,5 +115,13 @@
 			OR
 		lower(custid) like '%'||lower(#{searchText}) ||'%' 
 	</if>
+</select>
+<!-- 첨부파일 삭제를 위한 글 검색 -->
+<select id="searchForDeleteFile" parameterType="Board" resultType="Board">
+	select * from customerboard
+	where
+		boardnum = #{boardnum}
+		and
+		custid = #{custid}
 </select>
 </mapper>

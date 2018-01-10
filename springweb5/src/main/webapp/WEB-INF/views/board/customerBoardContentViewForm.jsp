@@ -43,6 +43,14 @@
 		</td>
 	</tr>
 </table>
+<c:if test="${boardContent.originalFile != null}">
+첨부파일 : 
+<a href="downloadFile?boardnum=${boardContent.boardnum}&savedFile=${boardContent.savedFile}">
+${boardContent.originalFile}</a><br>
+</c:if>
+<c:if test="${boardContent.originalFile == null}">
+첨부파일 : 없음<br>
+</c:if>
 <c:if test="${boardContent.custid == sessionScope.CustomerID}">
 <a href="editBoardContent?boardnum=${boardContent.boardnum}">수정</a>
 <a href="javascript:deleteCheck(${boardContent.boardnum})">삭제</a>

@@ -58,9 +58,12 @@
 			</td>
 			<td class="title">
 				<a href="viewBoardContent?boardnum=${boardList.boardnum}">${boardList.title}</a>
+				<c:if test="${boardList.savedFile != null && boardList.originalFile != null}">
+					<img src="<c:url value="/resources/image/attachedFile.png" />  " height="20" width="20">
+				</c:if>
 			</td>
 			<td>
-				${boardList.custid}
+				${boardList.custid}(${boardList.name })
 			</td>
 			<td>
 				${boardList.inputdate}

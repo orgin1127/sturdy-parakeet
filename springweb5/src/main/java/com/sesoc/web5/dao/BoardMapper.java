@@ -23,4 +23,5 @@ public interface BoardMapper {
 	
 	public int updateBoardContent(Board bo);
 	
+	public Board searchForDeleteFile(Board bo);
 }

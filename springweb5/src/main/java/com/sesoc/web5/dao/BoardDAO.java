@@ -20,6 +20,7 @@ public class BoardDAO {
 	@Autowired
 	SqlSession session;
 	
+	//글쓰기
 	public void writeCustomerBoard(Board bo) {
 		BoardMapper bm = session.getMapper(BoardMapper.class);
 		if (bm.writeCustomerBoard(bo) ==1) {
@@ -27,6 +28,7 @@ public class BoardDAO {
 		}
 	}
 	
+	//글 목록 검색
 	public ArrayList<Board> viewBoardList(HashMap<String, String> searchMap, int start, int cnt) {
 		BoardMapper bm = session.getMapper(BoardMapper.class);
 		ArrayList<Board> list = null;
@@ -36,6 +38,7 @@ public class BoardDAO {
 		return list;
 	}
 	
+	//글 읽기
 	public Board viewBoardContent(int boardnum) {
 		BoardMapper bm = session.getMapper(BoardMapper.class);
 		Board bo = null;
@@ -43,11 +46,13 @@ public class BoardDAO {
 		return bo;
 	}
 	
+	//조회수
 	public void updateContentHits(int boardnum) {
 		BoardMapper bm = session.getMapper(BoardMapper.class);
 		bm.updateContentHits(boardnum);
 	}
 	
+	//글 삭제
 	public void deleteBoardContent(Board bo) {
 		BoardMapper bm = session.getMapper(BoardMapper.class);
 		if (bm.deleteBoardContent(bo) == 1) {
@@ -55,6 +60,7 @@ public class BoardDAO {
 		}
 	}
 	
+	//글 수정
 	public void updateBoardContent(Board bo) {
 		BoardMapper bm = session.getMapper(BoardMapper.class);
 		if(bm.updateBoardContent(bo) == 1) {
@@ -62,11 +68,19 @@ public class BoardDAO {
 		}
 	}
 	
+	//페이징
 	public int countBoardContent(HashMap<String, String> searchMap) {
 		BoardMapper bm = session.getMapper(BoardMapper.class);
 		int count = 0;
 		count = bm.countBoardContent(searchMap);
 		return count;
+	}
+	
+	//첨부파일 삭제를 위한 글 검색
+	public Board searchForDeleteFile(Board bo) {
+		BoardMapper bm = session.getMapper(BoardMapper.class);
+		Board searchResultBO = bm.searchForDeleteFile(bo);
+		return searchResultBO;
 	}
 	
 }

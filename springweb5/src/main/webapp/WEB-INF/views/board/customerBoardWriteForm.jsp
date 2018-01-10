@@ -18,7 +18,7 @@
 </head>
 <body>
 <h1>[글쓰기]</h1>
-<form action="writeCustomerBoard" method = "post" onsubmit="boardCheck()">
+<form action="writeCustomerBoard" method = "post" onsubmit="boardCheck()" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<td>
@@ -41,7 +41,7 @@
 				파일첨부
 			</td>
 			<td>
-				<input type="file" value="파일선택">
+				<input type="file" name="upload" size="30" value="파일선택">
 			</td>
 		</tr>
 		<tr>

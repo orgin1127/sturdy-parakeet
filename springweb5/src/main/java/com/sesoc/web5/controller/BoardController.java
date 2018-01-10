@@ -1,9 +1,16 @@
 package com.sesoc.web5.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,13 +18,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sesoc.web5.dao.BoardDAO;
+import com.sesoc.web5.dao.FileService;
 import com.sesoc.web5.dao.JoinDAO;
 import com.sesoc.web5.dao.PageNavigator;
 import com.sesoc.web5.vo.Board;
@@ -35,6 +45,9 @@ public class BoardController {
 	BoardDAO boardDAO;
 	@Autowired
 	BoardValidator bv;
+	
+	//게시판 첨부파일 저장 경로
+	public static final String FILEPATH = "/boardfiles";
 	
 	//게시판 글 목록 보기
 	@RequestMapping(value = "viewBoard", method = RequestMethod.GET)
@@ -72,6 +85,41 @@ public class BoardController {
 		return "/board/customerBoardForm";
 	}
 	
+	//파일 다운로드
+	@RequestMapping(value="downloadFile", method = RequestMethod.GET)
+	public String downloadFile(@RequestParam(value="boardnum", defaultValue="") String boardnum
+								,@RequestParam(value="savedFile", defaultValue="") String savedFile
+								, HttpServletResponse response) {
+		//원래의 파일명
+				
+				try {
+					response.setHeader("Content-Disposition", " attachment;filename="+ URLEncoder.encode(savedFile, "UTF-8"));
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				
+				//저장된 파일 경로
+				String fullPath = FILEPATH + "/" + savedFile;
+				
+				//서버의 파일을 읽을 입력 스트림과 클라이언트에게 전달할 출력스트림
+				FileInputStream filein = null;
+				ServletOutputStream fileout = null;
+				
+				try {
+					filein = new FileInputStream(fullPath);
+					fileout = response.getOutputStream();
+					
+					//Spring의 파일 관련 유틸
+					FileCopyUtils.copy(filein, fileout);
+					
+					filein.close();
+					fileout.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		return null;
+	}
+	
 	//게시판 글쓰기 폼 보기
 	@RequestMapping(value= "writeCustomerBoard", method = RequestMethod.GET)
 	public String writeCustomerBoard(Model model) {
@@ -79,10 +127,10 @@ public class BoardController {
 		return "/board/customerBoardWriteForm";
 	}
 	
-	//사용자가 입력한 글 저장하고 글 목록으로 리다이렉트
+	//사용자가 입력한 글 저장하고 글 목록으로 리다이렉트  + 파일 업로드
 	@RequestMapping(value = "writeCustomerBoard", method = RequestMethod.POST)
 	public String writeCustomerBoard(HttpSession session, Model model, HttpServletRequest request
-									,String title, String content) {
+									, MultipartFile upload, String title, String content) {
 		logger.debug(title);
 		Customer cu = null;
 		String ip = request.getRemoteAddr();
@@ -97,6 +145,16 @@ public class BoardController {
 		}
 		
 		Board bo = new Board((String)session.getAttribute("CustomerID"), title, content, ip);
+		
+		//첨부파일이 있으면 지정된 경로에 이름 겹치지 않게 복사
+		//원래 이름과 저장된 이름을 Board 객체에 추가
+	
+		if (!upload.isEmpty()) {
+			String savedFile = FileService.saveFile(upload, FILEPATH);
+			bo.setOriginalFile(upload.getOriginalFilename());
+			bo.setSavedFile(savedFile);
+		}
+		
 		boardDAO.writeCustomerBoard(bo);
 		logger.debug("글쓰기 완료");
 		return "redirect:viewBoard";
@@ -123,14 +181,26 @@ public class BoardController {
 			String custid =(String) session.getAttribute("CustomerID");
 			if (custid != null) {
 				Board bo = new Board(bnum,custid);
+				logger.debug("삭제용 bo : "+bo.toString());
+				Board ForDeleteFileBO = boardDAO.searchForDeleteFile(bo);
+				if (ForDeleteFileBO != null) {
+					if (ForDeleteFileBO.getSavedFile() !=null && ForDeleteFileBO.getOriginalFile()!=null) {
+					String fullPath = FILEPATH + "/" + bo.getSavedFile();
+					FileService.deleteFile(fullPath);
+					}
+				}
+				logger.debug(bo.toString());
 				boardDAO.deleteBoardContent(bo);
 			}
 		}
 		catch (Exception e) {
+			e.printStackTrace();
+			logger.debug("에러발생 에러발생");
 			return "redirect:viewBoard";
 		}
 		return "redirect:viewBoard";
 	}
+	
 	//글 수정 폼으로 이동
 	@RequestMapping(value = "editBoardContent", method = RequestMethod.GET)
 	public String editBoardContent(String boardnum, Model model) {
@@ -149,11 +219,11 @@ public class BoardController {
 	}
 	
 	
-	//글 수정
+	//글 수정 (+파일 수정)
 	@RequestMapping(value = "editBoardContent", method = RequestMethod.POST)
 	public String editBoardContent(HttpSession session, Model model, HttpServletRequest request
 									, @ModelAttribute("boardnum") int boardnum
-									, String title, String content) {
+									, String title, String content, MultipartFile upload) {
 		String errMSG = "";
 		String custid = (String)session.getAttribute("CustomerID");
 		errMSG = bv.boardValidateCheck(title, content);
@@ -165,7 +235,21 @@ public class BoardController {
 			return "board/customerBoardContentEditForm";
 		}
 		Board bo = new Board(boardnum, custid, title, content);
+		
+		//원래 있던 file을 지우고 새로운 파일로 등록
+		Board BOForDeleteFile = boardDAO.searchForDeleteFile(bo);
+		if (!BOForDeleteFile.getSavedFile().isEmpty() && !BOForDeleteFile.getOriginalFile().isEmpty()) {
+			String fullPath = FILEPATH + "/" + BOForDeleteFile.getSavedFile();
+			FileService.deleteFile(fullPath);
+		}
+		if (!upload.isEmpty()) {
+			String savedFile = FileService.saveFile(upload, FILEPATH);
+			bo.setOriginalFile(upload.getOriginalFilename());
+			bo.setSavedFile(savedFile);
+		}
+		
 		logger.debug(bo.toString());
+		//수정된 bo로 해당 column을 update
 		boardDAO.updateBoardContent(bo);
 		return "redirect:viewBoard";
 	}
