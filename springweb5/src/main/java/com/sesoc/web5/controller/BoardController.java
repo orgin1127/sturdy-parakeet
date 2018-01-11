@@ -30,8 +30,10 @@ import com.sesoc.web5.dao.BoardDAO;
 import com.sesoc.web5.dao.FileService;
 import com.sesoc.web5.dao.JoinDAO;
 import com.sesoc.web5.dao.PageNavigator;
+import com.sesoc.web5.dao.ReplyDAO;
 import com.sesoc.web5.vo.Board;
 import com.sesoc.web5.vo.Customer;
+import com.sesoc.web5.vo.Reply;
 
 @Controller
 @RequestMapping("board")
@@ -45,6 +47,8 @@ public class BoardController {
 	BoardDAO boardDAO;
 	@Autowired
 	BoardValidator bv;
+	@Autowired
+	ReplyDAO replyDAO;
 	
 	//게시판 첨부파일 저장 경로
 	public static final String FILEPATH = "/boardfiles";
@@ -160,7 +164,7 @@ public class BoardController {
 		return "redirect:viewBoard";
 	}
 	
-	//게시판 글 읽기
+	//게시판 글 읽기(+리플읽기)
 	@RequestMapping(value = "viewBoardContent", method = RequestMethod.GET)
 	public String viewBoardContent(int boardnum, Model model) {
 		Board bo = null;
@@ -168,7 +172,12 @@ public class BoardController {
 		if (bo != null) {
 			boardDAO.updateContentHits(boardnum);
 		}
+		//글에 달린 리플목록 읽기
+		ArrayList<Reply> replyList = null;
+		replyList = replyDAO.viewBoardContentReply(boardnum);
+		//본문 글 정보와 리플목록을 모델에 저장하고 이동
 		model.addAttribute("boardContent", bo);
+		model.addAttribute("replyList", replyList);
 		return "board/customerBoardContentViewForm";
 	}
 	
@@ -179,9 +188,11 @@ public class BoardController {
 			int bnum = 0;
 			bnum = Integer.parseInt(boardnum);
 			String custid =(String) session.getAttribute("CustomerID");
+			
 			if (custid != null) {
 				Board bo = new Board(bnum,custid);
 				logger.debug("삭제용 bo : "+bo.toString());
+				//글 삭제 전 하드에 저장된 첨부파일 삭제
 				Board ForDeleteFileBO = boardDAO.searchForDeleteFile(bo);
 				if (ForDeleteFileBO != null) {
 					if (ForDeleteFileBO.getSavedFile() !=null && ForDeleteFileBO.getOriginalFile()!=null) {
@@ -190,8 +201,12 @@ public class BoardController {
 					}
 				}
 				logger.debug(bo.toString());
+				Reply re = new Reply(bnum);
+				replyDAO.deleteContentReply(re);
+				//글 삭제
 				boardDAO.deleteBoardContent(bo);
 			}
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();

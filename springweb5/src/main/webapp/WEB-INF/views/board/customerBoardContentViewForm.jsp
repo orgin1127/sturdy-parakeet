@@ -14,6 +14,25 @@
 			location.href="deleteBoardContent?boardnum="+boardnum
 		}
 	}
+	
+	function editReply(reContent, bnum, rnum) {
+		var output = '';
+		output += '<form action="editReply" method="post">'
+		output += '리플 수정 '
+		output += '<input type="text" name="replyContent"';
+		output += 'value="' + reContent + '">';
+		output += '<input type="hidden" name="boardnum" ';
+		output += 'value="' + bnum + '">';
+		output += '<input type="hidden" name="replynum" ';
+		output += 'value="' + rnum + '">';
+		output += ' <input type="submit" value="확인"></form>';
+		
+		var resetF = '';
+		var reEditForm = document.getElementById('replyEditForm'+rnum);
+		
+		reEditForm.innerHTML=output;
+		
+	}
 </script>
 </head>
 <body>
@@ -56,5 +75,30 @@ ${boardContent.originalFile}</a><br>
 <a href="javascript:deleteCheck(${boardContent.boardnum})">삭제</a>
 </c:if>
 <a href="viewBoard">목록으로</a>
+<c:if test="${sessionScope.CustomerID != null }">
+	<form action="replyWrite" method="post">
+		<input type="hidden" name="boardnum" value="${boardContent.boardnum}">
+		리플 쓰기 <input type="text" name="replyContent"> 
+		<input type="submit" value="확인">
+	</form>
+</c:if>
+======================================================================================
+<c:forEach var="re" items="${replyList}">
+	<table>
+		<tr>
+			<td>${re.custid }</td>
+			<td>
+				<c:out value="${re.replyContent}" /><br>
+			</td>
+			<td><c:if test="${re.custid == sessionScope.CustomerID }">
+				<a href="javascript:editReply('${re.replyContent}', ${boardContent.boardnum}, ${re.replynum})">수정</a>
+			</c:if></td>
+			<td><c:if test="${re.custid == sessionScope.CustomerID }">
+				<a href="deleteReply?boardnum=${re.boardnum}&replynum=${re.replynum}">삭제</a>
+			</c:if></td>
+		</tr>
+	</table>
+	<div id="replyEditForm${re.replynum}"></div>
+</c:forEach>
 </body>
 </html>

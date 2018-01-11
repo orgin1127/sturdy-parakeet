@@ -6,9 +6,11 @@
 	<typeAliases>
 		<typeAlias type="com.sesoc.web5.vo.Customer" alias="Customer" />
 		<typeAlias type="com.sesoc.web5.vo.Board" alias="Board" />
+		<typeAlias type="com.sesoc.web5.vo.Reply" alias="Reply" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="/mapper/customerMapper.xml" />
 		<mapper resource="/mapper/boardMapper.xml" />
+		<mapper resource="/mapper/replyMapper.xml" />
 	</mappers>
 </configuration>

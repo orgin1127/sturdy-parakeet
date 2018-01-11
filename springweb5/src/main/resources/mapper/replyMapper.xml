@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.sesoc.web5.dao.ReplyMapper">
+<!-- 리플 저장 -->
+  <insert id="replyWrite" parameterType="Reply">
+  	insert 
+  			into customerboardreply
+  									( replynum
+  									, boardnum
+  									, custid
+  									, replycontent )
+  				values
+  									( customerboardreply_seq.nextVal
+  									, #{boardnum}
+  									, #{custid}
+  									, #{replyContent} )
+  </insert>
+  
+<!-- 리플삭제 -->
+  <delete id="deleteContentReply" parameterType="Reply">
+   delete from customerboardreply
+   where 
+   		boardnum = #{boardnum}
+   		<if test="replynum != null">
+   			and
+   		replynum = #{replynum}
+   		</if>
+   </delete>
+<!-- 리플 수정 -->
+	<update id="editReply" parameterType="Reply">
+	update customerboardreply
+	set
+		replycontent = #{replyContent}
+	where
+		boardnum = #{boardnum}
+			and
+		custid = #{custid}
+			and
+		replynum = #{replynum}
+	</update>
+<!-- 리플검색 -->
+  <select id="viewBoardContentReply" parameterType="int" resultType="Reply">
+  	select * from customerboardreply
+  		where boardnum = #{boardnum}
+  </select>
+  </mapper>
