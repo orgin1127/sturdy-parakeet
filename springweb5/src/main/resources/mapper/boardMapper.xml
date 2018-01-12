@@ -61,6 +61,7 @@
 		, originalFile
 		, savedFile
 		, (select name from customer where customerboard.custid = customer.CUSTID ) name
+		, (select count(*) from customerboardreply where customerboard.boardnum = customerboardreply.boardnum) replyCount
 	from 
 		customerboard
 	<!--
@@ -89,7 +90,18 @@
 </select>
 <!-- 글 내용 보기 -->
 <select id="viewBoardContent" parameterType="int" resultType="Board">
-	select * from customerboard 
+	select 
+		title
+		, boardnum
+		, content
+		, custid
+		, hits
+		, to_char(inputdate, 'yyyy-mm-dd') inputdate
+		, originalFile
+		, savedFile
+		, (select name from customer where customerboard.custid = customer.CUSTID ) name
+	from 
+		customerboard
 	where boardnum = #{boardnum}
 </select>
 

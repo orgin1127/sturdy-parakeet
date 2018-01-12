@@ -2,6 +2,7 @@ package com.sesoc.web5.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +28,11 @@ public class ReplyDAO {
 	}
 	
 	//리플읽기
-	public ArrayList<Reply> viewBoardContentReply(int boardnum) {
+	public ArrayList<Reply> viewBoardContentReply(int boardnum, int start, int cnt) {
 		ReplyMapper rm = session.getMapper(ReplyMapper.class);
 		ArrayList<Reply> replyList = null;
-		replyList = rm.viewBoardContentReply(boardnum);
+		RowBounds rb = new RowBounds(start, cnt);
+		replyList = rm.viewBoardContentReply(boardnum, rb);
 		return replyList;
 	}
 	
@@ -48,5 +50,13 @@ public class ReplyDAO {
 		if (rm.editReply(re) == 1) {
 			logger.debug("리플수정 성공");
 		}
+	}
+	
+	//리플 개수
+	public int countBoardReply(int boardnum) {
+		int replyCount = 0;
+		ReplyMapper rm = session.getMapper(ReplyMapper.class);
+		replyCount = rm.countBoardReply(boardnum);
+		return replyCount;
 	}
 }

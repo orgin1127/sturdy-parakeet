@@ -166,18 +166,31 @@ public class BoardController {
 	
 	//게시판 글 읽기(+리플읽기)
 	@RequestMapping(value = "viewBoardContent", method = RequestMethod.GET)
-	public String viewBoardContent(int boardnum, Model model) {
+	public String viewBoardContent(int boardnum, Model model
+								, @RequestParam(value="replyPage", defaultValue="1") int replyPage
+								, @RequestParam(value="replyTable", defaultValue="false") Boolean replyTable) {
 		Board bo = null;
 		bo = boardDAO.viewBoardContent(boardnum);
 		if (bo != null) {
 			boardDAO.updateContentHits(boardnum);
 		}
+		
+		//글에 달린 리플의 개수를 구함
+		int replyCount =replyDAO.countBoardReply(boardnum);
+		
+		//PageNavigator객체를 만들면서 
+		PageNavigator pn = new PageNavigator(10, 5, replyPage, replyCount);
+		
 		//글에 달린 리플목록 읽기
 		ArrayList<Reply> replyList = null;
-		replyList = replyDAO.viewBoardContentReply(boardnum);
+		replyList = replyDAO.viewBoardContentReply(boardnum, pn.getStartRecord(), pn.getCountPerPage());
+		
 		//본문 글 정보와 리플목록을 모델에 저장하고 이동
 		model.addAttribute("boardContent", bo);
+		model.addAttribute("replyCount", replyCount);
 		model.addAttribute("replyList", replyList);
+		model.addAttribute("pn", pn);
+		model.addAttribute("replyTable", replyTable);
 		return "board/customerBoardContentViewForm";
 	}
 	
@@ -253,7 +266,7 @@ public class BoardController {
 		
 		//원래 있던 file을 지우고 새로운 파일로 등록
 		Board BOForDeleteFile = boardDAO.searchForDeleteFile(bo);
-		if (!BOForDeleteFile.getSavedFile().isEmpty() && !BOForDeleteFile.getOriginalFile().isEmpty()) {
+		if (BOForDeleteFile.getSavedFile() != null && BOForDeleteFile.getOriginalFile() != null) {
 			String fullPath = FILEPATH + "/" + BOForDeleteFile.getSavedFile();
 			FileService.deleteFile(fullPath);
 		}

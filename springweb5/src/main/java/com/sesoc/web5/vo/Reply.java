@@ -6,6 +6,7 @@ public class Reply {
 	private String custid;
 	private String replyContent;
 	private String inputdate;
+	private int replyCount;
 	
 	public int getReplynum() {return replynum;}
 	public void setReplynum(int replynum) {this.replynum = replynum;}
@@ -17,6 +18,8 @@ public class Reply {
 	public void setReplyContent(String replyContent) {this.replyContent = replyContent;}
 	public String getInputdate() {return inputdate;}
 	public void setInputdate(String inputdate) {this.inputdate = inputdate;}
+	public int getReplyCount() {return replyCount;}
+	public void setReplyCount(int replyCount) {this.replyCount = replyCount;}
 	
 	public Reply() {}
 	
@@ -37,10 +40,19 @@ public class Reply {
 		this.inputdate = inputdate;
 	}
 	
+	public Reply(int replynum, int boardnum, String custid, String replyContent, String inputdate, int replyCount) {
+		this.replynum = replynum;
+		this.boardnum = boardnum;
+		this.custid = custid;
+		this.replyContent = replyContent;
+		this.inputdate = inputdate;
+		this.replyCount = replyCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [replynum=" + replynum + ", boardnum=" + boardnum + ", custid=" + custid + ", replyContent="
-				+ replyContent + ", inputdate=" + inputdate + "]";
+				+ replyContent + ", inputdate=" + inputdate + ", replyCount=" + replyCount + "]";
 	}
 	
 	@Override

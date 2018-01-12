@@ -42,7 +42,19 @@
 	</update>
 <!-- 리플검색 -->
   <select id="viewBoardContentReply" parameterType="int" resultType="Reply">
-  	select * from customerboardreply
+  	select 
+  		replynum
+  		, boardnum
+  		, custid
+  		, replycontent
+  		, to_char(inputdate, 'yyyy-mm-dd') inputdate
+  		from customerboardreply
   		where boardnum = #{boardnum}
   </select>
+<!-- 해당 글의 리플 개수 -->
+<select id="countBoardReply" parameterType="int" resultType="int">
+	select count(*) from customerboardreply 
+	where
+		boardnum = #{boardnum}
+</select>
   </mapper>

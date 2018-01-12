@@ -61,6 +61,9 @@
 				<c:if test="${boardList.savedFile != null && boardList.originalFile != null}">
 					<img src="<c:url value="/resources/image/attachedFile.png" />  " height="20" width="20">
 				</c:if>
+				<c:if test="${boardList.replyCount != 0 }">
+					<b><a href="viewBoardContent?boardnum=${boardList.boardnum}&replyTable=true">[${boardList.replyCount}]</a></b>
+				</c:if>
 			</td>
 			<td>
 				${boardList.custid}(${boardList.name })
@@ -89,7 +92,6 @@
 	&nbsp;&nbsp;
 	<a href="javascript:pagingFormSubmit(${pn.currentPage + 1})">▶</a> &nbsp;&nbsp;
 	<a href="javascript:pagingFormSubmit(${pn.currentPage + pn.pagePerGroup})">▷▷</a>
-
 <!-- /페이지 이동 끝 -->                      
 
 <form id="pagingForm" method="get" action="viewBoard">
@@ -99,7 +101,7 @@
 		<option value="title" <c:if test="${searchType == 'title'}"> selected="selected" </c:if>>제목</option>
 		<option value="custid" <c:if test="${searchType == 'custid'}"> selected="selected" </c:if>>글쓴이</option>
 		<option value="content" <c:if test="${searchType == 'content'}"> selected="selected" </c:if>>내용</option>
-		<option value="titleAndID" <c:if test="${searchType == 'titleAndId'}"> selected="selected" </c:if>>제목 & 글쓴이</option>
+		<option value="titleAndID" <c:if test="${searchType == 'titleAndId'}"> selected="selected" </c:if> >제목 & 글쓴이</option>
 	</select>
 	<input type="text" name="searchText" value="${searchText}">
 	<input type="button" onclick="pagingFormSubmit(1)" value="검색">

@@ -12,6 +12,7 @@ public class Board {
 	private String savedFile;
 	private String ip;
 	private String name;
+	private int replyCount;
 	
 	public int getBoardnum() {return boardnum;}
 	public void setBoardnum(int boardnum) {this.boardnum = boardnum;}
@@ -33,6 +34,8 @@ public class Board {
 	public void setIp(String ip) {this.ip = ip;}
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
+	public int getReplyCount() {return replyCount;}
+	public void setReplyCount(int replyCount) {this.replyCount = replyCount;}
 	
 	public Board() {}
 	
@@ -83,12 +86,29 @@ public class Board {
 		this.name =name;
 	}
 	
+	public Board(int boardnum, String custid, String title, String content, String inputdate, int hits,
+			String originalFile, String savedFile, String ip, String name, int replyCount) {
+		super();
+		this.boardnum = boardnum;
+		this.custid = custid;
+		this.title = title;
+		this.content = content;
+		this.inputdate = inputdate;
+		this.hits = hits;
+		this.originalFile = originalFile;
+		this.savedFile = savedFile;
+		this.ip = ip;
+		this.name = name;
+		this.replyCount = replyCount;
+	}
+	
 	@Override
 	public String toString() {
 		return "Board [boardnum=" + boardnum + ", custid=" + custid + ", title=" + title + ", content=" + content
 				+ ", inputdate=" + inputdate + ", hits=" + hits + ", originalFile=" + originalFile + ", savedFile="
-				+ savedFile + ", ip=" + ip + ", name=" + name + "]";
+				+ savedFile + ", ip=" + ip + ", name=" + name + ", replyCount=" + replyCount + "]";
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
