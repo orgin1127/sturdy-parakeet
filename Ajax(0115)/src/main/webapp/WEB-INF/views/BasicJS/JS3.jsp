@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -76,6 +79,15 @@
 		}
 		else {
 			alert('숫자가 아닌 것이 포함되어 있거나 자리수가 올바르지 않습니다.');
+		}
+		
+		var n = prompt('숫자입력');
+		if (n.length < 3 || n.length > 10) {
+			alert('틀렸어');
+		} 
+		
+		if (isNaN(n)) {
+			alert('숫자아님');
 		}
 		
 	}

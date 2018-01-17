@@ -27,4 +27,19 @@ public class JavaScriptController {
 		logger.debug("JS Controller 3");
 		return "BasicJS/JS3";
 	}
+	@RequestMapping(value="js4", method = RequestMethod.GET)
+	public String javaScriptController4() {
+		logger.debug("JS Controller 4");
+		return "BasicJS/JS4";
+	}
+	@RequestMapping(value="jsmobile", method = RequestMethod.GET)
+	public String jsmobileController() {
+		logger.debug("JS Controller mobile");
+		return "BasicJS/jsmobile";
+	}
+	@RequestMapping(value="jspc", method = RequestMethod.GET)
+	public String jspcController() {
+		logger.debug("JS Controller pc");
+		return "BasicJS/jspc";
+	}
 }
