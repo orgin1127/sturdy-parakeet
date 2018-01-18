@@ -25,7 +25,7 @@
 			<li>문서 객체 모델</li>
 			<li>이벤트 처리</li>
 		</ul>
-	<li>jQuery</li>
+	<li><a href="jQuery1">jQuery</a></li>
 	<li>Ajax</li>
 </ol>
 </body>
