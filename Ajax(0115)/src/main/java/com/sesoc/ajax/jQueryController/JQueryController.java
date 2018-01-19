@@ -16,4 +16,10 @@ public class JQueryController {
 		logger.debug("jQuery Controller 1");
 		return "JQuery/jQuery1";
 	}
+	
+	@RequestMapping(value="jQuery2", method = RequestMethod.GET)
+	public String jQueryController2() {
+		logger.debug("jQuery Controller 2");
+		return "JQuery/jQuery2";
+	}
 }

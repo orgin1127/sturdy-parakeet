@@ -25,7 +25,11 @@
 			<li>문서 객체 모델</li>
 			<li>이벤트 처리</li>
 		</ul>
-	<li><a href="jQuery1">jQuery</a></li>
+	<li>jQuery</li>
+		<ul>
+			<li><a href="jQuery1">jQuery1 (기본 문법)</a></li>
+			<li><a href="jQuery2">jQuery2 (객체, 배열 반복문)</a></li>
+		</ul>
 	<li>Ajax</li>
 </ol>
 </body>

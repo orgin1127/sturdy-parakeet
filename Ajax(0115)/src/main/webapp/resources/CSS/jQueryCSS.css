@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+* {
+	color : black;
+}
+
+div {
+	color: blue;
+}
+
+.style1 {
+	background : Fuchsia;
+	color : SlateGrey;
+	font-size: 20pt;
+}
+
+.style2 {
+	background : CornflowerBlue;
+	color : Sienna;
+	font-size: 30pt;
+}
+
+.style3 {
+	background : Cyan;
+	color : red;
+	font-size: 40pt;
+}
+
+.imgStyle1 {
+	width: 200px;
+	height: 200px;
+	border: 3px dotted grey;
+}
+
+.imgStyle2 {
+	width: 100px;
+	height: 100px;
+	border: 3px solid black;
+}
