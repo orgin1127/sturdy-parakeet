@@ -99,7 +99,7 @@
 		alert($('#imgID').attr('width'));
 		alert($('#imgID').attr('space')); //없는 속성 읽을 시 undefinded
 		alert($('#imgID').attr('number')); //사용자가 임의로 만들어낸 속성 number를 읽는다
-		$('#imgID').attr('src', './resources/Image/kawai.GIF');
+		$('#imgID').attr('src', './resources/Image/kawai.GIF'); //해당 ID를 가진 태그의 속성(SRC)를 바꾼다
 	}
 </script>
 <title>jQuery 2 [배열]</title>
