@@ -32,6 +32,10 @@
 			<li><a href="jQuery3">jQuery3 (이벤트 처리)</a></li>
 		</ul>
 	<li>Ajax</li>
+		<ul>
+			<li><a href="Ajax1">Ajax1</a></li>
+			<li><a href="Ajax2">Ajax2</a></li>
+		</ul>
 </ol>
 </body>
 </html>
