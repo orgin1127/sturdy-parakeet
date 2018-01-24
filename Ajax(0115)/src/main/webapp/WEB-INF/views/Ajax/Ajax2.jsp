@@ -17,7 +17,7 @@
 		$('#formButton3').on('click', check3);
 		$('#bt1').on('click', test1);
 		$('#bt2').on('click', test2);
-	})
+	});
 	
 	function check() {
 		var name = $('#name').val();
