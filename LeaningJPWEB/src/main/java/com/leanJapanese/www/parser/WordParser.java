@@ -27,7 +27,6 @@ public class WordParser {
 		Row row = null;
 		Cell cell = null;
 		
-		
 		try {
 			File file = new File("D:/wordTest.xls");
 			FileOutputStream fileOutput = new FileOutputStream(file);
