@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<!--  <typeAlias type="com.sesoc.ajax.VO.Reply" alias="Reply" />-->
+		  <typeAlias type="com.learnJapanese.www.VO.UserVO" alias="User" />
 	</typeAliases>
 	<mappers>
-		<!--  <mapper resource="/mapper/replyMapper.xml" />-->
+		  <mapper resource="./mapper/userMapper.xml" />
 	</mappers>
 </configuration>

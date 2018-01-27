@@ -1,4 +1,4 @@
-package com.leanJapanese.www.parser;
+package com.learnJapanese.www.parser;
 
 import java.io.File;
 import java.io.FileOutputStream;
