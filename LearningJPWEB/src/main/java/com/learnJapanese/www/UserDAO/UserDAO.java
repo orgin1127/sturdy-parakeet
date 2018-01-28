@@ -22,4 +22,11 @@ public class UserDAO {
 		result = um.registerUser(vo);
 		return result;
 	}
+	
+	public String userIDDuplicateCheck(String inputID) {
+		String result = "";
+		UserMapper um = session.getMapper(UserMapper.class);
+		result = um.userIDDuplicateCheck(inputID);
+		return result;
+	}
 }

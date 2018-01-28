@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.leanJapanese.www.Mapper.UserMapper">
+  <mapper namespace="com.learnJapanese.www.Mapper.UserMapper">
   
 	  <!-- User Register -->
 	  <insert id="registerUser" parameterType="User">
@@ -11,11 +11,15 @@
 	  							, userID
 	  							, userPassword
 	  							, userName )
-	  				values (
+	  				values 	(
 	  							userTable_seq.nextVal
 	  							, #{userID}
 	  							, #{userPassword}
 	  							, #{userName} )
 	  </insert>
-  
+  	<!-- User Input ID Duplicate Check -->
+  	<select id="userIDDuplicateCheck" parameterType="String" resultType="String">
+  		select userID from userTable
+  		where userID = #{inputID}
+  	</select>
   </mapper>
