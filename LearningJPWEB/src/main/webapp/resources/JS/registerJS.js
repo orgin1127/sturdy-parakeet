@@ -1,27 +1,25 @@
 //문서 시작시 
-		$(document).ready(function() {
-			// When the user clicks on the button, open the modal 
-			$('#myButton').on('click', function() {
-				$('#myRegisterModal').css('display', 'block');
-				makeRegisterForm();
-				// Get the <span> element that closes the modal
-				// When the user clicks on <span> (x), close the modal
+$(document).ready(function() {
+	// When the user clicks on the button, open the modal 
+	$('#myButton').on('click', function() {
+		$('#myRegisterModal').css('display', 'block');
+		makeRegisterForm();
+		// Get the <span> element that closes the modal
+		// When the user clicks on <span> (x), close the modal
+		$('#registerCloser').on('click', closeRegisterModal);
 				
-				$('.closeModal').on('click', closeModal);
-				
-				//ID 유효성 검사
-				$('#userID').on('keyup', checkUserIDValidate);
-				//Password 유효성 검사
-				$('#userPassword').on('keyup', checkUserPasswordValidate);
-				//Password 재입력 유효성 검사
-				$('#userPasswordCheck').on('keyup', passwordInputValidateCheck);
-				//닉네임 유효성 검사
-				$('#userName').on('keyup', checkUserNameValidity);
-				//폼 송신
-				$('#registerSubmit').on('click', submitRegisterForm);
-			
-			});
-		});
+		//ID 유효성 검사
+		$('#userID').on('keyup', checkUserIDValidate);
+		//Password 유효성 검사
+		$('#userPassword').on('keyup', checkUserPasswordValidate);
+		//Password 재입력 유효성 검사
+		$('#userPasswordCheck').on('keyup', passwordInputValidateCheck);
+		//닉네임 유효성 검사
+		$('#userName').on('keyup', checkUserNameValidity);
+		//폼 송신
+		$('#registerSubmit').on('click', submitRegisterForm);
+	});
+});
 		function makeRegisterForm() {
 			var contentForModalBody = "";
 			contentForModalBody += '<p><form action="register" method="post" id="registerForm"><table id="registerTable">';
@@ -36,13 +34,12 @@
 			contentForModalBody += '<tr><td>닉네임</td><td><input type="text" id="userName" name="userName">';
 			contentForModalBody += '<input type="hidden" id="nameValidity" value="false">';
 			contentForModalBody += '<div id="nameValidateCheck"></div></td></tr>'
-			contentForModalBody += '<tr><td colspan="2"><input type="button" id="registerSubmit" value="회원가입" checked="false"></td></tr>';
+			contentForModalBody += '<tr><td colspan="2"><input type="button" id="registerSubmit" value="회원가입" checked="false">';
+			contentForModalBody += '<input type="hidden" id="closeRegisterModal" value="registModal"></td></tr>'
 			contentForModalBody += '</table></form></p>';
 			$('#myRegisterModalBody').html(contentForModalBody);
-			
 		}
-		
-		function closeModal() {
+		function closeRegisterModal() {
 			$('#myRegisterModal').css('display', 'none');
 		}
 		function submitRegisterForm() {
@@ -152,7 +149,7 @@
 					}
 					else {
 						$('#passwordInputValidateCheck').html(' ');
-						$('#passwordValidity').attr('value', 'false');
+						$('#passwordValidity').attr('value', 'true');
 					}
 				}
 			});
@@ -172,7 +169,7 @@
 					}
 					else {
 						$('#nameValidateCheck').html(' ');
-						$('#nameValidity').attr('value', 'false');
+						$('#nameValidity').attr('value', 'true');
 					}
 				}
 			});

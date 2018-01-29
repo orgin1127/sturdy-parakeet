@@ -5,9 +5,13 @@
 <configuration>
 	<typeAliases>
 		  <typeAlias type="com.learnJapanese.www.VO.UserVO" alias="User" />
+		  <typeAlias type="com.learnJapanese.www.VO.UserBoard" alias="Board" />
+		  <typeAlias type="com.learnJapanese.www.VO.Word" alias="Word" />
 	</typeAliases>
 	<mappers>
 		  <mapper resource="./mapper/userMapper.xml" />
 		  <mapper resource="./mapper/loginMapper.xml" />
+		  <mapper resource="./mapper/boardMapper.xml" />
+		  <mapper resource="./mapper/wordMapper.xml" />
 	</mappers>
 </configuration>
