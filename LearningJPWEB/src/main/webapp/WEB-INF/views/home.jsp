@@ -18,15 +18,23 @@
 	
 </head>
 <body>
-	<div class="sidemenu">
-		<ul>
-			<li><button id="myButton">회원가입</button></li>
-			<li><button id="myLogin">로그인</button></li>
-			<li>단어검색</li>
-			<li>단어게임</li>
-			<li>게시판</li>
-		</ul>
-	</div>
+	<table>
+		<tr>
+			<c:if test="${loginUser == null}">
+				<td><button id="myButton">회원가입</button></td>
+				<td><button id="myLogin">로그인</button></td>
+			</c:if>
+			<td>단어검색</td>
+			<td>단어게임</td>
+			<td>게시판</td>
+			<c:if test="${loginUser != null}">
+				<td>환영합니다 ${loginUserName}(${ loginUserID})님!</td>
+				<td>정보수정</td>
+				<td><a href="userLogout"><button id="myLogout">로그아웃</button></a></td>
+			</c:if>
+		</tr>
+	</table>
+	
 
 	<!-- Trigger/Open The Modal -->
 
@@ -39,7 +47,7 @@
 			    <span class="closeModal">&times;</span>
 			    <h2>[ R e g i s t e r ]</h2>
 			  </div>
-			  <div class="modal-body"></div>
+			  <div class="modal-body" id="myRegisterModalBody"></div>
 			  <div class="modal-footer"><h1> </h1></div>
 		</div>
 	</div>
@@ -50,10 +58,10 @@
 				<span class="closeModal">&times;</span>
 			    <h2>[ Log - IN ]</h2>
 			</div>
-			<div class="modal-body"></div>
+			<div class="modal-body" id="myLoginModalBody"></div>
 			<div class="modal-footer"><h1> </h1></div>
 		</div>
-	</div>
+	</div> 
 	
 </body>
 </html>
