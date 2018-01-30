@@ -14,8 +14,12 @@
 	<script src="./resources/JS/registerJS.js"></script>
 	<script src="./resources/JS/loginJS.js"></script>
 	<script src="./resources/JS/wordSearchJS.js"></script>
+	<script src="./resources/JS/BlinkGame.js"></script>
 	<!-- CSS -->
 	<link href="./resources/CSS/registerModalCSS.css" rel="stylesheet" type="text/css">
+	<link href="./resources/CSS/LoginCSS.css" rel="stylesheet" type="text/css">
+	<link href="./resources/CSS/SearchWordCSS.css" rel="stylesheet" type="text/css">
+	<link href="./resources/CSS/BlinkGameCSS.css" rel="stylesheet" type="text/css">
 	
 </head>
 <body>
@@ -27,7 +31,7 @@
 			</c:if>
 			<c:if test="${loginUser != null}">
 				<td><button id="myWordSearch">단어검색</button></td>
-				<td>단어게임</td>
+				<td><button id="myBlinkGame">단어게임</button></td>
 				<!-- <td><button id="myUserBoard">게시판</button></td> -->
 				<td>환영합니다 ${loginUserName}(${ loginUserID})님!</td>
 				<td>정보수정</td>
@@ -43,37 +47,75 @@
 	<!-- The Register Modal -->
 	<div id="myRegisterModal" class="modal">
 	  	<!-- Modal content -->
-		<div class="modal-content">
-			  <div class="modal-header">
+		<div class="modal-content" id="registerModalContent">
+			  <div class="modal-header" id="registerModalHeader">
 			    <span class="closeModal" id="registerCloser">&times;</span>
 			    <h2>[ R e g i s t e r ]</h2>
 			  </div>
 			  <div class="modal-body" id="myRegisterModalBody"></div>
-			  <div class="modal-footer"><h1> </h1></div>
+			  <div class="modal-footer" id="registerModalFooter"><h1> </h1></div>
 		</div>
 	</div>
 	
 	<!-- Login Modal -->
 	<div id="myLoginModal" class="modal">
-		<div class="modal-content">
-			<div class="modal-header">
+		<div class="modal-content" ID="loginModalContent">
+			<div class="modal-header" id="loginModalHeader">
 				<span class="closeModal" id="loginCloser">&times;</span>
 			    <h2>[ Log - IN ]</h2>
 			</div>
 			<div class="modal-body" id="myLoginModalBody"></div>
-			<div class="modal-footer"><h1> </h1></div>
+			<div class="modal-footer" id="loginModalFooter"><h1> </h1></div>
 		</div>
 	</div>
 	
 	<!-- UserWordSearch Div -->
 	<div class="modal" id="userWordSearchModal">
 		<div class="modal-content" id="SearchWordModalContent">
-			<div class="modal-header">
+			<div class="modal-header" id="wordSearchModalHeader">
 				<span class="closeModal" id="wordSearchCloser">&times;</span>
 				<h2>[ Searching Word ]</h2>
 			</div>
-			<div id="mySearchWordBody"></div>
-			<div class="modal-footer"><h1> </h1></div>
+			<div id="mySearchWordBody">
+				<div id="searchFormDiv"><form action="wordSearch" method="get" id="wordSearchForm">
+					<input type="hidden" name="page" id="page">
+					<select name="searchType">
+						<option value="" selected="selected">--검색 방법 선택--</option>
+						<option value="word">한자</option>
+						<option value="yomigana">발음</option>
+						<option value="meaning">뜻</option>
+						<option value="wordAndYomi">한자 & 발음</option>
+					</select>
+					<input type="text" name="inputWord" id="inputWord" value="${searchText}">
+					<input type="button" onclick="searchWord(1)" value="검색">
+				</form></div>
+				<div id="searchResultPrintDiv"></div>
+				<div id="pageNavigator"></div>
+			</div>
+			<div class="modal-footer" id="wordSearchModalFooter"><h1> </h1></div>
+		</div>
+	</div>
+	
+	<!-- UserWordBlinkGame -->
+	<div id="myBlinkModal" class="modal">
+		<div class="modal-content" ID="blinkModalContent">
+			<div class="modal-header" id="blinkModalHeader">
+				<span class="closeModal" id="blinkGameCloser">&times;</span>
+			    <h2>[ Blink Word ]</h2>
+			</div>
+			<div class="modal-body" id="myBlinkModalBody">
+				<select name="gameType" id="gameType">
+					<option value="" selected="selected">게임 난이도 선택</option>
+					<option value="N1">N1</option>
+					<option value="N2">N2</option>
+					<option value="N2">N3</option>
+					<option value="N2">N4</option>
+					<option value="N2">N5</option>
+				</select>
+				<input type="button" id="blinkGameStartBT" value="게임시작">
+				<div id="gameContentDiv"></div>
+			</div>
+			<div class="modal-footer" id="blinkModalFooter"><h1> </h1></div>
 		</div>
 	</div>
 </body>

@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-		.modal {
+		#userWordSearchModal {
 		    display: none; /* Hidden by default */
 		    position: fixed; /* Stay in place */
 		    z-index: 1; /* Sit on top */
@@ -15,34 +15,37 @@
 		}
 		
 		/* Modal Header */
-		.modal-header {
+		#wordSearchModalHeader {
 		    padding: 2px 16px;
 		    background-color: #5cb85c;
 		    color: white;
 		}
 		
 		/* Modal Body */
-		div #mySearchWordBody {
-			padding: 2px 16px;
+		#mySearchWordBody {
+			padding: 2px 10px;
 			margin: auto;
-			width: 600px;
+			width: 620px;
+			text-align: center;
 		}
 		
 		/* Modal Footer */
-		.modal-footer {
+		#wordSearchModalFooter {
 		    padding: 2px 16px;
 		    background-color: #5cb85c;
 		    color: white;
 		}
-		
+		#searchResultPrintDiv {
+			width: 600px;
+		}
 		/* Modal Content */
-		div #SearchWordModalContent {
+		#SearchWordModalContent {
 		    position: relative;
 		    background-color: #fefefe;
 		    margin: auto;
 		    padding: 0;
 		    border: 1px solid #888;
-		    width: 600px;
+		    width: 720px;
 		    font-size: 15px;
 		    text-align: center;
 		    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
@@ -54,12 +57,23 @@
 		    from {top: -300px; opacity: 0}
 		    to {top: 0; opacity: 1}
 		}
-		.closeModal:hover,
-		.closeModal:focus {
-		    color: #000;
-		    text-decoration: none;
-		    cursor: pointer;
-		}
+		
 		#wordMeanindTD {
-			width: 220px;
+			width: 260px;
 		}
+		#wordLevelTD {
+			width: 40px;
+		}
+		#pageNavigator{
+			display: none;
+		}
+		 #wordNumTH {
+			width: 80px;
+		}
+		#wordTH, #yomiganaTH {
+			width: 110px;
+		}
+		 #linkAddressTH {
+			 width: 60px
+		 }
+		

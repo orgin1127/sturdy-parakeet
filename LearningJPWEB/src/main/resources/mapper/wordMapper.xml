@@ -3,8 +3,57 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.learnJapanese.www.Mapper.WordMapper">
-  <select id="searchWord" parameterType="String" resultType="Word">
-  		select * from wordTable
-  		where word like '%'||#{inputWord}||'%'
+  <!-- 검색 -->
+  <select id="searchWord" parameterType="Hashmap" resultType="Word">
+  		select 
+  				*
+		from
+				wordTable
+  	<if test="searchText != null and searchType == 'word'">
+  		where 
+  				word like '%'||#{searchText}||'%'
+  	</if>
+  	<if test="searchText != null and searchType == 'yomigana'">
+  		where 
+  				yomigana like '%'||#{searchText}||'%'
+  	</if>
+  	<if test="searchText != null and searchType == 'meaning'">
+  		where 
+  				meaning like '%'||#{searchText}||'%'
+  	</if>
+  	<if test="searchText != null and searchType == 'wordAndYomi'">
+  		where 
+  				word like '%'||#{searchText}||'%'
+  					or 
+  				yomigana like '%'||#{searchText}||'%'
+  	</if>
+  	order by wordNum
+  </select>
+  
+  
+  
+  <!-- 검색 대상의 개수 -->
+  <select id="countSearchWord" parameterType="Hashmap" resultType="int">
+  	select count(*) from wordTable
+  	<if test="searchText != null and searchType == 'word'">
+  		where word like '%'||#{searchText}||'%'
+  	</if>
+  	<if test="searchText != null and searchType == 'yomigana'">
+  		where yomigana like '%'||#{searchText}||'%'
+  	</if>
+  	<if test="searchText != null and searchType == 'meaning'">
+  		where meaning like '%'||#{searchText}||'%'
+  	</if>
+  	<if test="searchText != null and searchType == 'wordAndYomi'">
+  		where word like '%'||#{searchText}||'%'
+  			or
+  		yomigana like '%'||#{searchText}||'%'
+  	</if>
+  </select>
+  
+  <!-- 단어 가져오기 for Blink gmae -->
+  <select id="wordListForBlinkGame" parameterType="String" resultType="Word">
+  	select * from wordTable
+  	where wordLevel = #{gameType}
   </select>
   </mapper>

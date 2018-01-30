@@ -62,7 +62,7 @@ $(document).ready(function() {
 					, success: function(result) {
 						if (result == 1) {
 							alert('회원가입에 성공하셨습니다. 메인으로 돌아갑니다.');
-							closeModal();
+							closeRegisterModal();
 						}
 						else {
 							alert('회원가입에 실패하였습니다. 입력사항을 확인하여 주세요');

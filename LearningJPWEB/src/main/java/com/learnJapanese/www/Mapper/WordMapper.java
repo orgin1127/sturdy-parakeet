@@ -1,10 +1,17 @@
 package com.learnJapanese.www.Mapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.apache.ibatis.session.RowBounds;
 
 import com.learnJapanese.www.VO.Word;
 
 public interface WordMapper {
 	
-	public ArrayList<Word> searchWord(String inputWord);
+	public ArrayList<Word> searchWord(HashMap<String, String> searchMap, RowBounds rb);
+	
+	public int countSearchWord(HashMap<String, String> searchMap);
+	
+	public ArrayList<Word> wordListForBlinkGame(String gameType);
 }

@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
-/* The Modal (background) */
-		.modal {
+
+		/* The Modal (background) */
+		#myRegisterModal {
 		    display: none; /* Hidden by default */
 		    position: fixed; /* Stay in place */
 		    z-index: 1; /* Sit on top */
@@ -15,28 +16,28 @@
 		}
 		
 		/* Modal Header */
-		.modal-header {
+		#registerModalHeader {
 		    padding: 2px 16px;
 		    background-color: #5cb85c;
 		    color: white;
 		}
 		
 		/* Modal Body */
-		.modal-body {
+		#myRegisterModalBody {
 			padding: 2px 16px;
 			margin: auto;
 			width: 280px;
 		}
 		
 		/* Modal Footer */
-		.modal-footer {
+		#registerModalFooter {
 		    padding: 2px 16px;
 		    background-color: #5cb85c;
 		    color: white;
 		}
 		
 		/* Modal Content */
-		.modal-content {
+		#registerModalContent {
 		    position: relative;
 		    background-color: #fefefe;
 		    margin: auto;
