@@ -1,7 +1,6 @@
 package com.learnJapanese.www;
 
-import java.text.DateFormat;
-import java.util.Date;
+
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 /**
  * Handles requests for the application home page.
  */
+
 @Controller
 public class HomeController {
 	
@@ -25,6 +25,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		logger.debug("Welcome home! The client locale is {}.", locale);
+		logger.debug("확인!");
 		return "home";
 	}
 	

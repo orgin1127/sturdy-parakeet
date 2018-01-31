@@ -20,10 +20,14 @@
 	<link href="./resources/CSS/LoginCSS.css" rel="stylesheet" type="text/css">
 	<link href="./resources/CSS/SearchWordCSS.css" rel="stylesheet" type="text/css">
 	<link href="./resources/CSS/BlinkGameCSS.css" rel="stylesheet" type="text/css">
-	
+	<link href="./resources/CSS/HomeCSS.css" rel="stylesheet" type="text/css">
+	<!-- font -->
+	<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
 </head>
 <body>
-	<table>
+<div class="headimg"><img src="./resources/IMAGE/raccoon.png" width="300" height="300" ></div>
+<br><br>
+	<table class="userNaviTable" id="userNaviTable">
 		<tr>
 			<c:if test="${loginUser == null}">
 				<td><button id="myButton">회원가입</button></td>
@@ -39,7 +43,6 @@
 			</c:if>
 		</tr>
 	</table>
-	<hr>
 
 	<!-- Trigger/Open The Modal -->
 

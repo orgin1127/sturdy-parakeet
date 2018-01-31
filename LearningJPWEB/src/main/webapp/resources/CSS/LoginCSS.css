@@ -16,8 +16,9 @@
 /* Modal Header */
 		#loginModalHeader {
 		    padding: 2px 16px;
-		    background-color: #5cb85c;
+		    background-color: #90A4AE;
 		    color: white;
+		    font-size: 27px;
 		}
 /* Modal Body */
 		#myLoginModalBody {
@@ -28,8 +29,22 @@
 		/* Modal Footer */
 		#loginModalFooter {
 		    padding: 2px 16px;
-		    background-color: #5cb85c;
+		    background-color: #90A4AE;
 		    color: white;
+		}
+		#loginCloser {
+			color: white;
+		    float: right;
+		    font-size: 40px;
+		    font-weight: bold;
+		    animation-name: loginModalCloseAni;
+		    animation-duration: 0.5s
+		}
+		#loginCloser:hover,
+		#loginCloser:focus {
+		    color: #000;
+		    text-decoration: none;
+		    cursor: pointer;
 		}
 	#loginModalContent{
 		position: relative;
@@ -48,3 +63,4 @@
 		from {top: -300px; opacity: 0}
 		to {top: 0; opacity: 1}
 	}
+	

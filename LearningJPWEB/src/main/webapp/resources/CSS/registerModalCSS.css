@@ -18,8 +18,9 @@
 		/* Modal Header */
 		#registerModalHeader {
 		    padding: 2px 16px;
-		    background-color: #5cb85c;
+		    background-color: #90A4AE;
 		    color: white;
+		    font-size: 30px;
 		}
 		
 		/* Modal Body */
@@ -32,7 +33,7 @@
 		/* Modal Footer */
 		#registerModalFooter {
 		    padding: 2px 16px;
-		    background-color: #5cb85c;
+		    background-color: #90A4AE;
 		    color: white;
 		}
 		
@@ -61,9 +62,9 @@
 		}
 		/* The Close Button */
 		.closeModal {
-		    color: #aaaaaa;
+		    color: white;
 		    float: right;
-		    font-size: 28px;
+		    font-size: 40px;
 		    font-weight: bold;
 		}
 		.closeModal:hover,
