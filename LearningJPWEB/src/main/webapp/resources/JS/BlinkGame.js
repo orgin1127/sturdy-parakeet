@@ -23,12 +23,27 @@ function startBlinkGame(gameType) {
 		, type: 'get'
 		, data: {gameType: gameType}
 		, dataType: 'json'
-		, success:function(gameContent) {
-				
+		, success:function(blinkGameContent) {
+				var userGameInfo = blinkGameContent.blinkGameUserInfo;
+				var blinkGameWordList = blinkGameContent.wordList;
+				blinkGameStart(userGameInfo, blinkGameWordList);
 		}
 		, error: function(e) {
 			alert(JSON.stringify(e));
 		}
 	});
 	
+}
+
+function blinkGameStart(userGameInfo, blinkGameWordList) {
+	var userHighScore = userGameInfo.highScore;
+	var userMaxCombo = userGameInfo.maxCombo;
+	var userPlayCount = userGameInfo.playCount;
+	var gameLife = 10;
+	
+	userPlayCount++;
+	while (gameLife != 0) {
+		
+		$('#gameContentDiv').html();
+	}
 }

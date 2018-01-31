@@ -1,7 +1,9 @@
 package com.learnJapanese.www.BlinkGame;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,16 +39,25 @@ public class BlinkGameController {
 		if (bvo != null) {
 			blinkGameContent.put("blinkGameUserInfo", bvo);
 		}
+		
 		//없으면 새롭게 유저를 등록하고 그 정보와 해당 레벨의 단어를 맵에 삽입
 		else {
+			//ID를 BVOD에 SET
 			bvo.setUserID(userID);
+			//BVO를 전달해 회원등록
 			blinkGameDAO.insertBlinkGameUser(bvo);
+			//아이디로 다시 유저의 게임정보 객체를 가져온다
 			bvo = blinkGameDAO.getBlinkGameUser(userID);
+			//맵에 유저 게임정보를 저장한다
 			blinkGameContent.put("blinkGameUserInfo", bvo);
 		}
 		//해당 레벨의 단어를 가져온다
 		ArrayList<Word> wordList = wordDAO.wordListForBlinkGame(gameType);
+		//해당 단어 배열을 랜덤으로 섞는다
+		Collections.shuffle(wordList);
 		blinkGameContent.put("wordList", wordList);
 		return blinkGameContent;
 	}
+	
+	
 }

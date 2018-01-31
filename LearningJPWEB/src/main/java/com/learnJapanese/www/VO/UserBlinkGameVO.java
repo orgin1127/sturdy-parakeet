@@ -39,16 +39,19 @@ public class UserBlinkGameVO {
 		this.maxCombo = maxCombo;
 	}
 	
-	public UserBlinkGameVO() {
-		super();
-	}
+	public UserBlinkGameVO() {}
 	
 	public UserBlinkGameVO(String userID) {
 		this.userID = userID;
 	}
 	
+	public UserBlinkGameVO(int playCount, int highScore, int maxCombo) {
+		this.playCount = playCount;
+		this.highScore = highScore;
+		this.maxCombo = maxCombo;
+	}
+	
 	public UserBlinkGameVO(int gameNum, String userID, int playCount, int highScore, int maxCombo) {
-		super();
 		this.gameNum = gameNum;
 		this.userID = userID;
 		this.playCount = playCount;

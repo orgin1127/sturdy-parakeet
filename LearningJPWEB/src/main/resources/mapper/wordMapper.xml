@@ -51,7 +51,7 @@
   	</if>
   </select>
   
-  <!-- 단어 가져오기 for Blink gmae -->
+  <!-- 단어 가져오기 for Blink game -->
   <select id="wordListForBlinkGame" parameterType="String" resultType="Word">
   	select * from wordTable
   	where wordLevel = #{gameType}
