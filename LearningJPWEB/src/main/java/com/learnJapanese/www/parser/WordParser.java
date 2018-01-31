@@ -2,6 +2,7 @@ package com.learnJapanese.www.parser;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -13,6 +14,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import com.learnJapanese.www.VO.Word;
 
 public class WordParser {
 	
@@ -120,4 +123,61 @@ public class WordParser {
 			e.printStackTrace();
 		}
 	}
+	
+	public void searchedWordSave(String filePath, ArrayList<Word> searchWordList) {
+		Workbook xlsWb = new HSSFWorkbook();
+		Sheet wordSheet = xlsWb.createSheet("searchedWordSheet");
+		Row row = null;
+		Cell cell = null;
+		int limitForRow = 1;
+		int limitForCell = 0;
+		try {
+			File file = new File(filePath);
+			FileOutputStream fileOutput = new FileOutputStream(file);
+			row = wordSheet.createRow(0);
+			
+			cell = row.createCell(0);
+			cell.setCellValue("한자");
+			
+			cell = row.createCell(1);
+			cell.setCellValue("발음");
+			cell = row.createCell(2);
+			cell.setCellValue("뜻");
+			
+			//한자
+			for (Word wl : searchWordList) {
+				row.setRowNum(limitForRow);
+				cell = row.createCell(limitForCell);
+				cell.setCellValue(wl.getWord());
+				limitForRow++;
+			}
+			limitForRow = 1;
+			limitForCell++;
+			
+			//발음
+			for (Word wl : searchWordList) {
+				row.setRowNum(limitForRow);
+				cell = row.createCell(limitForCell);
+				cell.setCellValue(wl.getYomigana());
+				limitForRow++;
+			}
+			limitForRow = 1;
+			limitForCell++;
+			
+			//뜻
+			for (Word wl : searchWordList) {
+				row.setRowNum(limitForRow);
+				cell = row.createCell(limitForCell);
+				cell.setCellValue(wl.getMeaning());
+				limitForRow++;
+			}
+			
+			xlsWb.write(fileOutput);
+			fileOutput.close();
+		}
+		catch(Exception e) {
+			
+		}
+	}
+	
 }

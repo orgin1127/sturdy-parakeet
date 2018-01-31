@@ -3,6 +3,8 @@ package com.learnJapanese.www.Word;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.learnJapanese.www.PageNavigator.PageNavigator;
 import com.learnJapanese.www.UserDAO.WordDAO;
 import com.learnJapanese.www.VO.Word;
+import com.learnJapanese.www.parser.WordParser;
 
 @Controller
 public class WordController {
@@ -24,11 +27,14 @@ public class WordController {
 	@Autowired
 	WordDAO wordDAO;
 	
+	public static final String FILEFULLPATH = "D:/wordList.xls";
+	
 	@ResponseBody
 	@RequestMapping(value="searchingWord", method = RequestMethod.POST)
 	public HashMap<String, Object> wordSearch(@RequestParam(value="inputWord", defaultValue="")String inputWord
 									, @RequestParam(value="page", defaultValue="1") int page
-									, @RequestParam(value="searchType", defaultValue="") String searchType) {
+									, @RequestParam(value="searchType", defaultValue="") String searchType
+									, HttpServletResponse response, String searchWordList) {
 		logger.debug("Searching Word : {}", inputWord);
 		logger.debug("page num: {}", page);
 		logger.debug("Searching method: {}", searchType);
@@ -44,6 +50,9 @@ public class WordController {
 		PageNavigator pn = new PageNavigator(10, 5, page, countSearchWord);
 		logger.debug(pn.getCountPerPage()+"");
 		ArrayList<Word> searchWordResult = wordDAO.wordSearch(searchMap, pn.getStartRecord(), pn.getCountPerPage());
+		WordParser wp = new WordParser();
+		
+		wp.searchedWordSave(FILEFULLPATH, searchWordResult);
 		
 		logger.debug("검색결과 : " + searchWordResult.size()+"");
 		
@@ -55,4 +64,6 @@ public class WordController {
 		searchResult.put("pn",pn);
 		return searchResult;
 	}
+	
+
 }

@@ -11,8 +11,19 @@
   										userBlinkGameTable_seq.nextVal
   										, #{userID})
   </insert>
+  <update id="blinkGameResultUpdate" parameterType="Blink">
+  		update userBlinkGameTable 
+  		set
+  			playCount = #{playCount}
+  			, highScore = #{highScore}
+  			, maxCombo = #{maxCombo}
+  		where
+  			gameNum = #{gameNum}
+				and  			
+  			userID = #{userID}
+  </update>
   <select id="getBlinkGameUser" parameterType="String" resultType="Blink">
   		select * from userBlinkGameTable
-  		where userID = {#userID}
+  		where userID = #{userID}
   </select>
   </mapper>

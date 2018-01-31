@@ -49,3 +49,10 @@
 			from {top: -300px; opacity: 0}
 			to {top: 0; opacity: 1}
 		}
+		td {
+			text-align: center;
+			
+		}
+		#blinkGameTable > td {
+			border: 1px dotted grey;
+		}

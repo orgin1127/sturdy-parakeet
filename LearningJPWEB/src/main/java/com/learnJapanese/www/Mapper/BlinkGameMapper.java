@@ -12,4 +12,6 @@ public interface BlinkGameMapper {
 	public ArrayList<UserBlinkGameVO> getBlinkGameContent(String gameType);
 	
 	public UserBlinkGameVO getBlinkGameUser(String userID);
+	
+	public int blinkGameResultUpdate(UserBlinkGameVO bvo);
 }

@@ -41,4 +41,11 @@ public class BlinkGameDAO {
 		bvo = bgm.getBlinkGameUser(userID);
 		return bvo;
 	}
+	
+	public void blinkGameResultUpdate(UserBlinkGameVO bvo) {
+		BlinkGameMapper bgm = session.getMapper(BlinkGameMapper.class);
+		if (bgm.blinkGameResultUpdate(bvo) == 1) {
+			logger.debug("전적 Update 성공");
+		}
+	}
 }

@@ -88,7 +88,7 @@
 					</select>
 					<input type="text" name="inputWord" id="inputWord" value="${searchText}">
 					<input type="button" onclick="searchWord(1)" value="검색">
-				</form></div>
+				</form></div><span id="downSearchList"></span>
 				<div id="searchResultPrintDiv"></div>
 				<div id="pageNavigator"></div>
 			</div>
@@ -113,7 +113,9 @@
 					<option value="N2">N5</option>
 				</select>
 				<input type="button" id="blinkGameStartBT" value="게임시작">
+				<div id="gameInfoDiv"></div>
 				<div id="gameContentDiv"></div>
+				<div id="answerInputDiv"></div>
 			</div>
 			<div class="modal-footer" id="blinkModalFooter"><h1> </h1></div>
 		</div>
