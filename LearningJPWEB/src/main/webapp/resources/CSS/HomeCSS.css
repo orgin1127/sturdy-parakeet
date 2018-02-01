@@ -10,13 +10,12 @@
 	}
 	
 	#userNaviTable{
-		
 		border-radius: 40px;
 	}
 	.userNaviTable {
 		border: 3px dotted lightgrey;
 		margin: auto;
-		width: 360px;
+		width: 600px;
 		background-color: #ECEFF1;
 		margin-top: 40px
 	}

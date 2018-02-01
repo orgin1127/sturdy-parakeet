@@ -23,4 +23,18 @@ public class LoginDAO {
 		loginedVO = lm.userLogin(vo);
 		return loginedVO;
 	}
+	
+	public UserVO loginedUser(String id) {
+		UserVO loginedVO = null;
+		LoginMapper lm = session.getMapper(LoginMapper.class);
+		loginedVO = lm.userSearch(id);
+		return loginedVO;
+	}
+	
+	public int editUserInfo(UserVO vo) {
+		int result = 0;
+		LoginMapper lm = session.getMapper(LoginMapper.class);
+		result = lm.userInfoEdit(vo);
+		return result;
+	}
 }

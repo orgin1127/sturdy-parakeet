@@ -14,4 +14,6 @@ public interface WordMapper {
 	public int countSearchWord(HashMap<String, String> searchMap);
 	
 	public ArrayList<Word> wordListForBlinkGame(String gameType);
+	
+	public ArrayList<Word> searchWordForFileOut(HashMap<String, String> searchMap);
 }

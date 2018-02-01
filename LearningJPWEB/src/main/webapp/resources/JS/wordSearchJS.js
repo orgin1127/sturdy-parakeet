@@ -29,9 +29,10 @@ function searchWord(pnum) {
 			, dataType: 'json'
 			, success:function(searchResult) {
 				if(searchResult != null) {
-					var searchedList = searchResult.searchWordResult
-					var pn = searchResult.pn
-					printSearchingResult(searchedList, pn);
+					var searchedList = searchResult.searchWordResult;
+					var pn = searchResult.pn;
+					var listDownload = searchResult.listDownload;
+					printSearchingResult(searchedList, pn, listDownload);
 				}
 				else {
 					alert('검색 결과가 없습니다. 한자를 확인해 주세요');
@@ -43,11 +44,10 @@ function searchWord(pnum) {
 		});
 	}
 }
-function printSearchingResult(searchedList, pn) {
+function printSearchingResult(searchedList, pn, listDownload) {
 	var contentForSearchResult = '';
 	var numbering = 1;
 	contentForSearchResult += '<table id="wordSearchResultTable"><tr><th id="wordNumTH">단어번호</th><th id="wordTH">한자</th><th id="yomiganaTH">발음</th><th>뜻</th><th id="linkAddressTH">더 보기</th><th>등급</th></tr>';
-	
 	
 	$.each(searchedList, function(index, values) {
 		contentForSearchResult += '<tr><td>No. '+values.wordNum+'</td><td>'+values.word+'</td><td>'+values.yomigana+'</td>';
@@ -74,6 +74,8 @@ function printSearchingResult(searchedList, pn) {
 		contentForPageNavi += '&nbsp;&nbsp;';
 		contentForPageNavi += '<a href="javascript:searchWord('+ (pn.currentPage + 1) +')">▶</a> &nbsp;&nbsp;'
 		contentForPageNavi += '<a href="javascript:searchWord('+(pn.currentPage + pn.pagePerGroup)+')">▷▷ </a>';
+		contentForPageNavi += '&nbsp;&nbsp;';
+		contentForPageNavi += '<a href="searchWordListDownload?FILEFULLPATH='+ listDownload +'">Download to Excel</a>';
 	$('#pageNavigator').html(contentForPageNavi);
 	}
 }

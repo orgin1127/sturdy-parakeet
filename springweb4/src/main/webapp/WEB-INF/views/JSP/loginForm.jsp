@@ -10,7 +10,20 @@
 <title>[ L O G I N ]</title>
 <script>
 	function check() {
-		
+		var writename = document.getElementById('userID');
+		if (writename.value == '' || writename.value.length > 9 || writename.value.length < 1) {
+			alert('아이디를 올바르게 입력하여 주세요');
+			writename.focus();
+			writename.select();
+			return false;
+		}
+		var writepassword = document.getElementById('userPassword');
+		if (writepassword.value == '' || writepassword.value.length > 12 || writepassword.value.length < 4) {
+			alert('비밀번호를 올바르게 입력하여 주세요');
+			writepassword.focus();
+			writepassword.select();
+			return false;
+		}
 	}
 </script>
 </head>
@@ -30,7 +43,7 @@
 				PASSWORD : 
 			</td>
 			<td>
-				<input type="password" id="userPassword" name="userPassword" place="Password를 입력하여 주세요">
+				<input type="password" id="userPassword" name="userPassword" placeholder="Password를 입력하여 주세요">
 			</td>
 		</tr>
 		<tr>

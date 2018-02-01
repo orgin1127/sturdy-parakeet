@@ -1,6 +1,7 @@
 package com.learnJapanese.www.Login;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.learnJapanese.www.UserDAO.LoginDAO;
+import com.learnJapanese.www.UserDAO.UserDAO;
 import com.learnJapanese.www.VO.UserVO;
 import com.learnJapanese.www.Validator.UserInfoValidator;
 
@@ -24,7 +26,8 @@ public class LoginController {
 	LoginDAO loginDAO;
 	@Autowired
 	UserInfoValidator userInfoValidator;
-	
+	@Autowired
+	UserDAO userDAO;
 	
 	@ResponseBody
 	@RequestMapping(value="userLogin", method=RequestMethod.POST)
@@ -49,6 +52,5 @@ public class LoginController {
 		session.removeAttribute("loginUser");
 		return "redirect:/";
 	}
-	
 	
 }

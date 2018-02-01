@@ -40,4 +40,9 @@ public class WordDAO {
 		ArrayList<Word> wordList = wm.wordListForBlinkGame(gameType);
 		return wordList;
 	}
+	public ArrayList<Word> searchWordForFileOut(HashMap<String, String> searchMap) {
+		WordMapper wm = session.getMapper(WordMapper.class);
+		ArrayList<Word> wordList = wm.searchWordForFileOut(searchMap);
+		return wordList;
+	}
 }

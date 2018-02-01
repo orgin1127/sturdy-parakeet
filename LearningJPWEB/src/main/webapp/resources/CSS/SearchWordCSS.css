@@ -17,8 +17,9 @@
 		/* Modal Header */
 		#wordSearchModalHeader {
 		    padding: 2px 16px;
-		    background-color: #5cb85c;
+		    background-color: #90A4AE;
 		    color: white;
+		    font-size: 27px;s
 		}
 		
 		/* Modal Body */
@@ -32,7 +33,7 @@
 		/* Modal Footer */
 		#wordSearchModalFooter {
 		    padding: 2px 16px;
-		    background-color: #5cb85c;
+		   background-color: #90A4AE;
 		    color: white;
 		}
 		#searchResultPrintDiv {

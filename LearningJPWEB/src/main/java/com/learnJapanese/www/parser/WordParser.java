@@ -129,54 +129,55 @@ public class WordParser {
 		Sheet wordSheet = xlsWb.createSheet("searchedWordSheet");
 		Row row = null;
 		Cell cell = null;
-		int limitForRow = 1;
+		int limitForRow = 0;
 		int limitForCell = 0;
 		try {
 			File file = new File(filePath);
 			FileOutputStream fileOutput = new FileOutputStream(file);
 			row = wordSheet.createRow(0);
-			
-			cell = row.createCell(0);
-			cell.setCellValue("한자");
-			
-			cell = row.createCell(1);
-			cell.setCellValue("발음");
-			cell = row.createCell(2);
-			cell.setCellValue("뜻");
-			
+			String output = "";
 			//한자
 			for (Word wl : searchWordList) {
-				row.setRowNum(limitForRow);
-				cell = row.createCell(limitForCell);
+				row = wordSheet.createRow(limitForRow);
+				cell = row.createCell(0);
 				cell.setCellValue(wl.getWord());
+				output += wl.getWord();
+				output += "\n";
 				limitForRow++;
 			}
-			limitForRow = 1;
+			limitForRow = 0;
 			limitForCell++;
-			
+			output = "";
+							
 			//발음
 			for (Word wl : searchWordList) {
 				row.setRowNum(limitForRow);
 				cell = row.createCell(limitForCell);
 				cell.setCellValue(wl.getYomigana());
+				output += wl.getYomigana();
+				output += "\n";
 				limitForRow++;
 			}
-			limitForRow = 1;
+			limitForRow = 0;
 			limitForCell++;
+			output = "";
+			
 			
 			//뜻
 			for (Word wl : searchWordList) {
 				row.setRowNum(limitForRow);
 				cell = row.createCell(limitForCell);
 				cell.setCellValue(wl.getMeaning());
+				output += wl.getMeaning();
+				output += "\n";
 				limitForRow++;
 			}
-			
+			//System.out.println(output);
 			xlsWb.write(fileOutput);
 			fileOutput.close();
 		}
 		catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 	}
 	

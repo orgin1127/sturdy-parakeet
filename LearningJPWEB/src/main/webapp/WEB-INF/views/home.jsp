@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Lean Japanese & Enjoy your Study</title>
+	<title>Learn Japanese & Enjoy your Study</title>
 	
 	<!-- JS -->
 	<script src="./resources/JS/jquery-3.2.1.min.js"></script>
@@ -15,12 +15,14 @@
 	<script src="./resources/JS/loginJS.js"></script>
 	<script src="./resources/JS/wordSearchJS.js"></script>
 	<script src="./resources/JS/BlinkGame.js"></script>
+	<script src="./resources/JS/UserInfoEdit.js"></script>
 	<!-- CSS -->
 	<link href="./resources/CSS/registerModalCSS.css" rel="stylesheet" type="text/css">
 	<link href="./resources/CSS/LoginCSS.css" rel="stylesheet" type="text/css">
 	<link href="./resources/CSS/SearchWordCSS.css" rel="stylesheet" type="text/css">
 	<link href="./resources/CSS/BlinkGameCSS.css" rel="stylesheet" type="text/css">
 	<link href="./resources/CSS/HomeCSS.css" rel="stylesheet" type="text/css">
+	<link href="./resources/CSS/UserInfoEditCSS.css" rel="stylesheet" type="text/css">
 	<!-- font -->
 	<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
 </head>
@@ -36,9 +38,7 @@
 			<c:if test="${loginUser != null}">
 				<td><button id="myWordSearch">단어검색</button></td>
 				<td><button id="myBlinkGame">단어게임</button></td>
-				<!-- <td><button id="myUserBoard">게시판</button></td> -->
-				<td>환영합니다 ${loginUserName}(${ loginUserID})님!</td>
-				<td>정보수정</td>
+				<td>환영합니다.</td><td>${loginUserName}(${ loginUserID})님!</td>
 				<td><a href="userLogout"><button id="myLogout">로그아웃</button></a></td>
 			</c:if>
 		</tr>
@@ -71,7 +71,7 @@
 			<div class="modal-footer" id="loginModalFooter"><h1> </h1></div>
 		</div>
 	</div>
-	
+
 	<!-- UserWordSearch Div -->
 	<div class="modal" id="userWordSearchModal">
 		<div class="modal-content" id="SearchWordModalContent">

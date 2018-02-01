@@ -19,7 +19,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		String loginID = (String) session.getAttribute("loginUserID");
 		if (loginID == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
+			response.sendRedirect(request.getContextPath()+"/");
 			return false;
 		}
 		return super.preHandle(request, response, handler);

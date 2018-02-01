@@ -56,4 +56,32 @@
   	select * from wordTable
   	where wordLevel = #{gameType}
   </select>
+  
+   <!-- -->
+  <select id="searchWordForFileOut" parameterType="Hashmap" resultType="Word">
+  		select 
+  				*
+		from
+				wordTable
+  	<if test="searchText != null and searchType == 'word'">
+  		where 
+  				word like '%'||#{searchText}||'%'
+  	</if>
+  	<if test="searchText != null and searchType == 'yomigana'">
+  		where 
+  				yomigana like '%'||#{searchText}||'%'
+  	</if>
+  	<if test="searchText != null and searchType == 'meaning'">
+  		where 
+  				meaning like '%'||#{searchText}||'%'
+  	</if>
+  	<if test="searchText != null and searchType == 'wordAndYomi'">
+  		where 
+  				word like '%'||#{searchText}||'%'
+  					or 
+  				yomigana like '%'||#{searchText}||'%'
+  	</if>
+  	order by wordNum
+  </select>
+  
   </mapper>

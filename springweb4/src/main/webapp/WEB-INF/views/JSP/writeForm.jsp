@@ -11,7 +11,7 @@
 <script>
 
 	function check() {
-		var writename = document.getElementById('name');
+		var writename = document.getElementById('userID');
 		if (writename.value == '' || writename.value.length > 9 || writename.value.length < 1) {
 			alert('이름은 1글자 이상 9글자 이하여야 합니다.');
 			writename.focus();
@@ -27,15 +27,14 @@
 			return false;
 		}
 		
-		
-		
 		var obj = document.getElementById('content');
-		if (obj.value == '' ) {
+		if (obj.value == '') {
 			alert('내용을 입력하여 주세요');
 			obj.focus();
 			obj.select();
 			return false;
 		}
+		
 		var con = obj.value;
 		if (con != '') {
 			con = con.replace(/&/g, "&amp;");

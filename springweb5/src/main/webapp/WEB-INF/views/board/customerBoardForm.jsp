@@ -19,7 +19,6 @@
 	}
 	
 	function pagingFormSubmit(pnum) {
-		alert(pnum);
 		var pagingForm = document.getElementById('pagingForm');
 		var page = document.getElementById('page');
 		page.value = pnum; // 폼에 요청할 페이지번호 저장

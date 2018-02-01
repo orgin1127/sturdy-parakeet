@@ -3,8 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.learnJapanese.www.Mapper.LoginMapper">
+  <update id="userInfoEdit" parameterType="User">
+  		update userTable 
+  		set
+  			userPassword = #{userPassword}
+  			, userName = #{UserName}
+  		where 
+  			userID = #{userID} 
+  </update>
   <select id="userLogin" parameterType="User" resultType="User">
   		select * from userTable 
   		where userID = #{userID} and userPassword = #{userPassword}
   </select>
+
   </mapper>

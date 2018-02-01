@@ -28,14 +28,14 @@ $(document).ready(function() {
 			contentForModalBody += '<br><span id="idValidateCheck"><pre></pre></span></td></tr>';
 			contentForModalBody += '<tr><td>PASSWORD</td><td><input type="password" id="userPassword" name="userPassword">';
 			contentForModalBody += '<input type="hidden" id="passwordValidity" value="false">';
-			contentForModalBody += '<div id="passwordValidateCheck"></div></td></tr>'
+			contentForModalBody += '<div id="passwordValidateCheck"></div></td></tr>';
 			contentForModalBody += '<tr><td>PASSWORD RE-ENTER</td><td><input type="password" id="userPasswordCheck" name="userPasswordCheck">';
-			contentForModalBody += '<div id="passwordInputValidateCheck"></div></td></tr>'
+			contentForModalBody += '<div id="passwordInputValidateCheck"></div></td></tr>';
 			contentForModalBody += '<tr><td>NICK NAME</td><td><input type="text" id="userName" name="userName">';
 			contentForModalBody += '<input type="hidden" id="nameValidity" value="false">';
-			contentForModalBody += '<div id="nameValidateCheck"></div></td></tr>'
+			contentForModalBody += '<div id="nameValidateCheck"></div></td></tr>';
 			contentForModalBody += '<tr><td colspan="2"><input type="button" id="registerSubmit" value="회원가입" checked="false">';
-			contentForModalBody += '<input type="hidden" id="closeRegisterModal" value="registModal"></td></tr>'
+			contentForModalBody += '<input type="hidden" id="closeRegisterModal" value="registModal"></td></tr>';
 			contentForModalBody += '</table></form></p>';
 			$('#myRegisterModalBody').html(contentForModalBody);
 		}

@@ -16,8 +16,9 @@
 		/* Modal Header */
 		#blinkModalHeader {
 		    padding: 2px 16px;
-		    background-color: #5cb85c;
+		    background-color: #90A4AE;
 		    color: white;
+		    font-size: 27px;
 		}
 		
 		/* Modal Body */
@@ -29,7 +30,7 @@
 		/* Modal Footer */
 		#blinkModalFooter {
 		    padding: 2px 16px;
-		    background-color: #5cb85c;
+		   background-color: #90A4AE;
 		    color: white;
 		}
 		#blinkModalContent{

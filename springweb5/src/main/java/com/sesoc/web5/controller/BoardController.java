@@ -85,6 +85,7 @@ public class BoardController {
 		model.addAttribute("searchText", searchText);
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("pn", pn);
+		logger.debug("게시판 사이즈 : {}", list.size());
 		logger.debug("게시판으로 이동");
 		return "/board/customerBoardForm";
 	}
@@ -115,7 +116,7 @@ public class BoardController {
 					
 					//Spring의 파일 관련 유틸
 					FileCopyUtils.copy(filein, fileout);
-					
+
 					filein.close();
 					fileout.close();
 				} catch (IOException e) {

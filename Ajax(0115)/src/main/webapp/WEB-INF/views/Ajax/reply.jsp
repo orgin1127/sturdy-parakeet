@@ -22,12 +22,14 @@
 </style>
 
 <script>
-	
+
 	$(document).ready(function() {
 		$('#formButton').on('click', sendReply);
-		init();
-	});
 	
+		init();
+
+	});
+
 	function sendReply() {
 		//이름, 리플 내용 읽기
 		var name = $('#name').val();
